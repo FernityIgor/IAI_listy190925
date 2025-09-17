@@ -1,0 +1,11 @@
+{
+    "name": "your-name/order-viewer",
+    "description": "An application to view order details from an API.",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "require": {}
+}
