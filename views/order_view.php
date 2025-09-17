@@ -63,7 +63,19 @@
     <?php if (!empty($packages)): ?>
     <div class="packages-box">
         <h3>Packages</h3>
-        <p class="courier-info"><strong>Courier:</strong> <?= $h($packages[0]['deliveryPackage']['courierName'] ?? 'N/A') ?> (ID: <?= $h($courierId) ?>)</p>
+        <p class="courier-info">
+            <?php if (isset($changeableCouriers[$courierId])): ?>
+                <button 
+                    type="button" 
+                    class="change-courier-btn"
+                    onclick="showCourierSelect(<?= $h($orderName) ?>, <?= $h($courierId) ?>)">
+                    Zmień kuriera
+                </button>
+            <?php endif; ?>
+            <strong>Courier:</strong> 
+            <?= $h($packages[0]['deliveryPackage']['courierName'] ?? 'N/A') ?> 
+            (ID: <?= $h($courierId) ?>)
+        </p>
         
         <?php foreach ($packages as $index => $package): ?>
         <div class="package-item">

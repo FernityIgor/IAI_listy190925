@@ -212,4 +212,91 @@ class OrderApiClient
 
         return json_decode($response, true);
     }
+
+    public function updateCourier(int $orderNumber, int $courierId): ?array
+    {
+        $url = "https://dkwadrat.pl/api/admin/v6/orders/courier";
+        $payload = [
+            'params' => [
+                'orderSerialNumber' => $orderNumber,
+                'courierId' => $courierId
+            ]
+        ];
+
+        $curl = curl_init();
+        curl_setopt_array($curl, [
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "PUT",
+            CURLOPT_POSTFIELDS => json_encode($payload),
+            CURLOPT_HTTPHEADER => [
+                "X-API-KEY: " . $this->apiKey,
+                "accept: application/json",
+                "content-type: application/json"
+            ],
+        ]);
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+        curl_close($curl);
+
+        if ($err) {
+            error_log("cURL Error (Update Courier): " . $err);
+            return null;
+        }
+
+        return json_decode($response, true);
+    }
+
+    public function generateShippingLabels(int $orderNumber, array $parameters): ?array
+    {
+        $url = "https://dkwadrat.pl/api/admin/v6/packages/labels";
+        $payload = [
+            'params' => [
+                'orderPackages' => [
+                    [
+                        'eventType' => 'order',
+                        'eventId' => (string)$orderNumber,
+                        'packages' => [
+                            [
+                                'parcelParameters' => $parameters
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ];
+
+        $curl = curl_init();
+        curl_setopt_array($curl, [
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => json_encode($payload),
+            CURLOPT_HTTPHEADER => [
+                "X-API-KEY: " . $this->apiKey,
+                "accept: application/json",
+                "content-type: application/json"
+            ],
+        ]);
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+        curl_close($curl);
+
+        if ($err) {
+            error_log("cURL Error (Generate Labels): " . $err);
+            return null;
+        }
+
+        return json_decode($response, true);
+    }
 }

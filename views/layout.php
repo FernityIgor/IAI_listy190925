@@ -48,6 +48,26 @@
         </div>
     </div>
 
+    <!-- Courier Modal -->
+    <div class="courier-modal modal-overlay" id="courierModal" style="display: none;">
+        <div class="modal-content">
+            <h3>Wybierz kuriera</h3>
+            <div class="courier-list">
+                <?php foreach ($changeableCouriers as $id => $name): ?>
+                    <button 
+                        type="button"
+                        onclick="selectCourier(<?= $h($id) ?>)" 
+                        class="courier-button">
+                        <?= $h($name) ?>
+                    </button>
+                <?php endforeach; ?>
+            </div>
+            <div class="modal-buttons">
+                <button onclick="closeCourierModal()" class="modal-button cancel">Anuluj</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         function confirmDelete(orderNumber) {
             const modal = document.getElementById('deleteModal');
@@ -97,6 +117,7 @@
             if (e.key === 'Escape') {
                 document.getElementById('weightModal').style.display = 'none';
                 document.getElementById('deleteModal').style.display = 'none';
+                document.getElementById('courierModal').style.display = 'none';
             }
         });
 
@@ -132,6 +153,49 @@
             .catch(error => {
                 console.error('Error:', error);
                 alert('Wystąpił błąd podczas aktualizacji wagi.');
+            });
+        }
+
+        let selectedOrderId = null;
+
+        function showCourierSelect(orderId, currentCourierId) {
+            console.log('Opening courier select for order:', orderId); // Debug line
+            selectedOrderId = orderId;
+            document.getElementById('courierModal').style.display = 'flex';
+        }
+
+        function closeCourierModal() {
+            document.getElementById('courierModal').style.display = 'none';
+        }
+
+        function selectCourier(courierId) {
+            // Find and disable all courier buttons
+            const courierList = document.querySelector('.courier-list');
+            const selectedButton = document.querySelector(`button[onclick*="selectCourier(${courierId})"]`);
+            
+            // Add loading state
+            courierList.classList.add('disabled');
+            selectedButton.classList.add('loading');
+            
+            fetch('index.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `update_courier=1&order_id=${selectedOrderId}&courier_id=${courierId}`
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                window.location.reload();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Wystąpił błąd podczas zmiany kuriera.');
+                // Remove loading state if there's an error
+                courierList.classList.remove('disabled');
+                selectedButton.classList.remove('loading');
             });
         }
 

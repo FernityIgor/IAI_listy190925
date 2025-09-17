@@ -8,11 +8,13 @@ class OrderController
 {
     private OrderApiClient $apiClient;
     private array $config;
+    private array $couriers; // Add this line
 
     public function __construct()
     {
         // Load configuration
         $this->config = require __DIR__ . '/../../config/config.php';
+        $this->couriers = require __DIR__ . '/../../config/couriers.php';
         
         // Create the API client with config values
         $this->apiClient = new OrderApiClient(
@@ -52,6 +54,18 @@ class OrderController
             }
         }
 
+        // Add this to handle courier updates
+        if (isset($_POST['update_courier'])) {
+            $orderId = (int)$_POST['order_id'];
+            $courierId = (int)$_POST['courier_id'];
+            
+            if ($orderId > 0 && isset($this->couriers['changeable_couriers'][$courierId])) {
+                $this->apiClient->updateCourier($orderId, $courierId);
+                header('Location: index.php?order=' . $orderId);
+                exit();
+            }
+        }
+
         // --- Data Handling ---
         $orderName = trim($_GET['order'] ?? $_POST['order'] ?? '');
         $orderData = null;
@@ -86,6 +100,9 @@ class OrderController
         if ($packagesData && isset($packagesData['results'])) {
             $packages = $packagesData['results'];
         }
+
+        // Add this before view rendering
+        $changeableCouriers = $this->couriers['changeable_couriers'];
 
         // --- View Rendering ---
         $pageTitle = 'Order Details';
