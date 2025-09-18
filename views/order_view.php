@@ -183,13 +183,22 @@
     <div class="modal-content">
         <span class="close" onclick="closeZlecKurieraModal()">&times;</span>
         <h3>Zleć kuriera - Parametry przesyłki</h3>
+        
+        <!-- Top buttons -->
+        <div class="modal-buttons top-buttons">
+            <button type="button" class="modal-button cancel" onclick="closeZlecKurieraModal()">Anuluj</button>
+            <button type="button" class="modal-button confirm" onclick="generujEtykiety()">Generuj</button>
+            <button type="button" class="modal-button generate-download" onclick="generujIPobierz()">Generuj i pobierz</button>
+        </div>
+        
         <form id="zlecKurieraForm">
             <div id="parametersContainer">
                 <!-- Parameters will be populated by JavaScript -->
             </div>
-            <div class="modal-buttons">
+            <div class="modal-buttons bottom-buttons">
                 <button type="button" class="modal-button cancel" onclick="closeZlecKurieraModal()">Anuluj</button>
                 <button type="button" class="modal-button confirm" onclick="generujEtykiety()">Generuj</button>
+                <button type="button" class="modal-button generate-download" onclick="generujIPobierz()">Generuj i pobierz</button>
             </div>
         </form>
     </div>
@@ -541,5 +550,135 @@ function pobierzEtykiety(orderNumber) {
         
         alert('Błąd sieci: ' + error.message);
     });
+}
+
+// Function to generate labels and immediately download them
+function generujIPobierz() {
+    console.log('generujIPobierz called');
+    
+    // Disable all buttons during the process
+    const buttons = document.querySelectorAll('.modal-button');
+    const originalStates = [];
+    
+    buttons.forEach((btn, index) => {
+        originalStates[index] = {
+            text: btn.textContent,
+            disabled: btn.disabled
+        };
+        if (btn.classList.contains('generate-download')) {
+            btn.textContent = 'Generowanie...';
+            btn.disabled = true;
+        } else {
+            btn.disabled = true;
+        }
+    });
+    
+    // Get current order number from global variable or extract from UI
+    const orderNumber = currentOrderNumber; // This should be set when modal opens
+    
+    if (!orderNumber) {
+        alert('Błąd: Brak numeru zamówienia');
+        restoreButtons();
+        return;
+    }
+    
+    // Step 1: Generate labels (same as generujEtykiety but without modal close)
+    const form = document.getElementById('zlecKurieraForm');
+    const formData = new FormData();
+    
+    // Collect all form parameters
+    const inputs = form.querySelectorAll('input, select, textarea');
+    const parameters = {};
+    
+    inputs.forEach(input => {
+        if (input.type === 'radio') {
+            if (input.checked) {
+                parameters[input.name] = input.value;
+            }
+        } else if (input.type === 'checkbox') {
+            parameters[input.name] = input.checked ? input.value : '';
+        } else if (input.name && input.value !== '') {
+            parameters[input.name] = input.value;
+        }
+    });
+    
+    formData.append('action', 'generate_labels');
+    formData.append('order_id', orderNumber);
+    formData.append('parameters', JSON.stringify(parameters));
+    
+    console.log('Step 1: Generating labels...');
+    
+    // Step 1: Generate labels
+    fetch('generate_labels.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(generateData => {
+        console.log('Generate response:', generateData);
+        
+        if (generateData.success) {
+            // Update button text for download phase
+            const generateDownloadBtn = document.querySelector('.modal-button.generate-download');
+            if (generateDownloadBtn) {
+                generateDownloadBtn.textContent = 'Pobieranie...';
+            }
+            
+            console.log('Step 2: Downloading labels...');
+            
+            // Step 2: Download the generated labels
+            const downloadFormData = new FormData();
+            downloadFormData.append('action', 'download_labels');
+            downloadFormData.append('order_number', orderNumber);
+            
+            return fetch('download_labels.php', {
+                method: 'POST',
+                body: downloadFormData
+            });
+        } else {
+            throw new Error('Generowanie etykiet nie powiodło się: ' + (generateData.error || 'Nieznany błąd'));
+        }
+    })
+    .then(response => response.json())
+    .then(downloadData => {
+        console.log('Download response:', downloadData);
+        
+        restoreButtons();
+        
+        if (downloadData.success) {
+            const result = downloadData.result;
+            if (result.files && result.files.length > 0) {
+                let message = `Etykiety zostały wygenerowane i pobrane!\n\n`;
+                message += `Pobrano ${result.total_labels} etykiet(y):\n\n`;
+                result.files.forEach(file => {
+                    message += `• ${file.filename} (${Math.round(file.size / 1024)} KB)\n`;
+                });
+                message += `\nPliki zapisane w folderze: storage/labels/`;
+                alert(message);
+                
+                // Close the modal after successful generation and download
+                closeZlecKurieraModal();
+            } else {
+                alert('Etykiety zostały wygenerowane, ale wystąpił błąd podczas pobierania plików.');
+            }
+        } else {
+            alert('Etykiety zostały wygenerowane, ale nie udało się ich pobrać: ' + (downloadData.error || 'Nieznany błąd'));
+        }
+    })
+    .catch(error => {
+        console.error('Error in generujIPobierz:', error);
+        restoreButtons();
+        alert('Błąd: ' + error.message);
+    });
+    
+    // Helper function to restore button states
+    function restoreButtons() {
+        buttons.forEach((btn, index) => {
+            if (originalStates[index]) {
+                btn.textContent = originalStates[index].text;
+                btn.disabled = originalStates[index].disabled;
+            }
+        });
+    }
 }
 </script>

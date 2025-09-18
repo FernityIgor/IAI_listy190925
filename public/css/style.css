@@ -273,11 +273,26 @@ body {
     margin-top: 20px;
 }
 
+.modal-buttons.top-buttons {
+    margin-top: 15px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.modal-buttons.bottom-buttons {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #e5e7eb;
+}
+
 .modal-button {
     padding: 8px 16px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
 }
 
 .modal-button.confirm {
@@ -290,8 +305,18 @@ body {
     color: white;
 }
 
+.modal-button.generate-download {
+    background-color: #059669;
+    color: white;
+}
+
 .modal-button:hover {
     opacity: 0.9;
+}
+
+.modal-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
 }
 
 .preset-weights {
