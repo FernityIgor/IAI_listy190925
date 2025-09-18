@@ -145,8 +145,10 @@ class OrderController
         // Handle both POST and GET requests
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $orderName = trim($_POST['order'] ?? '');
+            $wfmagOrder = trim($_POST['wfmag'] ?? '');
         } else {
             $orderName = trim($_GET['order'] ?? '');
+            $wfmagOrder = trim($_GET['wfmag'] ?? '');
         }
 
         $orderData = null;

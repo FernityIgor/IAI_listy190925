@@ -3,7 +3,10 @@
         <div class="search-container address-box">
             <form method="POST" action="index.php">
                 <label for="order">Numer zamówienia:</label>
-                <input type="text" id="order" name="order" value="">
+                <input type="text" id="order" name="order" value="<?= isset($orderName) ? $h($orderName) : '' ?>">
+                <?php if (!empty($wfmagOrder)): ?>
+                <input type="hidden" name="wfmag" value="<?= $h($wfmagOrder) ?>">
+                <?php endif; ?>
                 <input type="submit" value="Szukaj">
             </form>
         </div>
@@ -44,12 +47,31 @@
 
     <?php if ($order): // Only show these boxes if an order was found ?>
     <div class="order-details-box">
-        <h3>Order Details</h3>
+        <div class="order-details-header">
+            <h3>Order Details</h3>
+            <div class="email-buttons">
+                <button 
+                    type="button" 
+                    class="email-btn bok-btn"
+                    onclick="sendEmailToBOK(<?= $h($order['orderSerialNumber']) ?>, '<?= $h($wfmagOrder ?? '') ?>')">
+                    Zgłoś do BOK
+                </button>
+                <button 
+                    type="button" 
+                    class="email-btn manager-btn"
+                    onclick="sendEmailToManager(<?= $h($order['orderSerialNumber']) ?>, '<?= $h($wfmagOrder ?? '') ?>')">
+                    Zgłoś do kierownika
+                </button>
+            </div>
+        </div>
         <?php 
         $shopId = $order['orderDetails']['orderSourceResults']['shopId'] ?? null;
         $shopName = $shopNames[$shopId] ?? 'Unknown Shop';
         ?>
         <p><strong>Shop:</strong> <?= $h($shopName) ?> (ID: <?= $h($shopId) ?>)</p>
+        <?php if (!empty($wfmagOrder)): ?>
+        <p class="wfmag-order"><strong>Wfmag order:</strong> <?= $h($wfmagOrder) ?></p>
+        <?php endif; ?>
         <p><strong>Order Number:</strong> <?= $h($order['orderSerialNumber']) ?></p>
         <p><strong>Order Date:</strong> <?= $h($order['orderDetails']['orderAddDate']) ?></p>
         <p><strong>Payment Type:</strong> <?= $h($order['orderDetails']['payments']['orderPaymentType']) ?></p>
@@ -680,5 +702,59 @@ function generujIPobierz() {
             }
         });
     }
+}
+
+// Function to send email to BOK
+function sendEmailToBOK(orderNumber, wfmagOrder) {
+    const email = 'info@fernity.com';
+    
+    // Build subject with both order numbers
+    let subject = `błąd w zamówieniu ${orderNumber}`;
+    if (wfmagOrder && wfmagOrder.trim() !== '') {
+        subject += ` (Wfmag: ${wfmagOrder})`;
+    }
+    
+    // Build body with both order numbers
+    let body = `Dotyczy zamówienia numer: ${orderNumber}`;
+    if (wfmagOrder && wfmagOrder.trim() !== '') {
+        body += `\nWfmag order: ${wfmagOrder}`;
+    }
+    body += `\n\nOpis problemu:\n\n\n\nPozdrawiam`;
+    
+    openGmailCompose(email, subject, body);
+}
+
+// Function to send email to Manager
+function sendEmailToManager(orderNumber, wfmagOrder) {
+    const email = 'magazyn@fernity.com';
+    
+    // Build subject with both order numbers
+    let subject = `błąd w zamówieniu ${orderNumber}`;
+    if (wfmagOrder && wfmagOrder.trim() !== '') {
+        subject += ` (Wfmag: ${wfmagOrder})`;
+    }
+    
+    // Build body with both order numbers
+    let body = `Dotyczy zamówienia numer: ${orderNumber}`;
+    if (wfmagOrder && wfmagOrder.trim() !== '') {
+        body += `\nWfmag order: ${wfmagOrder}`;
+    }
+    body += `\n\nOpis problemu:\n\n\n\nPozdrawiam`;
+    
+    openGmailCompose(email, subject, body);
+}
+
+// Helper function to open Gmail compose window
+function openGmailCompose(email, subject, body) {
+    // Encode the parameters for URL
+    const encodedEmail = encodeURIComponent(email);
+    const encodedSubject = encodeURIComponent(subject);
+    const encodedBody = encodeURIComponent(body);
+    
+    // Create Gmail compose URL
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodedEmail}&su=${encodedSubject}&body=${encodedBody}`;
+    
+    // Open in new tab/window
+    window.open(gmailUrl, '_blank', 'width=800,height=600,scrollbars=yes,resizable=yes');
 }
 </script>
