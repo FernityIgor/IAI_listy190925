@@ -61,15 +61,15 @@
         
         <!-- Courier Information -->
         <div class="courier-info">
-            <?php if (isset($changeableCouriers[$courierId])): ?>
-                <button 
-                    type="button" 
-                    class="change-courier-btn"
-                    onclick="showCourierSelect(<?= $h($order['orderSerialNumber']) ?>, <?= $h($courierId) ?>)">
-                    Zmień kuriera
-                </button>
-            <?php endif; ?>
             <div class="courier-info-line">
+                <?php if (isset($changeableCouriers[$courierId])): ?>
+                    <button 
+                        type="button" 
+                        class="change-courier-btn"
+                        onclick="showCourierSelect(<?= $h($order['orderSerialNumber']) ?>, <?= $h($courierId) ?>)">
+                        Zmień kuriera
+                    </button>
+                <?php endif; ?>
                 <div class="courier-details">
                     <strong>Courier:</strong> 
                     <?= $h($packages[0]['deliveryPackage']['courierName'] ?? 'N/A') ?> 
@@ -83,31 +83,6 @@
                 </button>
             </div>
         </div>
-        
-        <?php foreach ($packages as $index => $package): ?>
-        <div class="package-item">
-            <div class="package-details">
-                <button 
-                    type="button" 
-                    class="change-weight-btn"
-                    onclick="showWeightInput(
-                        '<?= $h($orderName) ?>', 
-                        '<?= $h($package['deliveryPackage']['deliveryPackageId']) ?>',
-                        '<?= $h($courierId) ?>'
-                    )">
-                    Zmień wagę
-                </button>
-                <span class="package-title">Package <?= $index + 1 ?>:</span>
-                <span><strong>ID:</strong> <?= $h($package['deliveryPackage']['deliveryPackageId'] ?? 'N/A') ?></span>
-                <span><strong>Tracking:</strong> <?= $h($package['deliveryPackage']['deliveryShippingNumber'] ?? 'Not generated') ?></span>
-                <span class="weight-display">
-                    <strong>Logistic weight:</strong> 
-                    <?= $h(isset($package['deliveryPackage']['deliveryPackageParameters']['deliveryWeight']) ? 
-                        ($package['deliveryPackage']['deliveryPackageParameters']['deliveryWeight']) . ' g' : 'N/A') ?>
-                </span>
-            </div>
-        </div>
-        <?php endforeach; ?>
 
         <!-- Packages List -->
         <?php if (!empty($packages)): ?>
@@ -150,7 +125,7 @@
                 <?php if (!$courierExists): ?>
                     <button class="add-package-btn disabled" disabled>Brak kuriera</button>
                 <?php elseif (!$courierSupportsMultiplePackages): ?>
-                    <button class="add-package-btn disabled" disabled>Dodaj paczkę</button>
+                    <!-- Hide add package button when courier doesn't support multiple packages -->
                 <?php else: ?>
                     <form method="POST" class="inline-form">
                         <input type="hidden" name="add_package" value="1">
@@ -322,10 +297,18 @@ function populateParametersForm(parameters) {
                     let defaultValueStr = param.defaultValue !== undefined ? String(param.defaultValue).trim() : '';
                     const optionIdStr = String(option.id).trim();
                     
+                    // Debug logging for SMS field specifically
+                    if (param.key === 'SMS') {
+                        console.log(`DEBUG SMS: param.key=${param.key}, defaultValue="${defaultValueStr}", option.id="${optionIdStr}", option.name="${option.name}"`);
+                    }
+                    
                     // Handle different formats of boolean values
                     let isMatch = false;
                     if (defaultValueStr === optionIdStr) {
                         isMatch = true;
+                        if (param.key === 'SMS') {
+                            console.log(`DEBUG SMS: Direct match - defaultValue="${defaultValueStr}" === optionId="${optionIdStr}"`);
+                        }
                     } else {
                         // Handle yes/no vs 0/1 mappings
                         const valueMap = {
@@ -339,8 +322,14 @@ function populateParametersForm(parameters) {
                         
                         if (valueMap[defaultValueStr] && valueMap[defaultValueStr].includes(optionIdStr)) {
                             isMatch = true;
+                            if (param.key === 'SMS') {
+                                console.log(`DEBUG SMS: Mapped match 1 - defaultValue="${defaultValueStr}" maps to optionId="${optionIdStr}"`);
+                            }
                         } else if (valueMap[optionIdStr] && valueMap[optionIdStr].includes(defaultValueStr)) {
                             isMatch = true;
+                            if (param.key === 'SMS') {
+                                console.log(`DEBUG SMS: Mapped match 2 - optionId="${optionIdStr}" maps to defaultValue="${defaultValueStr}"`);
+                            }
                         }
                     }
                     
@@ -350,12 +339,21 @@ function populateParametersForm(parameters) {
                         isMatch = (optionIdStr === '1');
                     }
                     
+                    // Override for SMS to match API documentation (temporary fix)
+                    if (param.key === 'SMS' && defaultValueStr === '0') {
+                        console.log('Overriding SMS defaultValue from 0 to yes to match API spec');
+                        isMatch = (optionIdStr === 'yes');
+                    }
+                    
                     if (isMatch) {
                         radioInput.checked = true;
                         selectedFound = true;
                         
+                        if (param.key === 'SMS') {
+                            console.log(`DEBUG SMS: SETTING CHECKED - ${param.key} to ${option.name} (defaultValue: "${defaultValueStr}", optionId: "${optionIdStr}")`);
+                        }
                         console.log(`DEBUG: Setting ${param.key} to ${option.name} (defaultValue: "${defaultValueStr}", optionId: "${optionIdStr}")`);
-                    } else if (param.key === 'additionalHandling') {
+                    } else if (param.key === 'additionalHandling' || param.key === 'SMS') {
                         console.log(`DEBUG ${param.key}: NOT selecting ${option.name} (defaultValue: "${defaultValueStr}", optionId: "${optionIdStr}")`);
                     }
                     
@@ -414,41 +412,19 @@ function populateParametersForm(parameters) {
 }
 
 function generujEtykiety() {
-    // Show status on screen
-    const statusDiv = document.createElement('div');
-    statusDiv.id = 'generuj-status';
-    statusDiv.style.cssText = 'position: fixed; top: 10px; right: 10px; background: #fff; border: 2px solid #333; padding: 10px; z-index: 10000; max-width: 400px; font-family: monospace; font-size: 12px;';
-    statusDiv.innerHTML = '<strong>Generuj Etykiety - Status:</strong><br>';
-    document.body.appendChild(statusDiv);
-    
-    function addStatus(message) {
-        statusDiv.innerHTML += new Date().toLocaleTimeString() + ': ' + message + '<br>';
-        console.log('GENERUJ:', message);
-    }
-    
-    addStatus('Rozpoczęcie procesu generowania etykiet');
-    
     if (!currentOrderNumber) {
-        addStatus('BŁĄD: Brak numeru zamówienia');
         alert('Błąd: Brak numeru zamówienia');
         return;
     }
     
-    addStatus('Numer zamówienia: ' + currentOrderNumber);
-    
     // Collect form data
     const form = document.getElementById('zlecKurieraForm');
-    addStatus('Pobieranie danych z formularza...');
-    
     const formData = new FormData(form);
     const parameters = {};
     
     for (let [key, value] of formData.entries()) {
         parameters[key] = value;
-        addStatus('Parametr: ' + key + ' = ' + value);
     }
-    
-    addStatus('Wszystkich parametrów: ' + Object.keys(parameters).length);
     
     // Send request to generate labels
     const requestData = new FormData();
@@ -456,63 +432,34 @@ function generujEtykiety() {
     requestData.append('order_id', currentOrderNumber);
     requestData.append('parameters', JSON.stringify(parameters));
     
-    addStatus('Przygotowywanie żądania POST...');
-    addStatus('URL docelowy: generate_labels.php (STANDALONE TEST)');
-    addStatus('Wysyłanie żądania...');
-    
     fetch('generate_labels.php', {
         method: 'POST',
         body: requestData
     })
     .then(response => {
-        addStatus('Otrzymano odpowiedź HTTP: ' + response.status + ' ' + response.statusText);
-        addStatus('Content-Type: ' + (response.headers.get('content-type') || 'brak'));
-        
         return response.text().then(text => {
-            addStatus('Rozmiar odpowiedzi: ' + text.length + ' znaków');
-            addStatus('Pierwsze 200 znaków odpowiedzi: ' + text.substring(0, 200));
-            
             try {
-                const jsonData = JSON.parse(text);
-                addStatus('Odpowiedź poprawnie sparsowana jako JSON');
-                return jsonData;
+                return JSON.parse(text);
             } catch (e) {
-                addStatus('BŁĄD: Nie można sparsować JSON: ' + e.message);
-                addStatus('Pełna odpowiedź serwera: ' + text);
+                console.error('Server response (non-JSON):', text);
                 throw new Error('Server returned invalid JSON response');
             }
         });
     })
     .then(data => {
-        addStatus('Przetwarzanie odpowiedzi JSON...');
-        addStatus('Odpowiedź: ' + JSON.stringify(data));
-        
         if (data.success) {
-            addStatus('SUKCES: Etykiety wygenerowane!');
             alert('Etykiety zostały wygenerowane pomyślnie!');
             closeZlecKurieraModal();
-            // Remove status div before reload
-            document.body.removeChild(statusDiv);
+            // Reload the page to see updated package information
             window.location.reload();
         } else {
-            addStatus('BŁĄD w odpowiedzi: ' + (data.error || 'Unknown error'));
             alert('Błąd przy generowaniu etykiet: ' + (data.error || 'Unknown error'));
         }
     })
     .catch(error => {
-        addStatus('WYJĄTEK: ' + error.message);
         console.error('Error:', error);
         alert('Błąd przy generowaniu etykiet: ' + error.message);
     });
-    
-    // Add close button to status div
-    setTimeout(() => {
-        const closeBtn = document.createElement('button');
-        closeBtn.textContent = 'Zamknij';
-        closeBtn.onclick = () => document.body.removeChild(statusDiv);
-        closeBtn.style.cssText = 'margin-top: 10px; padding: 5px;';
-        statusDiv.appendChild(closeBtn);
-    }, 1000);
 }
 
 function closeZlecKurieraModal() {

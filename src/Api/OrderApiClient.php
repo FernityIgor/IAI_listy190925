@@ -287,18 +287,14 @@ class OrderApiClient
 
     public function generateShippingLabels(int $orderNumber, array $parameters = []): ?array
     {
-        error_log('Generate labels called with orderNumber: ' . $orderNumber);
-        error_log('Parameters: ' . print_r($parameters, true));
-        
         $apiKey = "YXBwbGljYXRpb24xODpzSUdaNFU1ZzFwVnV2K3R4bExZU2lxRnR6dytHa0hiY3dhQ29HZ1BOdFdOSEtlekRYR0F3NkpFZEFCZGk0RWQ0";
         $endpoint = "https://dkwadrat.pl/api/admin/v6/packages/labels";
 
-        // Use your exact working format
         $eventId = $orderNumber;
         $eventType = "order";
         
         // Convert form parameters to parcel parameters format if provided
-        // Otherwise use empty array (your original working approach)
+        // Otherwise use empty array (fallback approach)
         $parcels = [];
         if (!empty($parameters)) {
             // Transform the form parameters into the format expected by the API
@@ -315,8 +311,6 @@ class OrderApiClient
             if (!empty($parcelParams)) {
                 $parcels = [$parcelParams]; // Wrap in array as expected by API
             }
-            
-            error_log('Converted parcel parameters: ' . print_r($parcels, true));
         }
 
         $payload = [
@@ -326,8 +320,6 @@ class OrderApiClient
                 'parcelParameters' => $parcels
             ]
         ];
-
-        error_log('Final payload: ' . print_r($payload, true));
 
         $curl = curl_init();
         curl_setopt_array($curl, [
@@ -355,7 +347,6 @@ class OrderApiClient
             return null;
         }
 
-        error_log('Generate labels API response: ' . substr($response, 0, 500));
         return json_decode($response, true);
     }
 }

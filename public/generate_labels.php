@@ -1,16 +1,10 @@
 <?php
-// Simple standalone handler for generate_labels
-error_log("STANDALONE HANDLER CALLED");
+// Standalone handler for generate_labels
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'generate_labels') {
-    error_log("GENERATE LABELS STANDALONE - Order ID: " . $_POST['order_id']);
-    error_log("GENERATE LABELS STANDALONE - Parameters: " . $_POST['parameters']);
-    
     // Parse parameters
     $orderId = (int)$_POST['order_id'];
     $parameters = json_decode($_POST['parameters'], true);
-    
-    error_log("GENERATE LABELS STANDALONE - Parsed parameters: " . print_r($parameters, true));
     
     // Include necessary files for API client
     require_once __DIR__ . '/../vendor/autoload.php';
@@ -24,10 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
         $config['api']['key']
     );
     
-    // Call the API with the actual form parameters
+    // Call the API with the form parameters
     $result = $apiClient->generateShippingLabels($orderId, $parameters ?: []);
-    
-    error_log("GENERATE LABELS STANDALONE - Result: " . print_r($result, true));
     
     // Return JSON response
     header('Content-Type: application/json');
