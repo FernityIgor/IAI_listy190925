@@ -166,7 +166,6 @@ class OrderApiClient
 
     private function addPackageBase(int $orderId, int $courierId): ?array
     {
-        // Move the original addPackage code here
         $url = "https://dkwadrat.pl/api/admin/v6/packages/packages";
         $payload = [
             'params' => [
@@ -174,6 +173,9 @@ class OrderApiClient
                     [
                         'packages' => [
                             [
+                                'shippingStoreCosts' => [
+                                    'tax' => 23
+                                ],
                                 'delivery' => $courierId
                             ]
                         ],
@@ -252,24 +254,9 @@ class OrderApiClient
         return json_decode($response, true);
     }
 
-    public function generateShippingLabels(int $orderNumber, array $parameters): ?array
+    public function fetchCourierProfiles(): ?array
     {
-        $url = "https://dkwadrat.pl/api/admin/v6/packages/labels";
-        $payload = [
-            'params' => [
-                'orderPackages' => [
-                    [
-                        'eventType' => 'order',
-                        'eventId' => (string)$orderNumber,
-                        'packages' => [
-                            [
-                                'parcelParameters' => $parameters
-                            ]
-                        ]
-                    ]
-                ]
-            ]
-        ];
+        $url = "https://dkwadrat.pl/api/admin/v6/couriers/assignedToShippingProfiles";
 
         $curl = curl_init();
         curl_setopt_array($curl, [
@@ -279,12 +266,10 @@ class OrderApiClient
             CURLOPT_MAXREDIRS => 10,
             CURLOPT_TIMEOUT => 30,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => json_encode($payload),
+            CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_HTTPHEADER => [
                 "X-API-KEY: " . $this->apiKey,
-                "accept: application/json",
-                "content-type: application/json"
+                "accept: application/json"
             ],
         ]);
 
@@ -293,7 +278,7 @@ class OrderApiClient
         curl_close($curl);
 
         if ($err) {
-            error_log("cURL Error (Generate Labels): " . $err);
+            error_log("cURL Error (Courier Profiles): " . $err);
             return null;
         }
 

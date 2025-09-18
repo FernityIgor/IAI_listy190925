@@ -24,27 +24,31 @@
     </div>
 
     <!-- Weight Modal -->
-    <div class="weight-modal" id="weightModal" style="display: none;">
+    <div id="weightModal" class="modal-overlay" style="display: none;">
         <div class="modal-content">
             <h3>Zmień wagę paczki</h3>
-            <div class="preset-weights">
-                <button onclick="setWeight(1500)" class="preset-button">1.5 kg</button>
-                <button onclick="setWeight(7000)" class="preset-button">7 kg</button>
-                <button onclick="setWeight(14000)" class="preset-button">14 kg</button>
-                <button onclick="setWeight(28000)" class="preset-button">28 kg</button>
-                <button onclick="setWeight(31500)" class="preset-button">31.5 kg</button>
-            </div>
-            <input 
-                type="number" 
-                id="weightInput" 
-                placeholder="Waga w gramach" 
-                min="100" 
-                step="100" 
-                value="1000">
-            <div class="modal-buttons">
-                <button onclick="saveWeight()" class="modal-button confirm">Zapisz</button>
-                <button onclick="closeWeightModal()" class="modal-button cancel">Anuluj</button>
-            </div>
+            <form method="POST" action="index.php">
+                <input type="hidden" name="update_weight" value="1">
+                <input type="hidden" id="weightOrderId" name="order_id">
+                <input type="hidden" id="weightPackageId" name="package_id">
+                <input type="hidden" id="weightCourierId" name="courier_id">
+                
+                <div class="form-group">
+                    <label for="weightInput">Waga (g):</label>
+                    <div class="weight-presets">
+                        <button type="button" class="preset-btn" onclick="setWeight(1500)">1.5 kg</button>
+                        <button type="button" class="preset-btn" onclick="setWeight(7000)">7 kg</button>
+                        <button type="button" class="preset-btn" onclick="setWeight(28000)">28 kg</button>
+                        <button type="button" class="preset-btn" onclick="setWeight(31500)">31.5 kg</button>
+                    </div>
+                    <input type="number" id="weightInput" name="weight" min="1" required>
+                </div>
+                
+                <div class="modal-buttons">
+                    <button type="submit" class="modal-button confirm">Zapisz</button>
+                    <button type="button" onclick="closeWeightModal()" class="modal-button cancel">Anuluj</button>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -204,6 +208,24 @@
             if (e.key === 'Enter') {
                 saveWeight();
             }
+        });
+
+        function showWeightModal(orderId, packageId, courierId, currentWeight) {
+            const modal = document.getElementById('weightModal');
+            document.getElementById('weightOrderId').value = orderId;
+            document.getElementById('weightPackageId').value = packageId;
+            document.getElementById('weightCourierId').value = courierId;
+            document.getElementById('weightInput').value = currentWeight;
+            modal.style.display = 'flex';
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Close modal when clicking outside
+            document.getElementById('weightModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeWeightModal();
+                }
+            });
         });
     </script>
 </body>
