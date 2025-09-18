@@ -73,25 +73,6 @@ class OrderController
             exit;
         }
 
-        // Handle generate labels request
-        if (isset($_POST['generate_labels'])) {
-            $orderId = (int)$_POST['order_id'];
-            $parameters = json_decode($_POST['parameters'], true);
-            
-            if ($orderId > 0 && $parameters) {
-                $result = $this->apiClient->generateShippingLabels($orderId, $parameters);
-                
-                header('Content-Type: application/json');
-                echo json_encode([
-                    'success' => $result !== null
-                ]);
-                exit;
-            }
-            
-            header('Content-Type: application/json');
-            echo json_encode(['success' => false]);
-            exit;
-        }
 
         // --- Action Handling ---
         // Check if the "Add Package" form was submitted
