@@ -336,13 +336,131 @@ body {
 
 .courier-info {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     gap: 10px;
     background-color: #f8fafc;
     padding: 12px;
     border-radius: 6px;
     border: 1px solid #e5e7eb;
     margin-bottom: 15px;
+}
+
+.courier-info-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.courier-details {
+    flex: 1;
+}
+
+.zlec-kuriera-btn {
+    padding: 8px 16px;
+    background-color: #10b981;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.zlec-kuriera-btn:hover {
+    background-color: #059669;
+}
+
+/* Modal styles for Zleć kuriera */
+.modal {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    right: 15px;
+    top: 10px;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+}
+
+.parameter-item {
+    margin-bottom: 15px;
+}
+
+.parameter-item label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #374151;
+}
+
+.parameter-select,
+.parameter-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.parameter-select:focus,
+.parameter-input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Radio button styles for tak/nie options */
+.radio-container {
+    display: flex;
+    gap: 20px;
+    margin-top: 5px;
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.radio-option input[type="radio"] {
+    width: auto;
+    margin: 0;
+}
+
+.radio-option label {
+    margin: 0;
+    cursor: pointer;
+    font-weight: normal;
+    color: #374151;
 }
 
 .courier-modal {
@@ -406,68 +524,92 @@ body {
     opacity: 0.7;
 }
 
-.add-package-btn.disabled {
-    background-color: #9ca3af;
-    cursor: not-allowed;
-    opacity: 0.7;
-}
-
-.add-package-btn.disabled:hover {
-    background-color: #9ca3af;
-    transform: none;
-}
-
-.inline-form {
-    display: inline-block;
-    margin: 10px 0;
-}
-
-.add-package-btn {
-    background-color: #16a34a;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 8px 16px;
-    cursor: pointer;
-    font-size: 0.95em;
-    transition: background-color 0.2s;
-}
-
-.add-package-btn:hover:not(.disabled) {
-    background-color: #15803d;
-}
-
-.weight-presets {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 10px;
-}
-
-.preset-btn {
-    background-color: #e5e7eb;
-    border: 1px solid #d1d5db;
-    border-radius: 4px;
+.generate-label-btn {
+    margin-left: 15px;
     padding: 4px 8px;
-    font-size: 0.9em;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-
-.preset-btn:hover {
-    background-color: #d1d5db;
-}
-
-.delete-package-btn {
-    background-color: #dc2626;
+    background-color: #059669;
     color: white;
     border: none;
     border-radius: 4px;
-    padding: 8px 16px;
     cursor: pointer;
-    font-size: 0.95em;
-    transition: background-color 0.2s;
+    font-size: 0.9em;
 }
 
-.delete-package-btn:hover {
-    background-color: #b91c1c;
+.generate-label-btn:hover {
+    background-color: #047857;
+}
+
+.shipping-modal .modal-content {
+    width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.shipping-form {
+    margin-top: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #374151;
+}
+
+.form-control {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+    font-size: 0.95em;
+}
+
+.form-control:focus {
+    border-color: #3b82f6;
+    outline: none;
+}
+
+select.form-control {
+    background-color: white;
+}
+
+.error-message {
+    background-color: #fee2e2;
+    border: 1px solid #ef4444;
+    color: #991b1b;
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 6px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.error-message::before {
+    content: "⚠️";
+    font-size: 1.2em;
+}
+
+.error-details {
+    margin-top: 8px;
+    font-size: 0.9em;
+    color: #b91c1c;
+    font-family: monospace;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 4px;
+}
+
+@media (max-width: 1024px) {
+    .address-boxes {
+        flex-wrap: wrap;
+    }
+    .address-box {
+        flex: 1 1 45%;
+    }
 }

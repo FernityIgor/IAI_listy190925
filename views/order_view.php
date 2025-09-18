@@ -1,15 +1,11 @@
 <div class="container">
     <div class="address-boxes">
         <div class="search-container address-box">
-            <h3>Search Order</h3>
-            <form method="post">
-                <label for="order">Enter Order ID:</label>
-                <input type="text" id="order" name="order" value="<?= $h($orderName) ?>">
-                <input type="submit" name="submit" value="Submit">
+            <form method="POST" action="index.php">
+                <label for="order">Numer zamówienia:</label>
+                <input type="text" id="order" name="order" value="">
+                <input type="submit" value="Szukaj">
             </form>
-            <?php if ($error): ?>
-                <p style="color: red;"><?= $h($error) ?></p>
-            <?php endif; ?>
         </div>
 
         <div class="address-box">
@@ -73,10 +69,45 @@
                     Zmień kuriera
                 </button>
             <?php endif; ?>
-            <strong>Courier:</strong> 
-            <?= $h($packages[0]['deliveryPackage']['courierName'] ?? 'N/A') ?> 
-            (ID: <?= $h($courierId) ?>)
+            <div class="courier-info-line">
+                <div class="courier-details">
+                    <strong>Courier:</strong> 
+                    <?= $h($packages[0]['deliveryPackage']['courierName'] ?? 'N/A') ?> 
+                    (ID: <?= $h($courierId) ?>)
+                </div>
+                <button 
+                    type="button" 
+                    class="zlec-kuriera-btn"
+                    onclick="zlecKuriera(<?= $h($order['orderSerialNumber']) ?>)">
+                    Zleć kuriera
+                </button>
+            </div>
         </div>
+        
+        <?php foreach ($packages as $index => $package): ?>
+        <div class="package-item">
+            <div class="package-details">
+                <button 
+                    type="button" 
+                    class="change-weight-btn"
+                    onclick="showWeightInput(
+                        '<?= $h($orderName) ?>', 
+                        '<?= $h($package['deliveryPackage']['deliveryPackageId']) ?>',
+                        '<?= $h($courierId) ?>'
+                    )">
+                    Zmień wagę
+                </button>
+                <span class="package-title">Package <?= $index + 1 ?>:</span>
+                <span><strong>ID:</strong> <?= $h($package['deliveryPackage']['deliveryPackageId'] ?? 'N/A') ?></span>
+                <span><strong>Tracking:</strong> <?= $h($package['deliveryPackage']['deliveryShippingNumber'] ?? 'Not generated') ?></span>
+                <span class="weight-display">
+                    <strong>Logistic weight:</strong> 
+                    <?= $h(isset($package['deliveryPackage']['deliveryPackageParameters']['deliveryWeight']) ? 
+                        ($package['deliveryPackage']['deliveryPackageParameters']['deliveryWeight']) . ' g' : 'N/A') ?>
+                </span>
+            </div>
+        </div>
+        <?php endforeach; ?>
 
         <!-- Packages List -->
         <?php if (!empty($packages)): ?>
@@ -166,6 +197,23 @@
     <?php endif; ?>
 </div>
 
+<!-- Modal for Zleć kuriera -->
+<div id="zlecKurieraModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <span class="close" onclick="closeZlecKurieraModal()">&times;</span>
+        <h3>Zleć kuriera - Parametry przesyłki</h3>
+        <form id="zlecKurieraForm">
+            <div id="parametersContainer">
+                <!-- Parameters will be populated by JavaScript -->
+            </div>
+            <div class="modal-buttons">
+                <button type="button" class="modal-button cancel" onclick="closeZlecKurieraModal()">Anuluj</button>
+                <button type="button" class="modal-button confirm" onclick="generujEtykiety()">Generuj</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <script>
 function confirmDelete(orderId) {
     if (confirm('Are you sure you want to delete this package?')) {
@@ -189,6 +237,294 @@ function confirmDelete(orderId) {
 
         document.body.appendChild(form);
         form.submit();
+    }
+}
+
+let currentOrderNumber = null;
+
+function zlecKuriera(orderNumber) {
+    console.log('zlecKuriera called with orderNumber:', orderNumber);
+    currentOrderNumber = orderNumber;
+    
+    // Fetch package parameters via AJAX
+    fetch(`?action=get_package_params&order=${orderNumber}`)
+        .then(response => {
+            console.log('Fetch response status:', response.status);
+            return response.json();
+        })
+        .then(data => {
+            console.log('Received data:', data);
+            // Log the specific parameters we're interested in
+            if (data.parameters) {
+                data.parameters.forEach(param => {
+                    if (param.key === 'privpers') {
+                        console.log('PRIVPERS parameter:', {
+                            key: param.key,
+                            defaultValue: param.defaultValue,
+                            options: param.options
+                        });
+                    }
+                });
+            }
+            if (data.error) {
+                alert('Błąd przy pobieraniu parametrów: ' + data.error);
+                return;
+            }
+            
+            populateParametersForm(data.parameters);
+            document.getElementById('zlecKurieraModal').style.display = 'block';
+        })
+        .catch(error => {
+            console.error('Fetch error:', error);
+            alert('Błąd przy pobieraniu parametrów');
+        });
+}
+
+function populateParametersForm(parameters) {
+    const container = document.getElementById('parametersContainer');
+    container.innerHTML = '';
+    
+    parameters.forEach((param, index) => {
+        const div = document.createElement('div');
+        div.className = 'parameter-item';
+        
+        const label = document.createElement('label');
+        label.textContent = param.name;
+        div.appendChild(label);
+        
+        if (param.options && param.options.length > 0) {
+            // Check if this is a tak/nie parameter
+            const isTakNieParameter = param.options.length === 2 && 
+                param.options.some(opt => opt.name === 'tak') && 
+                param.options.some(opt => opt.name === 'nie');
+            
+            if (isTakNieParameter) {
+                // Create radio buttons for tak/nie options
+                const radioContainer = document.createElement('div');
+                radioContainer.className = 'radio-container';
+                let selectedFound = false; // Initialize selectedFound for this parameter
+                
+                param.options.forEach((option, optIndex) => {
+                    const radioWrapper = document.createElement('div');
+                    radioWrapper.className = 'radio-option';
+                    
+                    const radioInput = document.createElement('input');
+                    radioInput.type = 'radio';
+                    radioInput.name = param.key;
+                    radioInput.value = option.id;
+                    radioInput.id = `${param.key}_${option.id}`;
+                    
+                    const radioLabel = document.createElement('label');
+                    radioLabel.htmlFor = radioInput.id;
+                    radioLabel.textContent = option.name;
+                    
+                    // Set default value
+                    let defaultValueStr = param.defaultValue !== undefined ? String(param.defaultValue).trim() : '';
+                    const optionIdStr = String(option.id).trim();
+                    
+                    // Handle different formats of boolean values
+                    let isMatch = false;
+                    if (defaultValueStr === optionIdStr) {
+                        isMatch = true;
+                    } else {
+                        // Handle yes/no vs 0/1 mappings
+                        const valueMap = {
+                            'yes': ['1', 'tak'],
+                            'no': ['0', 'nie'],
+                            '1': ['yes', 'tak'],
+                            '0': ['no', 'nie'],
+                            'y': ['yes', '1', 'tak'],
+                            'n': ['no', '0', 'nie']
+                        };
+                        
+                        if (valueMap[defaultValueStr] && valueMap[defaultValueStr].includes(optionIdStr)) {
+                            isMatch = true;
+                        } else if (valueMap[optionIdStr] && valueMap[optionIdStr].includes(defaultValueStr)) {
+                            isMatch = true;
+                        }
+                    }
+                    
+                    // Override for privpers to match API documentation (temporary fix)
+                    if (param.key === 'privpers' && defaultValueStr === '0') {
+                        console.log('Overriding privpers defaultValue from 0 to 1 to match API spec');
+                        isMatch = (optionIdStr === '1');
+                    }
+                    
+                    if (isMatch) {
+                        radioInput.checked = true;
+                        selectedFound = true;
+                        
+                        console.log(`DEBUG: Setting ${param.key} to ${option.name} (defaultValue: "${defaultValueStr}", optionId: "${optionIdStr}")`);
+                    } else if (param.key === 'additionalHandling') {
+                        console.log(`DEBUG ${param.key}: NOT selecting ${option.name} (defaultValue: "${defaultValueStr}", optionId: "${optionIdStr}")`);
+                    }
+                    
+                    radioWrapper.appendChild(radioInput);
+                    radioWrapper.appendChild(radioLabel);
+                    radioContainer.appendChild(radioWrapper);
+                });
+                
+                // If no option was selected, default to "nie" (0)
+                if (!selectedFound) {
+                    const nieRadio = radioContainer.querySelector('input[value="0"]');
+                    if (nieRadio) {
+                        nieRadio.checked = true;
+                    }
+                }
+                
+                div.appendChild(radioContainer);
+            } else {
+                // Create select dropdown for other options (like service type)
+                const select = document.createElement('select');
+                select.name = param.key;
+                select.className = 'parameter-select';
+                
+                param.options.forEach((option, optIndex) => {
+                    const optionElement = document.createElement('option');
+                    optionElement.value = option.id;
+                    optionElement.textContent = option.name;
+                    
+                    // Convert both to strings for comparison
+                    const defaultValueStr = String(param.defaultValue || '');
+                    const optionIdStr = String(option.id);
+                    
+                    // Set default value if it matches
+                    if (param.defaultValue !== undefined && param.defaultValue !== null && param.defaultValue !== "" && defaultValueStr === optionIdStr) {
+                        optionElement.selected = true;
+                        selectedFound = true;
+                    }
+                    
+                    select.appendChild(optionElement);
+                });
+                
+                div.appendChild(select);
+            }
+        } else {
+            // Create text input for text parameters
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.name = param.key;
+            input.className = 'parameter-input';
+            input.value = param.defaultValue || '';
+            div.appendChild(input);
+        }
+        
+        container.appendChild(div);
+    });
+}
+
+function generujEtykiety() {
+    // Show status on screen
+    const statusDiv = document.createElement('div');
+    statusDiv.id = 'generuj-status';
+    statusDiv.style.cssText = 'position: fixed; top: 10px; right: 10px; background: #fff; border: 2px solid #333; padding: 10px; z-index: 10000; max-width: 400px; font-family: monospace; font-size: 12px;';
+    statusDiv.innerHTML = '<strong>Generuj Etykiety - Status:</strong><br>';
+    document.body.appendChild(statusDiv);
+    
+    function addStatus(message) {
+        statusDiv.innerHTML += new Date().toLocaleTimeString() + ': ' + message + '<br>';
+        console.log('GENERUJ:', message);
+    }
+    
+    addStatus('Rozpoczęcie procesu generowania etykiet');
+    
+    if (!currentOrderNumber) {
+        addStatus('BŁĄD: Brak numeru zamówienia');
+        alert('Błąd: Brak numeru zamówienia');
+        return;
+    }
+    
+    addStatus('Numer zamówienia: ' + currentOrderNumber);
+    
+    // Collect form data
+    const form = document.getElementById('zlecKurieraForm');
+    addStatus('Pobieranie danych z formularza...');
+    
+    const formData = new FormData(form);
+    const parameters = {};
+    
+    for (let [key, value] of formData.entries()) {
+        parameters[key] = value;
+        addStatus('Parametr: ' + key + ' = ' + value);
+    }
+    
+    addStatus('Wszystkich parametrów: ' + Object.keys(parameters).length);
+    
+    // Send request to generate labels
+    const requestData = new FormData();
+    requestData.append('action', 'generate_labels');
+    requestData.append('order_id', currentOrderNumber);
+    requestData.append('parameters', JSON.stringify(parameters));
+    
+    addStatus('Przygotowywanie żądania POST...');
+    addStatus('URL docelowy: generate_labels.php (STANDALONE TEST)');
+    addStatus('Wysyłanie żądania...');
+    
+    fetch('generate_labels.php', {
+        method: 'POST',
+        body: requestData
+    })
+    .then(response => {
+        addStatus('Otrzymano odpowiedź HTTP: ' + response.status + ' ' + response.statusText);
+        addStatus('Content-Type: ' + (response.headers.get('content-type') || 'brak'));
+        
+        return response.text().then(text => {
+            addStatus('Rozmiar odpowiedzi: ' + text.length + ' znaków');
+            addStatus('Pierwsze 200 znaków odpowiedzi: ' + text.substring(0, 200));
+            
+            try {
+                const jsonData = JSON.parse(text);
+                addStatus('Odpowiedź poprawnie sparsowana jako JSON');
+                return jsonData;
+            } catch (e) {
+                addStatus('BŁĄD: Nie można sparsować JSON: ' + e.message);
+                addStatus('Pełna odpowiedź serwera: ' + text);
+                throw new Error('Server returned invalid JSON response');
+            }
+        });
+    })
+    .then(data => {
+        addStatus('Przetwarzanie odpowiedzi JSON...');
+        addStatus('Odpowiedź: ' + JSON.stringify(data));
+        
+        if (data.success) {
+            addStatus('SUKCES: Etykiety wygenerowane!');
+            alert('Etykiety zostały wygenerowane pomyślnie!');
+            closeZlecKurieraModal();
+            // Remove status div before reload
+            document.body.removeChild(statusDiv);
+            window.location.reload();
+        } else {
+            addStatus('BŁĄD w odpowiedzi: ' + (data.error || 'Unknown error'));
+            alert('Błąd przy generowaniu etykiet: ' + (data.error || 'Unknown error'));
+        }
+    })
+    .catch(error => {
+        addStatus('WYJĄTEK: ' + error.message);
+        console.error('Error:', error);
+        alert('Błąd przy generowaniu etykiet: ' + error.message);
+    });
+    
+    // Add close button to status div
+    setTimeout(() => {
+        const closeBtn = document.createElement('button');
+        closeBtn.textContent = 'Zamknij';
+        closeBtn.onclick = () => document.body.removeChild(statusDiv);
+        closeBtn.style.cssText = 'margin-top: 10px; padding: 5px;';
+        statusDiv.appendChild(closeBtn);
+    }, 1000);
+}
+
+function closeZlecKurieraModal() {
+    document.getElementById('zlecKurieraModal').style.display = 'none';
+    currentOrderNumber = null;
+}
+
+// Close modal when clicking outside of it
+window.onclick = function(event) {
+    const modal = document.getElementById('zlecKurieraModal');
+    if (event.target == modal) {
+        closeZlecKurieraModal();
     }
 }
 </script>

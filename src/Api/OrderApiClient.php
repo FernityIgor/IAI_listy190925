@@ -284,4 +284,78 @@ class OrderApiClient
 
         return json_decode($response, true);
     }
+
+    public function generateShippingLabels(int $orderNumber, array $parameters = []): ?array
+    {
+        error_log('Generate labels called with orderNumber: ' . $orderNumber);
+        error_log('Parameters: ' . print_r($parameters, true));
+        
+        $apiKey = "YXBwbGljYXRpb24xODpzSUdaNFU1ZzFwVnV2K3R4bExZU2lxRnR6dytHa0hiY3dhQ29HZ1BOdFdOSEtlekRYR0F3NkpFZEFCZGk0RWQ0";
+        $endpoint = "https://dkwadrat.pl/api/admin/v6/packages/labels";
+
+        // Use your exact working format
+        $eventId = $orderNumber;
+        $eventType = "order";
+        
+        // Convert form parameters to parcel parameters format if provided
+        // Otherwise use empty array (your original working approach)
+        $parcels = [];
+        if (!empty($parameters)) {
+            // Transform the form parameters into the format expected by the API
+            $parcelParams = [];
+            foreach ($parameters as $key => $value) {
+                if (!empty($value) || $value === '0') { // Include if has value or is explicitly '0'
+                    $parcelParams[] = [
+                        'key' => $key,
+                        'value' => $value
+                    ];
+                }
+            }
+            
+            if (!empty($parcelParams)) {
+                $parcels = [$parcelParams]; // Wrap in array as expected by API
+            }
+            
+            error_log('Converted parcel parameters: ' . print_r($parcels, true));
+        }
+
+        $payload = [
+            'params' => [
+                'eventId' => $eventId,
+                'eventType' => $eventType,
+                'parcelParameters' => $parcels
+            ]
+        ];
+
+        error_log('Final payload: ' . print_r($payload, true));
+
+        $curl = curl_init();
+        curl_setopt_array($curl, [
+            CURLOPT_URL => $endpoint,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 60,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => json_encode($payload, JSON_UNESCAPED_UNICODE),
+            CURLOPT_HTTPHEADER => [
+                "X-API-KEY: {$apiKey}",
+                "Accept: application/json, application/pdf",
+                "Content-Type: application/json"
+            ],
+        ]);
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+        curl_close($curl);
+
+        if ($err) {
+            error_log("cURL Error (Generate Labels): " . $err);
+            return null;
+        }
+
+        error_log('Generate labels API response: ' . substr($response, 0, 500));
+        return json_decode($response, true);
+    }
 }
