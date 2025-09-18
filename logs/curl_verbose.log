@@ -1,0 +1,832 @@
+*   Trying 5.149.162.148:443...
+* Connected to dkwadrat.pl (5.149.162.148) port 443
+* ALPN: curl offers http/1.1
+*  CAfile: C:\xampp\apache\bin\curl-ca-bundle.crt
+*  CApath: none
+* SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384
+* ALPN: server accepted http/1.1
+* Server certificate:
+*  subject: CN=*.dkwadrat.pl
+*  start date: Jul 15 12:21:28 2025 GMT
+*  expire date: Jul 15 12:21:27 2026 GMT
+*  subjectAltName: host "dkwadrat.pl" matched cert's "dkwadrat.pl"
+*  issuer: C=PL; O=Unizeto Technologies S.A.; OU=Certum Certification Authority; CN=Certum Domain Validation CA SHA2
+*  SSL certificate verify ok.
+* using HTTP/1.1
+> POST /api/admin/v6/packages/labels HTTP/1.1
+Host: dkwadrat.pl
+Accept-Encoding: deflate, gzip
+X-API-KEY: YXBwbGljYXRpb24xODpzSUdaNFU1ZzFwVnV2K3R4bExZU2lxRnR6dytHa0hiY3dhQ29HZ1BOdFdOSEtlekRYR0F3NkpFZEFCZGk0RWQ0
+Accept: application/json, application/pdf
+Content-Type: application/json
+Content-Length: 556
+
+* old SSL session ID is stale, removing
+< HTTP/1.1 207 Multi-Status
+< Server: nginx
+< Date: Thu, 18 Sep 2025 16:58:29 GMT
+< Content-Type: application/json
+< Transfer-Encoding: chunked
+< Connection: keep-alive
+< 
+* Connection #0 to host dkwadrat.pl left intact
+*   Trying 5.149.162.148:443...
+* Connected to dkwadrat.pl (5.149.162.148) port 443
+* ALPN: curl offers http/1.1
+*  CAfile: C:\xampp\apache\bin\curl-ca-bundle.crt
+*  CApath: none
+* SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384
+* ALPN: server accepted http/1.1
+* Server certificate:
+*  subject: CN=*.dkwadrat.pl
+*  start date: Jul 15 12:21:28 2025 GMT
+*  expire date: Jul 15 12:21:27 2026 GMT
+*  subjectAltName: host "dkwadrat.pl" matched cert's "dkwadrat.pl"
+*  issuer: C=PL; O=Unizeto Technologies S.A.; OU=Certum Certification Authority; CN=Certum Domain Validation CA SHA2
+*  SSL certificate verify ok.
+* using HTTP/1.1
+> POST /api/admin/v6/packages/labels HTTP/1.1
+Host: dkwadrat.pl
+Accept-Encoding: deflate, gzip
+X-API-KEY: YXBwbGljYXRpb24xODpzSUdaNFU1ZzFwVnV2K3R4bExZU2lxRnR6dytHa0hiY3dhQ29HZ1BOdFdOSEtlekRYR0F3NkpFZEFCZGk0RWQ0
+Accept: application/json, application/pdf
+Content-Type: application/json
+Content-Length: 592
+
+* old SSL session ID is stale, removing
+< HTTP/1.1 200 OK
+< Server: nginx
+< Date: Thu, 18 Sep 2025 16:59:54 GMT
+< Content-Type: application/json
+< Transfer-Encoding: chunked
+< Connection: keep-alive
+< 
+* Connection #0 to host dkwadrat.pl left intact
+*   Trying 5.149.162.148:443...
+* Connected to dkwadrat.pl (5.149.162.148) port 443
+* ALPN: curl offers http/1.1
+*  CAfile: C:\xampp\apache\bin\curl-ca-bundle.crt
+*  CApath: none
+* SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384
+* ALPN: server accepted http/1.1
+* Server certificate:
+*  subject: CN=*.dkwadrat.pl
+*  start date: Jul 15 12:21:28 2025 GMT
+*  expire date: Jul 15 12:21:27 2026 GMT
+*  subjectAltName: host "dkwadrat.pl" matched cert's "dkwadrat.pl"
+*  issuer: C=PL; O=Unizeto Technologies S.A.; OU=Certum Certification Authority; CN=Certum Domain Validation CA SHA2
+*  SSL certificate verify ok.
+* using HTTP/1.1
+> POST /api/admin/v6/packages/labels HTTP/1.1
+Host: dkwadrat.pl
+Accept-Encoding: deflate, gzip
+X-API-KEY: YXBwbGljYXRpb24xODpzSUdaNFU1ZzFwVnV2K3R4bExZU2lxRnR6dytHa0hiY3dhQ29HZ1BOdFdOSEtlekRYR0F3NkpFZEFCZGk0RWQ0
+Accept: application/json, application/pdf
+Content-Type: application/json
+Content-Length: 523
+
+* old SSL session ID is stale, removing
+< HTTP/1.1 200 OK
+< Server: nginx
+< Date: Thu, 18 Sep 2025 17:11:44 GMT
+< Content-Type: application/json
+< Transfer-Encoding: chunked
+< Connection: keep-alive
+< 
+* Connection #0 to host dkwadrat.pl left intact
+*   Trying 5.149.162.148:443...
+* Connected to dkwadrat.pl (5.149.162.148) port 443
+* ALPN: curl offers http/1.1
+*  CAfile: C:\xampp\apache\bin\curl-ca-bundle.crt
+*  CApath: none
+* SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384
+* ALPN: server accepted http/1.1
+* Server certificate:
+*  subject: CN=*.dkwadrat.pl
+*  start date: Jul 15 12:21:28 2025 GMT
+*  expire date: Jul 15 12:21:27 2026 GMT
+*  subjectAltName: host "dkwadrat.pl" matched cert's "dkwadrat.pl"
+*  issuer: C=PL; O=Unizeto Technologies S.A.; OU=Certum Certification Authority; CN=Certum Domain Validation CA SHA2
+*  SSL certificate verify ok.
+* using HTTP/1.1
+> POST /api/admin/v6/packages/labels HTTP/1.1
+Host: dkwadrat.pl
+Accept-Encoding: deflate, gzip
+X-API-KEY: YXBwbGljYXRpb24xODpzSUdaNFU1ZzFwVnV2K3R4bExZU2lxRnR6dytHa0hiY3dhQ29HZ1BOdFdOSEtlekRYR0F3NkpFZEFCZGk0RWQ0
+Accept: application/json, application/pdf
+Content-Type: application/json
+Content-Length: 99
+
+* old SSL session ID is stale, removing
+< HTTP/1.1 200 OK
+< Server: nginx
+< Date: Thu, 18 Sep 2025 17:20:44 GMT
+< Content-Type: application/json
+< Transfer-Encoding: chunked
+< Connection: keep-alive
+< 
+* Connection #0 to host dkwadrat.pl left intact
+*   Trying 5.149.162.148:443...
+* Connected to dkwadrat.pl (5.149.162.148) port 443
+* ALPN: curl offers http/1.1
+*  CAfile: C:\xampp\apache\bin\curl-ca-bundle.crt
+*  CApath: none
+* SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384
+* ALPN: server accepted http/1.1
+* Server certificate:
+*  subject: CN=*.dkwadrat.pl
+*  start date: Jul 15 12:21:28 2025 GMT
+*  expire date: Jul 15 12:21:27 2026 GMT
+*  subjectAltName: host "dkwadrat.pl" matched cert's "dkwadrat.pl"
+*  issuer: C=PL; O=Unizeto Technologies S.A.; OU=Certum Certification Authority; CN=Certum Domain Validation CA SHA2
+*  SSL certificate verify ok.
+* using HTTP/1.1
+> POST /api/admin/v6/packages/labels HTTP/1.1
+Host: dkwadrat.pl
+Accept-Encoding: deflate, gzip
+X-API-KEY: YXBwbGljYXRpb24xODpzSUdaNFU1ZzFwVnV2K3R4bExZU2lxRnR6dytHa0hiY3dhQ29HZ1BOdFdOSEtlekRYR0F3NkpFZEFCZGk0RWQ0
+Accept: application/json, application/pdf
+Content-Type: application/json
+Content-Length: 99
+
+* old SSL session ID is stale, removing
+< HTTP/1.1 200 OK
+< Server: nginx
+< Date: Thu, 18 Sep 2025 17:22:43 GMT
+< Content-Type: application/json
+< Transfer-Encoding: chunked
+< Connection: keep-alive
+< 
+* Connection #0 to host dkwadrat.pl left intact
+*   Trying 5.149.162.148:443...
+* Connected to dkwadrat.pl (5.149.162.148) port 443
+* ALPN: curl offers http/1.1
+*  CAfile: C:\xampp\apache\bin\curl-ca-bundle.crt
+*  CApath: none
+* SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384
+* ALPN: server accepted http/1.1
+* Server certificate:
+*  subject: CN=*.dkwadrat.pl
+*  start date: Jul 15 12:21:28 2025 GMT
+*  expire date: Jul 15 12:21:27 2026 GMT
+*  subjectAltName: host "dkwadrat.pl" matched cert's "dkwadrat.pl"
+*  issuer: C=PL; O=Unizeto Technologies S.A.; OU=Certum Certification Authority; CN=Certum Domain Validation CA SHA2
+*  SSL certificate verify ok.
+* using HTTP/1.1
+> POST /api/admin/v6/packages/labels HTTP/1.1
+Host: dkwadrat.pl
+Accept-Encoding: deflate, gzip
+X-API-KEY: YXBwbGljYXRpb24xODpzSUdaNFU1ZzFwVnV2K3R4bExZU2lxRnR6dytHa0hiY3dhQ29HZ1BOdFdOSEtlekRYR0F3NkpFZEFCZGk0RWQ0
+Accept: application/json, application/pdf
+Content-Type: application/json
+Content-Length: 99
+
+* old SSL session ID is stale, removing
+< HTTP/1.1 200 OK
+< Server: nginx
+< Date: Thu, 18 Sep 2025 17:27:01 GMT
+< Content-Type: application/json
+< Transfer-Encoding: chunked
+< Connection: keep-alive
+< 
+* Connection #0 to host dkwadrat.pl left intact
+*   Trying 5.149.162.148:443...
+* Connected to dkwadrat.pl (5.149.162.148) port 443
+* ALPN: curl offers http/1.1
+*  CAfile: C:\xampp\apache\bin\curl-ca-bundle.crt
+*  CApath: none
+* SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384
+* ALPN: server accepted http/1.1
+* Server certificate:
+*  subject: CN=*.dkwadrat.pl
+*  start date: Jul 15 12:21:28 2025 GMT
+*  expire date: Jul 15 12:21:27 2026 GMT
+*  subjectAltName: host "dkwadrat.pl" matched cert's "dkwadrat.pl"
+*  issuer: C=PL; O=Unizeto Technologies S.A.; OU=Certum Certification Authority; CN=Certum Domain Validation CA SHA2
+*  SSL certificate verify ok.
+* using HTTP/1.1
+> POST /api/admin/v6/packages/labels HTTP/1.1
+Host: dkwadrat.pl
+Accept-Encoding: deflate, gzip
+X-API-KEY: YXBwbGljYXRpb24xODpzSUdaNFU1ZzFwVnV2K3R4bExZU2lxRnR6dytHa0hiY3dhQ29HZ1BOdFdOSEtlekRYR0F3NkpFZEFCZGk0RWQ0
+Accept: application/json, application/pdf
+Content-Type: application/json
+Content-Length: 99
+
+* old SSL session ID is stale, removing
+< HTTP/1.1 200 OK
+< Server: nginx
+< Date: Thu, 18 Sep 2025 17:29:50 GMT
+< Content-Type: application/json
+< Transfer-Encoding: chunked
+< Connection: keep-alive
+< 
+* Connection #0 to host dkwadrat.pl left intact
+*   Trying 5.149.162.148:443...
+* Connected to dkwadrat.pl (5.149.162.148) port 443
+* ALPN: curl offers http/1.1
+*  CAfile: C:\xampp\apache\bin\curl-ca-bundle.crt
+*  CApath: none
+* SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384
+* ALPN: server accepted http/1.1
+* Server certificate:
+*  subject: CN=*.dkwadrat.pl
+*  start date: Jul 15 12:21:28 2025 GMT
+*  expire date: Jul 15 12:21:27 2026 GMT
+*  subjectAltName: host "dkwadrat.pl" matched cert's "dkwadrat.pl"
+*  issuer: C=PL; O=Unizeto Technologies S.A.; OU=Certum Certification Authority; CN=Certum Domain Validation CA SHA2
+*  SSL certificate verify ok.
+* using HTTP/1.1
+> POST /api/admin/v6/packages/labels HTTP/1.1
+Host: dkwadrat.pl
+Accept-Encoding: deflate, gzip
+X-API-KEY: YXBwbGljYXRpb24xODpzSUdaNFU1ZzFwVnV2K3R4bExZU2lxRnR6dytHa0hiY3dhQ29HZ1BOdFdOSEtlekRYR0F3NkpFZEFCZGk0RWQ0
+Accept: application/json, application/pdf
+Content-Type: application/json
+Content-Length: 99
+
+* old SSL session ID is stale, removing
+< HTTP/1.1 207 Multi-Status
+< Server: nginx
+< Date: Thu, 18 Sep 2025 17:31:57 GMT
+< Content-Type: application/json
+< Transfer-Encoding: chunked
+< Connection: keep-alive
+< 
+* Connection #0 to host dkwadrat.pl left intact
+*   Trying 5.149.162.148:443...
+* Connected to dkwadrat.pl (5.149.162.148) port 443
+* ALPN: curl offers http/1.1
+*  CAfile: C:\xampp\apache\bin\curl-ca-bundle.crt
+*  CApath: none
+* SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384
+* ALPN: server accepted http/1.1
+* Server certificate:
+*  subject: CN=*.dkwadrat.pl
+*  start date: Jul 15 12:21:28 2025 GMT
+*  expire date: Jul 15 12:21:27 2026 GMT
+*  subjectAltName: host "dkwadrat.pl" matched cert's "dkwadrat.pl"
+*  issuer: C=PL; O=Unizeto Technologies S.A.; OU=Certum Certification Authority; CN=Certum Domain Validation CA SHA2
+*  SSL certificate verify ok.
+* using HTTP/1.1
+> POST /api/admin/v6/packages/labels HTTP/1.1
+Host: dkwadrat.pl
+Accept-Encoding: deflate, gzip
+X-API-KEY: YXBwbGljYXRpb24xODpzSUdaNFU1ZzFwVnV2K3R4bExZU2lxRnR6dytHa0hiY3dhQ29HZ1BOdFdOSEtlekRYR0F3NkpFZEFCZGk0RWQ0
+Accept: application/json, application/pdf
+Content-Type: application/json
+Content-Length: 99
+
+* old SSL session ID is stale, removing
+< HTTP/1.1 200 OK
+< Server: nginx
+< Date: Thu, 18 Sep 2025 17:33:35 GMT
+< Content-Type: application/json
+< Transfer-Encoding: chunked
+< Connection: keep-alive
+< 
+* Connection #0 to host dkwadrat.pl left intact
+*   Trying 5.149.162.148:443...
+* Connected to dkwadrat.pl (5.149.162.148) port 443
+* ALPN: curl offers http/1.1
+*  CAfile: C:\xampp\apache\bin\curl-ca-bundle.crt
+*  CApath: none
+* SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384
+* ALPN: server accepted http/1.1
+* Server certificate:
+*  subject: CN=*.dkwadrat.pl
+*  start date: Jul 15 12:21:28 2025 GMT
+*  expire date: Jul 15 12:21:27 2026 GMT
+*  subjectAltName: host "dkwadrat.pl" matched cert's "dkwadrat.pl"
+*  issuer: C=PL; O=Unizeto Technologies S.A.; OU=Certum Certification Authority; CN=Certum Domain Validation CA SHA2
+*  SSL certificate verify ok.
+* using HTTP/1.1
+> POST /api/admin/v6/packages/labels HTTP/1.1
+Host: dkwadrat.pl
+Accept-Encoding: deflate, gzip
+X-API-KEY: YXBwbGljYXRpb24xODpzSUdaNFU1ZzFwVnV2K3R4bExZU2lxRnR6dytHa0hiY3dhQ29HZ1BOdFdOSEtlekRYR0F3NkpFZEFCZGk0RWQ0
+Accept: application/json, application/pdf
+Content-Type: application/json
+Content-Length: 101
+
+* old SSL session ID is stale, removing
+< HTTP/1.1 200 OK
+< Server: nginx
+< Date: Thu, 18 Sep 2025 17:36:19 GMT
+< Content-Type: application/json
+< Transfer-Encoding: chunked
+< Connection: keep-alive
+< 
+* Connection #0 to host dkwadrat.pl left intact
+*   Trying 5.149.162.148:443...
+* Connected to dkwadrat.pl (5.149.162.148) port 443
+* ALPN: curl offers http/1.1
+*  CAfile: C:\xampp\apache\bin\curl-ca-bundle.crt
+*  CApath: none
+* SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384
+* ALPN: server accepted http/1.1
+* Server certificate:
+*  subject: CN=*.dkwadrat.pl
+*  start date: Jul 15 12:21:28 2025 GMT
+*  expire date: Jul 15 12:21:27 2026 GMT
+*  subjectAltName: host "dkwadrat.pl" matched cert's "dkwadrat.pl"
+*  issuer: C=PL; O=Unizeto Technologies S.A.; OU=Certum Certification Authority; CN=Certum Domain Validation CA SHA2
+*  SSL certificate verify ok.
+* using HTTP/1.1
+> POST /api/admin/v6/packages/labels HTTP/1.1
+Host: dkwadrat.pl
+Accept-Encoding: deflate, gzip
+X-API-KEY: YXBwbGljYXRpb24xODpzSUdaNFU1ZzFwVnV2K3R4bExZU2lxRnR6dytHa0hiY3dhQ29HZ1BOdFdOSEtlekRYR0F3NkpFZEFCZGk0RWQ0
+Accept: application/json, application/pdf
+Content-Type: application/json
+Content-Length: 99
+
+* old SSL session ID is stale, removing
+< HTTP/1.1 200 OK
+< Server: nginx
+< Date: Thu, 18 Sep 2025 17:41:59 GMT
+< Content-Type: application/json
+< Transfer-Encoding: chunked
+< Connection: keep-alive
+< 
+* Connection #0 to host dkwadrat.pl left intact
+*   Trying 5.149.162.148:443...
+* Connected to dkwadrat.pl (5.149.162.148) port 443
+* ALPN: curl offers http/1.1
+*  CAfile: C:\xampp\apache\bin\curl-ca-bundle.crt
+*  CApath: none
+* SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384
+* ALPN: server accepted http/1.1
+* Server certificate:
+*  subject: CN=*.dkwadrat.pl
+*  start date: Jul 15 12:21:28 2025 GMT
+*  expire date: Jul 15 12:21:27 2026 GMT
+*  subjectAltName: host "dkwadrat.pl" matched cert's "dkwadrat.pl"
+*  issuer: C=PL; O=Unizeto Technologies S.A.; OU=Certum Certification Authority; CN=Certum Domain Validation CA SHA2
+*  SSL certificate verify ok.
+* using HTTP/1.1
+> POST /api/admin/v6/packages/labels HTTP/1.1
+Host: dkwadrat.pl
+Accept-Encoding: deflate, gzip
+X-API-KEY: YXBwbGljYXRpb24xODpzSUdaNFU1ZzFwVnV2K3R4bExZU2lxRnR6dytHa0hiY3dhQ29HZ1BOdFdOSEtlekRYR0F3NkpFZEFCZGk0RWQ0
+Accept: application/json, application/pdf
+Content-Type: application/json
+Content-Length: 519
+
+* old SSL session ID is stale, removing
+< HTTP/1.1 207 Multi-Status
+< Server: nginx
+< Date: Thu, 18 Sep 2025 17:57:01 GMT
+< Content-Type: application/json
+< Content-Length: 262
+< Connection: keep-alive
+< 
+* Connection #0 to host dkwadrat.pl left intact
+*   Trying 5.149.162.148:443...
+* Connected to dkwadrat.pl (5.149.162.148) port 443
+* ALPN: curl offers http/1.1
+*  CAfile: C:\xampp\apache\bin\curl-ca-bundle.crt
+*  CApath: none
+* SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384
+* ALPN: server accepted http/1.1
+* Server certificate:
+*  subject: CN=*.dkwadrat.pl
+*  start date: Jul 15 12:21:28 2025 GMT
+*  expire date: Jul 15 12:21:27 2026 GMT
+*  subjectAltName: host "dkwadrat.pl" matched cert's "dkwadrat.pl"
+*  issuer: C=PL; O=Unizeto Technologies S.A.; OU=Certum Certification Authority; CN=Certum Domain Validation CA SHA2
+*  SSL certificate verify ok.
+* using HTTP/1.1
+> POST /api/admin/v6/packages/labels HTTP/1.1
+Host: dkwadrat.pl
+Accept-Encoding: deflate, gzip
+X-API-KEY: YXBwbGljYXRpb24xODpzSUdaNFU1ZzFwVnV2K3R4bExZU2lxRnR6dytHa0hiY3dhQ29HZ1BOdFdOSEtlekRYR0F3NkpFZEFCZGk0RWQ0
+Accept: application/json, application/pdf
+Content-Type: application/json
+Content-Length: 519
+
+* old SSL session ID is stale, removing
+< HTTP/1.1 207 Multi-Status
+< Server: nginx
+< Date: Thu, 18 Sep 2025 17:57:17 GMT
+< Content-Type: application/json
+< Content-Length: 262
+< Connection: keep-alive
+< 
+* Connection #0 to host dkwadrat.pl left intact
+*   Trying 5.149.162.148:443...
+* Connected to dkwadrat.pl (5.149.162.148) port 443
+* ALPN: curl offers http/1.1
+*  CAfile: C:\xampp\apache\bin\curl-ca-bundle.crt
+*  CApath: none
+* SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384
+* ALPN: server accepted http/1.1
+* Server certificate:
+*  subject: CN=*.dkwadrat.pl
+*  start date: Jul 15 12:21:28 2025 GMT
+*  expire date: Jul 15 12:21:27 2026 GMT
+*  subjectAltName: host "dkwadrat.pl" matched cert's "dkwadrat.pl"
+*  issuer: C=PL; O=Unizeto Technologies S.A.; OU=Certum Certification Authority; CN=Certum Domain Validation CA SHA2
+*  SSL certificate verify ok.
+* using HTTP/1.1
+> POST /api/admin/v6/packages/labels HTTP/1.1
+Host: dkwadrat.pl
+Accept-Encoding: deflate, gzip
+X-API-KEY: YXBwbGljYXRpb24xODpzSUdaNFU1ZzFwVnV2K3R4bExZU2lxRnR6dytHa0hiY3dhQ29HZ1BOdFdOSEtlekRYR0F3NkpFZEFCZGk0RWQ0
+Accept: application/json, application/pdf
+Content-Type: application/json
+Content-Length: 519
+
+* old SSL session ID is stale, removing
+< HTTP/1.1 200 OK
+< Server: nginx
+< Date: Thu, 18 Sep 2025 17:57:55 GMT
+< Content-Type: application/json
+< Transfer-Encoding: chunked
+< Connection: keep-alive
+< 
+* Connection #0 to host dkwadrat.pl left intact
+*   Trying 5.149.162.148:443...
+* Connected to dkwadrat.pl (5.149.162.148) port 443
+* ALPN: curl offers http/1.1
+*  CAfile: C:\xampp\apache\bin\curl-ca-bundle.crt
+*  CApath: none
+* SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384
+* ALPN: server accepted http/1.1
+* Server certificate:
+*  subject: CN=*.dkwadrat.pl
+*  start date: Jul 15 12:21:28 2025 GMT
+*  expire date: Jul 15 12:21:27 2026 GMT
+*  subjectAltName: host "dkwadrat.pl" matched cert's "dkwadrat.pl"
+*  issuer: C=PL; O=Unizeto Technologies S.A.; OU=Certum Certification Authority; CN=Certum Domain Validation CA SHA2
+*  SSL certificate verify ok.
+* using HTTP/1.1
+> POST /api/admin/v6/packages/labels HTTP/1.1
+Host: dkwadrat.pl
+Accept-Encoding: deflate, gzip
+X-API-KEY: YXBwbGljYXRpb24xODpzSUdaNFU1ZzFwVnV2K3R4bExZU2lxRnR6dytHa0hiY3dhQ29HZ1BOdFdOSEtlekRYR0F3NkpFZEFCZGk0RWQ0
+Accept: application/json, application/pdf
+Content-Type: application/json
+Content-Length: 519
+
+* old SSL session ID is stale, removing
+< HTTP/1.1 207 Multi-Status
+< Server: nginx
+< Date: Thu, 18 Sep 2025 17:58:45 GMT
+< Content-Type: application/json
+< Content-Length: 262
+< Connection: keep-alive
+< 
+* Connection #0 to host dkwadrat.pl left intact
+*   Trying 5.149.162.148:443...
+* Connected to dkwadrat.pl (5.149.162.148) port 443
+* ALPN: curl offers http/1.1
+*  CAfile: C:\xampp\apache\bin\curl-ca-bundle.crt
+*  CApath: none
+* SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384
+* ALPN: server accepted http/1.1
+* Server certificate:
+*  subject: CN=*.dkwadrat.pl
+*  start date: Jul 15 12:21:28 2025 GMT
+*  expire date: Jul 15 12:21:27 2026 GMT
+*  subjectAltName: host "dkwadrat.pl" matched cert's "dkwadrat.pl"
+*  issuer: C=PL; O=Unizeto Technologies S.A.; OU=Certum Certification Authority; CN=Certum Domain Validation CA SHA2
+*  SSL certificate verify ok.
+* using HTTP/1.1
+> POST /api/admin/v6/packages/labels HTTP/1.1
+Host: dkwadrat.pl
+Accept-Encoding: deflate, gzip
+X-API-KEY: YXBwbGljYXRpb24xODpzSUdaNFU1ZzFwVnV2K3R4bExZU2lxRnR6dytHa0hiY3dhQ29HZ1BOdFdOSEtlekRYR0F3NkpFZEFCZGk0RWQ0
+Accept: application/json, application/pdf
+Content-Type: application/json
+Content-Length: 519
+
+* old SSL session ID is stale, removing
+< HTTP/1.1 207 Multi-Status
+< Server: nginx
+< Date: Thu, 18 Sep 2025 17:59:33 GMT
+< Content-Type: application/json
+< Content-Length: 262
+< Connection: keep-alive
+< 
+* Connection #0 to host dkwadrat.pl left intact
+*   Trying 5.149.162.148:443...
+* Connected to dkwadrat.pl (5.149.162.148) port 443
+* ALPN: curl offers http/1.1
+*  CAfile: C:\xampp\apache\bin\curl-ca-bundle.crt
+*  CApath: none
+* SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384
+* ALPN: server accepted http/1.1
+* Server certificate:
+*  subject: CN=*.dkwadrat.pl
+*  start date: Jul 15 12:21:28 2025 GMT
+*  expire date: Jul 15 12:21:27 2026 GMT
+*  subjectAltName: host "dkwadrat.pl" matched cert's "dkwadrat.pl"
+*  issuer: C=PL; O=Unizeto Technologies S.A.; OU=Certum Certification Authority; CN=Certum Domain Validation CA SHA2
+*  SSL certificate verify ok.
+* using HTTP/1.1
+> POST /api/admin/v6/packages/labels HTTP/1.1
+Host: dkwadrat.pl
+Accept-Encoding: deflate, gzip
+X-API-KEY: YXBwbGljYXRpb24xODpzSUdaNFU1ZzFwVnV2K3R4bExZU2lxRnR6dytHa0hiY3dhQ29HZ1BOdFdOSEtlekRYR0F3NkpFZEFCZGk0RWQ0
+Accept: application/json, application/pdf
+Content-Type: application/json
+Content-Length: 519
+
+* old SSL session ID is stale, removing
+< HTTP/1.1 200 OK
+< Server: nginx
+< Date: Thu, 18 Sep 2025 17:59:48 GMT
+< Content-Type: application/json
+< Transfer-Encoding: chunked
+< Connection: keep-alive
+< 
+* Connection #0 to host dkwadrat.pl left intact
+*   Trying 5.149.162.148:443...
+* Connected to dkwadrat.pl (5.149.162.148) port 443
+* ALPN: curl offers http/1.1
+*  CAfile: C:\xampp\apache\bin\curl-ca-bundle.crt
+*  CApath: none
+* SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384
+* ALPN: server accepted http/1.1
+* Server certificate:
+*  subject: CN=*.dkwadrat.pl
+*  start date: Jul 15 12:21:28 2025 GMT
+*  expire date: Jul 15 12:21:27 2026 GMT
+*  subjectAltName: host "dkwadrat.pl" matched cert's "dkwadrat.pl"
+*  issuer: C=PL; O=Unizeto Technologies S.A.; OU=Certum Certification Authority; CN=Certum Domain Validation CA SHA2
+*  SSL certificate verify ok.
+* using HTTP/1.1
+> POST /api/admin/v6/packages/labels HTTP/1.1
+Host: dkwadrat.pl
+Accept-Encoding: deflate, gzip
+X-API-KEY: YXBwbGljYXRpb24xODpzSUdaNFU1ZzFwVnV2K3R4bExZU2lxRnR6dytHa0hiY3dhQ29HZ1BOdFdOSEtlekRYR0F3NkpFZEFCZGk0RWQ0
+Accept: application/json, application/pdf
+Content-Type: application/json
+Content-Length: 521
+
+* old SSL session ID is stale, removing
+< HTTP/1.1 200 OK
+< Server: nginx
+< Date: Thu, 18 Sep 2025 18:09:43 GMT
+< Content-Type: application/json
+< Transfer-Encoding: chunked
+< Connection: keep-alive
+< 
+* Connection #0 to host dkwadrat.pl left intact
+*   Trying 5.149.162.148:443...
+* Connected to dkwadrat.pl (5.149.162.148) port 443
+* ALPN: curl offers http/1.1
+*  CAfile: C:\xampp\apache\bin\curl-ca-bundle.crt
+*  CApath: none
+* SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384
+* ALPN: server accepted http/1.1
+* Server certificate:
+*  subject: CN=*.dkwadrat.pl
+*  start date: Jul 15 12:21:28 2025 GMT
+*  expire date: Jul 15 12:21:27 2026 GMT
+*  subjectAltName: host "dkwadrat.pl" matched cert's "dkwadrat.pl"
+*  issuer: C=PL; O=Unizeto Technologies S.A.; OU=Certum Certification Authority; CN=Certum Domain Validation CA SHA2
+*  SSL certificate verify ok.
+* using HTTP/1.1
+> POST /api/admin/v6/packages/labels HTTP/1.1
+Host: dkwadrat.pl
+Accept-Encoding: deflate, gzip
+X-API-KEY: YXBwbGljYXRpb24xODpzSUdaNFU1ZzFwVnV2K3R4bExZU2lxRnR6dytHa0hiY3dhQ29HZ1BOdFdOSEtlekRYR0F3NkpFZEFCZGk0RWQ0
+Accept: application/json, application/pdf
+Content-Type: application/json
+Content-Length: 517
+
+* old SSL session ID is stale, removing
+< HTTP/1.1 200 OK
+< Server: nginx
+< Date: Thu, 18 Sep 2025 18:10:54 GMT
+< Content-Type: application/json
+< Transfer-Encoding: chunked
+< Connection: keep-alive
+< 
+* Connection #0 to host dkwadrat.pl left intact
+*   Trying 5.149.162.148:443...
+* Connected to dkwadrat.pl (5.149.162.148) port 443
+* ALPN: curl offers http/1.1
+*  CAfile: C:\xampp\apache\bin\curl-ca-bundle.crt
+*  CApath: none
+* SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384
+* ALPN: server accepted http/1.1
+* Server certificate:
+*  subject: CN=*.dkwadrat.pl
+*  start date: Jul 15 12:21:28 2025 GMT
+*  expire date: Jul 15 12:21:27 2026 GMT
+*  subjectAltName: host "dkwadrat.pl" matched cert's "dkwadrat.pl"
+*  issuer: C=PL; O=Unizeto Technologies S.A.; OU=Certum Certification Authority; CN=Certum Domain Validation CA SHA2
+*  SSL certificate verify ok.
+* using HTTP/1.1
+> POST /api/admin/v6/packages/labels HTTP/1.1
+Host: dkwadrat.pl
+Accept-Encoding: deflate, gzip
+X-API-KEY: YXBwbGljYXRpb24xODpzSUdaNFU1ZzFwVnV2K3R4bExZU2lxRnR6dytHa0hiY3dhQ29HZ1BOdFdOSEtlekRYR0F3NkpFZEFCZGk0RWQ0
+Accept: application/json, application/pdf
+Content-Type: application/json
+Content-Length: 517
+
+* old SSL session ID is stale, removing
+< HTTP/1.1 207 Multi-Status
+< Server: nginx
+< Date: Thu, 18 Sep 2025 18:12:28 GMT
+< Content-Type: application/json
+< Transfer-Encoding: chunked
+< Connection: keep-alive
+< 
+* Connection #0 to host dkwadrat.pl left intact
+*   Trying 5.149.162.148:443...
+* Connected to dkwadrat.pl (5.149.162.148) port 443
+* ALPN: curl offers http/1.1
+*  CAfile: C:\xampp\apache\bin\curl-ca-bundle.crt
+*  CApath: none
+* SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384
+* ALPN: server accepted http/1.1
+* Server certificate:
+*  subject: CN=*.dkwadrat.pl
+*  start date: Jul 15 12:21:28 2025 GMT
+*  expire date: Jul 15 12:21:27 2026 GMT
+*  subjectAltName: host "dkwadrat.pl" matched cert's "dkwadrat.pl"
+*  issuer: C=PL; O=Unizeto Technologies S.A.; OU=Certum Certification Authority; CN=Certum Domain Validation CA SHA2
+*  SSL certificate verify ok.
+* using HTTP/1.1
+> POST /api/admin/v6/packages/labels HTTP/1.1
+Host: dkwadrat.pl
+Accept-Encoding: deflate, gzip
+X-API-KEY: YXBwbGljYXRpb24xODpzSUdaNFU1ZzFwVnV2K3R4bExZU2lxRnR6dytHa0hiY3dhQ29HZ1BOdFdOSEtlekRYR0F3NkpFZEFCZGk0RWQ0
+Accept: application/json, application/pdf
+Content-Type: application/json
+Content-Length: 506
+
+* old SSL session ID is stale, removing
+< HTTP/1.1 200 OK
+< Server: nginx
+< Date: Thu, 18 Sep 2025 18:18:02 GMT
+< Content-Type: application/json
+< Transfer-Encoding: chunked
+< Connection: keep-alive
+< 
+* Connection #0 to host dkwadrat.pl left intact
+*   Trying 5.149.162.148:443...
+* Connected to dkwadrat.pl (5.149.162.148) port 443
+* ALPN: curl offers http/1.1
+*  CAfile: C:\xampp\apache\bin\curl-ca-bundle.crt
+*  CApath: none
+* SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384
+* ALPN: server accepted http/1.1
+* Server certificate:
+*  subject: CN=*.dkwadrat.pl
+*  start date: Jul 15 12:21:28 2025 GMT
+*  expire date: Jul 15 12:21:27 2026 GMT
+*  subjectAltName: host "dkwadrat.pl" matched cert's "dkwadrat.pl"
+*  issuer: C=PL; O=Unizeto Technologies S.A.; OU=Certum Certification Authority; CN=Certum Domain Validation CA SHA2
+*  SSL certificate verify ok.
+* using HTTP/1.1
+> POST /api/admin/v6/packages/labels HTTP/1.1
+Host: dkwadrat.pl
+Accept-Encoding: deflate, gzip
+X-API-KEY: YXBwbGljYXRpb24xODpzSUdaNFU1ZzFwVnV2K3R4bExZU2lxRnR6dytHa0hiY3dhQ29HZ1BOdFdOSEtlekRYR0F3NkpFZEFCZGk0RWQ0
+Accept: application/json, application/pdf
+Content-Type: application/json
+Content-Length: 504
+
+* old SSL session ID is stale, removing
+< HTTP/1.1 200 OK
+< Server: nginx
+< Date: Thu, 18 Sep 2025 18:22:38 GMT
+< Content-Type: application/json
+< Transfer-Encoding: chunked
+< Connection: keep-alive
+< 
+* Connection #0 to host dkwadrat.pl left intact
+*   Trying 5.149.162.148:443...
+* Connected to dkwadrat.pl (5.149.162.148) port 443
+* ALPN: curl offers http/1.1
+*  CAfile: C:\xampp\apache\bin\curl-ca-bundle.crt
+*  CApath: none
+* SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384
+* ALPN: server accepted http/1.1
+* Server certificate:
+*  subject: CN=*.dkwadrat.pl
+*  start date: Jul 15 12:21:28 2025 GMT
+*  expire date: Jul 15 12:21:27 2026 GMT
+*  subjectAltName: host "dkwadrat.pl" matched cert's "dkwadrat.pl"
+*  issuer: C=PL; O=Unizeto Technologies S.A.; OU=Certum Certification Authority; CN=Certum Domain Validation CA SHA2
+*  SSL certificate verify ok.
+* using HTTP/1.1
+> POST /api/admin/v6/packages/labels HTTP/1.1
+Host: dkwadrat.pl
+Accept-Encoding: deflate, gzip
+X-API-KEY: YXBwbGljYXRpb24xODpzSUdaNFU1ZzFwVnV2K3R4bExZU2lxRnR6dytHa0hiY3dhQ29HZ1BOdFdOSEtlekRYR0F3NkpFZEFCZGk0RWQ0
+Accept: application/json, application/pdf
+Content-Type: application/json
+Content-Length: 417
+
+* old SSL session ID is stale, removing
+< HTTP/1.1 207 Multi-Status
+< Server: nginx
+< Date: Thu, 18 Sep 2025 18:23:32 GMT
+< Content-Type: application/json
+< Content-Length: 224
+< Connection: keep-alive
+< 
+* Connection #0 to host dkwadrat.pl left intact
+*   Trying 5.149.162.148:443...
+* Connected to dkwadrat.pl (5.149.162.148) port 443
+* ALPN: curl offers http/1.1
+*  CAfile: C:\xampp\apache\bin\curl-ca-bundle.crt
+*  CApath: none
+* SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384
+* ALPN: server accepted http/1.1
+* Server certificate:
+*  subject: CN=*.dkwadrat.pl
+*  start date: Jul 15 12:21:28 2025 GMT
+*  expire date: Jul 15 12:21:27 2026 GMT
+*  subjectAltName: host "dkwadrat.pl" matched cert's "dkwadrat.pl"
+*  issuer: C=PL; O=Unizeto Technologies S.A.; OU=Certum Certification Authority; CN=Certum Domain Validation CA SHA2
+*  SSL certificate verify ok.
+* using HTTP/1.1
+> POST /api/admin/v6/packages/labels HTTP/1.1
+Host: dkwadrat.pl
+Accept-Encoding: deflate, gzip
+X-API-KEY: YXBwbGljYXRpb24xODpzSUdaNFU1ZzFwVnV2K3R4bExZU2lxRnR6dytHa0hiY3dhQ29HZ1BOdFdOSEtlekRYR0F3NkpFZEFCZGk0RWQ0
+Accept: application/json, application/pdf
+Content-Type: application/json
+Content-Length: 476
+
+* old SSL session ID is stale, removing
+< HTTP/1.1 207 Multi-Status
+< Server: nginx
+< Date: Thu, 18 Sep 2025 18:23:59 GMT
+< Content-Type: application/json
+< Content-Length: 128
+< Connection: keep-alive
+< 
+* Connection #0 to host dkwadrat.pl left intact
+*   Trying 5.149.162.148:443...
+* Connected to dkwadrat.pl (5.149.162.148) port 443
+* ALPN: curl offers http/1.1
+*  CAfile: C:\xampp\apache\bin\curl-ca-bundle.crt
+*  CApath: none
+* SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384
+* ALPN: server accepted http/1.1
+* Server certificate:
+*  subject: CN=*.dkwadrat.pl
+*  start date: Jul 15 12:21:28 2025 GMT
+*  expire date: Jul 15 12:21:27 2026 GMT
+*  subjectAltName: host "dkwadrat.pl" matched cert's "dkwadrat.pl"
+*  issuer: C=PL; O=Unizeto Technologies S.A.; OU=Certum Certification Authority; CN=Certum Domain Validation CA SHA2
+*  SSL certificate verify ok.
+* using HTTP/1.1
+> POST /api/admin/v6/packages/labels HTTP/1.1
+Host: dkwadrat.pl
+Accept-Encoding: deflate, gzip
+X-API-KEY: YXBwbGljYXRpb24xODpzSUdaNFU1ZzFwVnV2K3R4bExZU2lxRnR6dytHa0hiY3dhQ29HZ1BOdFdOSEtlekRYR0F3NkpFZEFCZGk0RWQ0
+Accept: application/json, application/pdf
+Content-Type: application/json
+Content-Length: 526
+
+* old SSL session ID is stale, removing
+< HTTP/1.1 207 Multi-Status
+< Server: nginx
+< Date: Thu, 18 Sep 2025 18:24:36 GMT
+< Content-Type: application/json
+< Content-Length: 128
+< Connection: keep-alive
+< 
+* Connection #0 to host dkwadrat.pl left intact
+*   Trying 5.149.162.148:443...
+* Connected to dkwadrat.pl (5.149.162.148) port 443
+* ALPN: curl offers http/1.1
+*  CAfile: C:\xampp\apache\bin\curl-ca-bundle.crt
+*  CApath: none
+* SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384
+* ALPN: server accepted http/1.1
+* Server certificate:
+*  subject: CN=*.dkwadrat.pl
+*  start date: Jul 15 12:21:28 2025 GMT
+*  expire date: Jul 15 12:21:27 2026 GMT
+*  subjectAltName: host "dkwadrat.pl" matched cert's "dkwadrat.pl"
+*  issuer: C=PL; O=Unizeto Technologies S.A.; OU=Certum Certification Authority; CN=Certum Domain Validation CA SHA2
+*  SSL certificate verify ok.
+* using HTTP/1.1
+> POST /api/admin/v6/packages/labels HTTP/1.1
+Host: dkwadrat.pl
+Accept-Encoding: deflate, gzip
+X-API-KEY: YXBwbGljYXRpb24xODpzSUdaNFU1ZzFwVnV2K3R4bExZU2lxRnR6dytHa0hiY3dhQ29HZ1BOdFdOSEtlekRYR0F3NkpFZEFCZGk0RWQ0
+Accept: application/json, application/pdf
+Content-Type: application/json
+Content-Length: 504
+
+* old SSL session ID is stale, removing
+< HTTP/1.1 200 OK
+< Server: nginx
+< Date: Thu, 18 Sep 2025 18:29:55 GMT
+< Content-Type: application/json
+< Transfer-Encoding: chunked
+< Connection: keep-alive
+< 
+* Connection #0 to host dkwadrat.pl left intact

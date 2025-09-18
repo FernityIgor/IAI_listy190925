@@ -41,7 +41,17 @@ class OrderController
             if ($packages && isset($packages['results'][0]['deliveryPackage']['deliveryPackageParameters']['parcelParameters'])) {
                 $parameters = $packages['results'][0]['deliveryPackage']['deliveryPackageParameters']['parcelParameters'];
                 
-                // Don't modify any default values - use exactly what the API returns
+                // Debug: Log original parameters from DKwadrat API
+                error_log("=== GET PACKAGE PARAMS DEBUG ===");
+                error_log("Order Number: " . $orderNumber);
+                error_log("Original parameters from DKwadrat: " . print_r($parameters, true));
+                
+                // Check for schema parameters that might contain placeholders
+                foreach ($parameters as $param) {
+                    if (isset($param['key']) && (strpos($param['key'], 'schema') !== false || strpos($param['key'], 'description') !== false || strpos($param['key'], 'notice') !== false)) {
+                        error_log("Found schema parameter: " . $param['key'] . " = " . ($param['defaultValue'] ?? 'no default'));
+                    }
+                }
                 
                 header('Content-Type: application/json');
                 echo json_encode([

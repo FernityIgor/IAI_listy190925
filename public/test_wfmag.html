@@ -70,6 +70,27 @@
         Pozdrawiam</p>
     </div>
     
+    <h2>Parameter Processing Examples:</h2>
+    <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 10px 0;">
+        <h3>Original Parameter Value:</h3>
+        <p><code>zam. [iai:order_sn]</code></p>
+        
+        <h3>Without Wfmag Parameter:</h3>
+        <p><code>zam. [iai:order_sn]</code> (unchanged)</p>
+        
+        <h3>With Wfmag Parameter (WF123456):</h3>
+        <p><code>zam. [iai:order_sn] wfmag: WF123456</code></p>
+    </div>
+    
+    <div style="background: #f0f8ff; padding: 15px; border-radius: 8px; margin: 10px 0;">
+        <h3>Real Example from Ambro Courier:</h3>
+        <p><strong>Original:</strong> <code>[iai:delivery_notice]</code></p>
+        <p><strong>With Wfmag:</strong> <code>[iai:delivery_notice] wfmag: WF123456</code></p>
+        
+        <p><strong>Original:</strong> <code>zam. [iai:order_sn]</code></p>
+        <p><strong>With Wfmag:</strong> <code>zam. [iai:order_sn] wfmag: WF123456</code></p>
+    </div>
+
     <h2>URL Format:</h2>
     <p><code>http://localhost/phphtdoc/IAI_zlecanie_listow/public/index.php?order=97555&wfmag=YOUR_WFMAG_ORDER</code></p>
 </body>

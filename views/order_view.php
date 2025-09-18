@@ -100,7 +100,7 @@
                 <button 
                     type="button" 
                     class="zlec-kuriera-btn"
-                    onclick="zlecKuriera(<?= $h($order['orderSerialNumber']) ?>)">
+                    onclick="zlecKuriera(<?= $h($order['orderSerialNumber']) ?>, '<?= $h($wfmagOrder ?? '') ?>')">
                     Zleć kuriera
                 </button>
                 <button 
@@ -253,10 +253,12 @@ function confirmDelete(orderId) {
 }
 
 let currentOrderNumber = null;
+let currentWfmagOrder = null;
 
-function zlecKuriera(orderNumber) {
-    console.log('zlecKuriera called with orderNumber:', orderNumber);
+function zlecKuriera(orderNumber, wfmagOrder) {
+    console.log('zlecKuriera called with orderNumber:', orderNumber, 'wfmagOrder:', wfmagOrder);
     currentOrderNumber = orderNumber;
+    currentWfmagOrder = wfmagOrder || '';
     
     // Fetch package parameters via AJAX
     fetch(`?action=get_package_params&order=${orderNumber}`)
@@ -448,6 +450,36 @@ function populateParametersForm(parameters) {
     });
 }
 
+// Helper function to process parameters and append wfmag to [iai:order_sn] values
+function processParametersWithWfmag(parameters, wfmagOrder, orderNumber) {
+    if (!wfmagOrder || wfmagOrder.trim() === '') {
+        return parameters; // No wfmag to append
+    }
+    
+    const processedParameters = {};
+    let modificationsCount = 0;
+    
+    for (const [key, value] of Object.entries(parameters)) {
+        if (typeof value === 'string' && value.includes('[iai:order_sn]')) {
+            // Replace entire placeholder with custom text including wfmag
+            processedParameters[key] = `IAI: ${orderNumber}, wfmag: ${wfmagOrder.trim()}`;
+            console.log(`DEBUG: Replaced [iai:order_sn] with custom text for ${key}: "${value}" -> "${processedParameters[key]}"`);
+            modificationsCount++;
+        } else if (typeof value === 'string' && value.includes('[iai:delivery_notice]')) {
+            // Replace entire placeholder with custom text including wfmag  
+            processedParameters[key] = `IAI: ${orderNumber}, wfmag: ${wfmagOrder.trim()}`;
+            console.log(`DEBUG: Replaced [iai:delivery_notice] with custom text for ${key}: "${value}" -> "${processedParameters[key]}"`);
+            modificationsCount++;
+        } else {
+            processedParameters[key] = value;
+        }
+    }
+    
+    console.log(`DEBUG: Total modifications made: ${modificationsCount}`);
+    
+    return processedParameters;
+}
+
 function generujEtykiety() {
     if (!currentOrderNumber) {
         alert('Błąd: Brak numeru zamówienia');
@@ -457,11 +489,14 @@ function generujEtykiety() {
     // Collect form data
     const form = document.getElementById('zlecKurieraForm');
     const formData = new FormData(form);
-    const parameters = {};
+    const rawParameters = {};
     
     for (let [key, value] of formData.entries()) {
-        parameters[key] = value;
+        rawParameters[key] = value;
     }
+    
+    // Process parameters to append wfmag to [iai:order_sn] values
+    const parameters = processParametersWithWfmag(rawParameters, currentWfmagOrder, currentOrderNumber);
     
     // Send request to generate labels
     const requestData = new FormData();
@@ -490,7 +525,29 @@ function generujEtykiety() {
             // Reload the page to see updated package information
             window.location.reload();
         } else {
-            alert('Błąd przy generowaniu etykiet: ' + (data.error || 'Unknown error'));
+            // Show detailed error information
+            let errorMessage = 'Błąd przy generowaniu etykiet:\n\n';
+            
+            if (data.error) {
+                errorMessage += 'Błąd: ' + data.error + '\n';
+            }
+            
+            if (data.http_status) {
+                errorMessage += 'Status HTTP: ' + data.http_status + '\n';
+            }
+            
+            if (data.error_code) {
+                errorMessage += 'Kod błędu: ' + data.error_code + '\n';
+            }
+            
+            // Add suggestions based on error type
+            if (data.error && data.error.includes('już wygenerowana')) {
+                errorMessage += '\n💡 Sugestia: Usuń istniejącą etykietę przed wygenerowaniem nowej.';
+            } else if (data.http_status === 207) {
+                errorMessage += '\n💡 Sugestia: Sprawdź ustawienia parametrów kuriera (np. "Wnosić paczki" na "nie").';
+            }
+            
+            alert(errorMessage);
         }
     })
     .catch(error => {
@@ -610,19 +667,22 @@ function generujIPobierz() {
     
     // Collect all form parameters
     const inputs = form.querySelectorAll('input, select, textarea');
-    const parameters = {};
+    const rawParameters = {};
     
     inputs.forEach(input => {
         if (input.type === 'radio') {
             if (input.checked) {
-                parameters[input.name] = input.value;
+                rawParameters[input.name] = input.value;
             }
         } else if (input.type === 'checkbox') {
-            parameters[input.name] = input.checked ? input.value : '';
+            rawParameters[input.name] = input.checked ? input.value : '';
         } else if (input.name && input.value !== '') {
-            parameters[input.name] = input.value;
+            rawParameters[input.name] = input.value;
         }
     });
+    
+    // Process parameters to append wfmag to [iai:order_sn] values
+    const parameters = processParametersWithWfmag(rawParameters, currentWfmagOrder, orderNumber);
     
     formData.append('action', 'generate_labels');
     formData.append('order_id', orderNumber);
@@ -658,7 +718,29 @@ function generujIPobierz() {
                 body: downloadFormData
             });
         } else {
-            throw new Error('Generowanie etykiet nie powiodło się: ' + (generateData.error || 'Nieznany błąd'));
+            // Show detailed error information for generation step
+            let errorMessage = 'Generowanie etykiet nie powiodło się:\n\n';
+            
+            if (generateData.error) {
+                errorMessage += 'Błąd: ' + generateData.error + '\n';
+            }
+            
+            if (generateData.http_status) {
+                errorMessage += 'Status HTTP: ' + generateData.http_status + '\n';
+            }
+            
+            if (generateData.error_code) {
+                errorMessage += 'Kod błędu: ' + generateData.error_code + '\n';
+            }
+            
+            // Add suggestions based on error type
+            if (generateData.error && generateData.error.includes('już wygenerowana')) {
+                errorMessage += '\n💡 Sugestia: Usuń istniejącą etykietę przed wygenerowaniem nowej.';
+            } else if (generateData.http_status === 207) {
+                errorMessage += '\n💡 Sugestia: Sprawdź ustawienia parametrów kuriera (np. "Wnosić paczki" na "nie").';
+            }
+            
+            throw new Error(errorMessage);
         }
     })
     .then(response => response.json())
@@ -680,6 +762,8 @@ function generujIPobierz() {
                 
                 // Close the modal after successful generation and download
                 closeZlecKurieraModal();
+                // Reload the page to see updated package information
+                window.location.reload();
             } else {
                 alert('Etykiety zostały wygenerowane, ale wystąpił błąd podczas pobierania plików.');
             }
