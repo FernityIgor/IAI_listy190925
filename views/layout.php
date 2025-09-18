@@ -72,6 +72,23 @@
         </div>
     </div>
 
+    <!-- Shipping Modal -->
+    <div class="shipping-modal modal-overlay" id="shippingModal" style="display: none;">
+        <div class="modal-content">
+            <h3>Parametry przesyłki</h3>
+            <form id="shippingForm" class="shipping-form">
+                <input type="hidden" id="shippingOrderId" name="order_id" value="">
+                <div id="shippingOptions" class="shipping-options">
+                    <!-- Options will be populated by JavaScript -->
+                </div>
+                <div class="modal-buttons">
+                    <button type="submit" class="modal-button confirm">Generuj</button>
+                    <button type="button" onclick="closeShippingModal()" class="modal-button cancel">Anuluj</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script>
         function confirmDelete(orderNumber) {
             const modal = document.getElementById('deleteModal');
@@ -122,6 +139,7 @@
                 document.getElementById('weightModal').style.display = 'none';
                 document.getElementById('deleteModal').style.display = 'none';
                 document.getElementById('courierModal').style.display = 'none';
+                document.getElementById('shippingModal').style.display = 'none';
             }
         });
 
@@ -210,21 +228,102 @@
             }
         });
 
-        function showWeightModal(orderId, packageId, courierId, currentWeight) {
-            const modal = document.getElementById('weightModal');
-            document.getElementById('weightOrderId').value = orderId;
-            document.getElementById('weightPackageId').value = packageId;
-            document.getElementById('weightCourierId').value = courierId;
-            document.getElementById('weightInput').value = currentWeight;
-            modal.style.display = 'flex';
+        let currentPackageParams = null;
+
+        function showLabelOptions(orderId) {
+            document.getElementById('shippingOrderId').value = orderId;
+            
+            // Fetch package parameters
+            fetch(`index.php?action=get_package_params&order=${orderId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.parameters) {
+                        currentPackageParams = data.parameters;
+                        const container = document.getElementById('shippingOptions');
+                        container.innerHTML = ''; // Clear existing options
+
+                        data.parameters.forEach(param => {
+                            const div = document.createElement('div');
+                            div.className = 'form-group';
+                            
+                            if (param.options) {
+                                // Create select for options
+                                div.innerHTML = `
+                                    <label for="${param.key}">${param.name}:</label>
+                                    <select id="${param.key}" name="${param.key}" class="form-control">
+                                        ${param.options.map(opt => 
+                                            `<option value="${opt.id}" ${opt.id === param.defaultValue ? 'selected' : ''}>
+                                                ${opt.name}
+                                            </option>`
+                                        ).join('')}
+                                    </select>
+                                `;
+                            } else {
+                                // Create text input for free-form fields
+                                div.innerHTML = `
+                                    <label for="${param.key}">${param.name}:</label>
+                                    <input type="text" id="${param.key}" name="${param.key}" 
+                                           value="${param.defaultValue || ''}" class="form-control">
+                                `;
+                            }
+                            container.appendChild(div);
+                        });
+
+                        document.getElementById('shippingModal').style.display = 'flex';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Wystąpił błąd podczas pobierania parametrów przesyłki.');
+                });
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
-            // Close modal when clicking outside
-            document.getElementById('weightModal').addEventListener('click', function(e) {
-                if (e.target === this) {
-                    closeWeightModal();
+        function closeShippingModal() {
+            document.getElementById('shippingModal').style.display = 'none';
+        }
+
+        document.getElementById('shippingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const parameters = {};
+            
+            formData.forEach((value, key) => {
+                if (key !== 'order_id') {
+                    parameters[key] = value;
                 }
+            });
+
+            const orderId = formData.get('order_id');
+
+            // Show loading state
+            const submitButton = this.querySelector('button[type="submit"]');
+            const originalText = submitButton.textContent;
+            submitButton.textContent = 'Generowanie...';
+            submitButton.disabled = true;
+
+            fetch('index.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `generate_labels=1&order_id=${orderId}&parameters=${JSON.stringify(parameters)}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Listy przewozowe zostały wygenerowane.');
+                    window.location.reload();
+                } else {
+                    alert('Wystąpił błąd podczas generowania listów przewozowych.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Wystąpił błąd podczas generowania listów przewozowych.');
+            })
+            .finally(() => {
+                submitButton.textContent = originalText;
+                submitButton.disabled = false;
             });
         });
     </script>

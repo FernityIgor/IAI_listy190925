@@ -41,25 +41,7 @@ class OrderController
             if ($packages && isset($packages['results'][0]['deliveryPackage']['deliveryPackageParameters']['parcelParameters'])) {
                 $parameters = $packages['results'][0]['deliveryPackage']['deliveryPackageParameters']['parcelParameters'];
                 
-                // Modify default values for boolean options
-                foreach ($parameters as &$param) {
-                    if (isset($param['options']) && count($param['options']) === 2) {
-                        // Check if this is a yes/no parameter
-                        $hasYesNo = false;
-                        foreach ($param['options'] as $option) {
-                            if (in_array($option['id'], ['0', '1']) || in_array($option['name'], ['tak', 'nie'])) {
-                                $hasYesNo = true;
-                                break;
-                            }
-                        }
-                        
-                        // If it's a yes/no parameter, set default to "no"
-                        if ($hasYesNo) {
-                            $param['defaultValue'] = '0';
-                        }
-                    }
-                }
-                unset($param); // Clean up reference
+                // Don't modify any default values - use exactly what the API returns
                 
                 header('Content-Type: application/json');
                 echo json_encode([
@@ -73,6 +55,42 @@ class OrderController
             exit;
         }
 
+        // Handle generate labels request
+        if (isset($_POST['action']) && $_POST['action'] === 'generate_labels') {
+            error_log('Generate labels request received');
+            error_log('POST data: ' . print_r($_POST, true));
+            
+            $orderId = (int)$_POST['order_id'];
+            $parameters = json_decode($_POST['parameters'], true);
+            
+            error_log('Order ID: ' . $orderId);
+            error_log('Parameters decoded: ' . print_r($parameters, true));
+            
+            if ($orderId > 0) {
+                error_log('Calling generateShippingLabels...');
+                $result = $this->apiClient->generateShippingLabels($orderId, $parameters ?: []);
+                error_log('Generate labels result: ' . print_r($result, true));
+                
+                header('Content-Type: application/json');
+                if ($result !== null) {
+                    echo json_encode([
+                        'success' => true,
+                        'result' => $result
+                    ]);
+                } else {
+                    echo json_encode([
+                        'success' => false,
+                        'error' => 'API call failed'
+                    ]);
+                }
+                exit;
+            }
+            
+            error_log('Invalid parameters for generate labels');
+            header('Content-Type: application/json');
+            echo json_encode(['success' => false, 'error' => 'Invalid order ID']);
+            exit;
+        }
 
         // --- Action Handling ---
         // Check if the "Add Package" form was submitted
@@ -187,6 +205,17 @@ class OrderController
                 if ($packagesData && isset($packagesData['results'])) {
                     $packages = $packagesData['results'];
                 }
+                
+                // Check courier capabilities
+                $courierExists = !empty($courierId);
+                $courierSupportsMultiplePackages = false;
+                
+                // Define couriers that support multiple packages (you can move this to config if needed)
+                $multiplePackageCouriers = [6, 26]; // DPD, K-EX support multiple packages
+                
+                if ($courierExists && in_array($courierId, $multiplePackageCouriers)) {
+                    $courierSupportsMultiplePackages = true;
+                }
             }
         }
 
@@ -196,36 +225,25 @@ class OrderController
         }
 
         // --- View Rendering ---
-        // Fetch courier profiles
-        $courierProfiles = $this->apiClient->fetchCourierProfiles();
-        $courierSupportsMultiplePackages = false;
-        $courierExists = false;
+        $pageTitle = 'Order Details';
+        $shopNames = $this->config['shops'];
+        $changeableCouriers = $this->couriers['changeable_couriers'];
+        
+        // Ensure these variables are always defined
+        $courierExists = $courierExists ?? false;
+        $courierSupportsMultiplePackages = $courierSupportsMultiplePackages ?? false;
 
-        if ($courierProfiles && isset($courierProfiles['couriers']) && $courierId) {
-            $courierExists = isset($courierProfiles['couriers'][$courierId]);
-            if ($courierExists) {
-                $courierSupportsMultiplePackages = 
-                    $courierProfiles['couriers'][$courierId]['multiple_packages_support'] === '1';
-            }
+        // This helper function will be used in the view to prevent XSS attacks
+        $h = function($str) {
+            return htmlspecialchars($str ?? '', ENT_QUOTES, 'UTF-8');
+        };
+
+        // Display error if exists
+        if (!empty($error)) {
+            echo '<div class="error-message">' . $h($error) . '</div>';
         }
 
-        // Add these variables to be used in the view
-        $viewData = [
-            'pageTitle' => 'Order Details',
-            'shopNames' => $this->config['shops'],
-            'changeableCouriers' => $this->couriers['changeable_couriers'],
-            'h' => function($str) { return htmlspecialchars($str ?? '', ENT_QUOTES, 'UTF-8'); },
-            'courierExists' => $courierExists,
-            'courierSupportsMultiplePackages' => $courierSupportsMultiplePackages,
-            'order' => $order,
-            'clientResult' => $clientResult,
-            'products' => $products,
-            'packages' => $packages,
-            'courierId' => $courierId,
-            'error' => $error
-        ];
-
-        extract($viewData);
+        // Load the main layout
         require_once __DIR__ . '/../../views/layout.php';
     }
 }
