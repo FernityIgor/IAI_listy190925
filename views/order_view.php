@@ -81,6 +81,12 @@
                     onclick="zlecKuriera(<?= $h($order['orderSerialNumber']) ?>)">
                     Zleć kuriera
                 </button>
+                <button 
+                    type="button" 
+                    class="download-labels-btn"
+                    onclick="pobierzEtykiety(<?= $h($order['orderSerialNumber']) ?>)">
+                    Pobierz etykiety
+                </button>
             </div>
         </div>
 
@@ -473,5 +479,67 @@ window.onclick = function(event) {
     if (event.target == modal) {
         closeZlecKurieraModal();
     }
+}
+
+// Function to download labels for an order
+function pobierzEtykiety(orderNumber) {
+    console.log('pobierzEtykiety called with orderNumber:', orderNumber);
+    
+    if (!orderNumber) {
+        alert('Błąd: Brak numeru zamówienia');
+        return;
+    }
+
+    // Show loading state on button
+    const button = event.target;
+    const originalText = button.textContent;
+    button.textContent = 'Pobieranie...';
+    button.disabled = true;
+
+    const formData = new FormData();
+    formData.append('action', 'download_labels');
+    formData.append('order_number', orderNumber);
+
+    fetch('download_labels.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        console.log('Fetch response status:', response.status);
+        return response.json();
+    })
+    .then(data => {
+        console.log('Received data:', data);
+        
+        // Reset button
+        button.textContent = originalText;
+        button.disabled = false;
+        
+        if (data.success) {
+            const result = data.result;
+            if (result.files && result.files.length > 0) {
+                let message = `Pobrano ${result.total_labels} etykiet(y):\n\n`;
+                result.files.forEach(file => {
+                    message += `• ${file.filename} (${Math.round(file.size / 1024)} KB)\n`;
+                });
+                message += `\nPliki zapisane w folderze: storage/labels/`;
+                alert(message);
+            } else {
+                alert('Brak etykiet do pobrania lub błąd w zapisie plików.');
+            }
+        } else {
+            console.error('Error:', data);
+            alert('Błąd podczas pobierania etykiet: ' + (data.error || 'Nieznany błąd'));
+        }
+    })
+    .catch(error => {
+        console.error('Network error:', error);
+        
+        // Reset button
+        button.textContent = originalText;
+        button.disabled = false;
+        
+        alert('Błąd sieci: ' + error.message);
+    });
 }
 </script>

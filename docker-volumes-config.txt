@@ -1,0 +1,24 @@
+# Docker volume mount configuration for labels storage
+# Add this to your docker-compose.yml:
+
+# volumes:
+#   - ./storage/labels:/var/www/html/storage/labels:rw
+
+# This ensures that:
+# 1. The labels directory is mounted from the host
+# 2. Both host and container can read/write labels
+# 3. Labels persist even if container is recreated
+# 4. Host can access downloaded PDF files directly
+
+# Alternative: Use a named volume for better portability
+# volumes:
+#   labels_storage:
+#
+# services:
+#   app:
+#     volumes:
+#       - labels_storage:/var/www/html/storage/labels
+
+# For Linux containers, ensure correct permissions:
+# RUN chown -R www-data:www-data /var/www/html/storage/labels
+# RUN chmod -R 755 /var/www/html/storage/labels

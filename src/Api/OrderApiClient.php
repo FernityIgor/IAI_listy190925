@@ -349,4 +349,78 @@ class OrderApiClient
 
         return json_decode($response, true);
     }
+
+    public function downloadLabels(int $orderSerialNumber): ?array
+    {
+        $curl = curl_init();
+
+        curl_setopt_array($curl, [
+            CURLOPT_URL => "https://dkwadrat.pl/api/admin/v6/orders/labels?orderSerialNumber={$orderSerialNumber}",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => [
+                "X-API-KEY: " . $this->apiKey,
+                "accept: application/json"
+            ],
+        ]);
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+        curl_close($curl);
+
+        if ($err) {
+            error_log("cURL Error (Download Labels): " . $err);
+            return null;
+        }
+
+        $data = json_decode($response, true);
+        
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            // Not JSON - return raw response for debugging
+            error_log("Non-JSON response from labels API: " . $response);
+            return ['error' => 'Invalid JSON response', 'raw_response' => $response];
+        }
+
+        // Create labels directory if it doesn't exist
+        $labelsDir = __DIR__ . '/../../storage/labels';
+        if (!is_dir($labelsDir)) {
+            mkdir($labelsDir, 0755, true);
+        }
+
+        $savedFiles = [];
+        
+        if (!empty($data['labels']) && is_array($data['labels'])) {
+            foreach ($data['labels'] as $idx => $b64) {
+                $pdf = base64_decode($b64, true);
+                if ($pdf === false) {
+                    error_log("Error decoding label #{$idx} for order {$orderSerialNumber}");
+                    continue;
+                }
+                
+                $filename = "label_{$orderSerialNumber}_" . ($idx + 1) . ".pdf";
+                $filepath = $labelsDir . "/" . $filename;
+                
+                if (file_put_contents($filepath, $pdf) !== false) {
+                    $savedFiles[] = [
+                        'filename' => $filename,
+                        'filepath' => $filepath,
+                        'size' => strlen($pdf)
+                    ];
+                } else {
+                    error_log("Failed to save label file: {$filepath}");
+                }
+            }
+        }
+
+        return [
+            'success' => !empty($savedFiles),
+            'files' => $savedFiles,
+            'total_labels' => count($savedFiles),
+            'api_response' => $data
+        ];
+    }
 }

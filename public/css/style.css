@@ -372,6 +372,27 @@ body {
     background-color: #059669;
 }
 
+.download-labels-btn {
+    background-color: #0ea5e9;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    margin-left: 10px;
+}
+
+.download-labels-btn:hover {
+    background-color: #0284c7;
+}
+
+.download-labels-btn:disabled {
+    background-color: #94a3b8;
+    cursor: not-allowed;
+}
+
 /* Package management buttons */
 .package-management {
     display: flex;
