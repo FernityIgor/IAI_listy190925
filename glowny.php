@@ -54,9 +54,15 @@ if (!empty($orderName) && (isset($_POST['submit']) || isset($_GET['order']))) {
     } else {
         $orderData = json_decode($response, true);
         
-        // Debug: Save API response to logs
+        // Debug: Save API response to logs (with error handling)
         if ($orderData) {
-            file_put_contents('/var/www/html/storage/logs/debug_api_response.json', json_encode($orderData, JSON_PRETTY_PRINT));
+            $logDir = '/var/www/html/storage/logs';
+            if (!is_dir($logDir)) {
+                mkdir($logDir, 0755, true);
+            }
+            if (is_writable($logDir)) {
+                file_put_contents($logDir . '/debug_api_response.json', json_encode($orderData, JSON_PRETTY_PRINT));
+            }
         }
     }
 }
@@ -318,6 +324,7 @@ if ($orderData) {
 
         <div class="products-table">
             <h3>Products</h3>
+            <?php if (!empty($products)): ?>
             <table>
                 <thead>
                     <tr>
@@ -338,6 +345,9 @@ if ($orderData) {
                     <?php endforeach; ?>
                 </tbody>
             </table>
+            <?php else: ?>
+            <p>No products found.</p>
+            <?php endif; ?>
         </div>
     </div>
 </body>
