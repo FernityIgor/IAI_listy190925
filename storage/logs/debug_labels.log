@@ -1,0 +1,139 @@
+=== GENERATE LABELS DEBUG ===
+Order ID: 97555
+Raw parameters JSON: {"service":"1","labelFormat":"LBL_PRINTER","carryIn":"0","cud":"0","duty":"0","inPers":"0","rod":"0","selfCol":"0","privpers":"1","tiresService":"0","dec":"0","schemaProductDescription":"IAI: 97555, wfmag: WF1231","schemaNotice":"IAI: 97555, wfmag: WF1231"}
+Decoded parameters: Array
+(
+    [service] => 1
+    [labelFormat] => LBL_PRINTER
+    [carryIn] => 0
+    [cud] => 0
+    [duty] => 0
+    [inPers] => 0
+    [rod] => 0
+    [selfCol] => 0
+    [privpers] => 1
+    [tiresService] => 0
+    [dec] => 0
+    [schemaProductDescription] => IAI: 97555, wfmag: WF1231
+    [schemaNotice] => IAI: 97555, wfmag: WF1231
+)
+
+Time: 2025-09-19 12:52:30
+
+=== GENERATE LABELS DEBUG ===
+Order ID: 97555
+Raw parameters JSON: {"service":"1","labelFormat":"LBL_PRINTER","carryIn":"0","cud":"0","duty":"0","inPers":"0","rod":"0","selfCol":"0","privpers":"1","tiresService":"0","dec":"0","schemaProductDescription":"[iai:order_sn]","schemaNotice":"[iai:delivery_notice]"}
+Decoded parameters: Array
+(
+    [service] => 1
+    [labelFormat] => LBL_PRINTER
+    [carryIn] => 0
+    [cud] => 0
+    [duty] => 0
+    [inPers] => 0
+    [rod] => 0
+    [selfCol] => 0
+    [privpers] => 1
+    [tiresService] => 0
+    [dec] => 0
+    [schemaProductDescription] => [iai:order_sn]
+    [schemaNotice] => [iai:delivery_notice]
+)
+
+Time: 2025-09-19 12:55:49
+
+=== GENERATE LABELS DEBUG ===
+Order ID: 97555
+Raw parameters JSON: {}
+Decoded parameters: Array
+(
+)
+
+Time: 2025-09-19 13:01:04
+
+=== GENERATE LABELS DEBUG ===
+Order ID: 97555
+Raw parameters JSON: {}
+Decoded parameters: Array
+(
+)
+
+Time: 2025-09-19 13:02:10
+
+=== GENERATE LABELS DEBUG ===
+Order ID: 97555
+Raw parameters JSON: {}
+Decoded parameters: Array
+(
+)
+
+Time: 2025-09-19 13:02:12
+
+=== GENERATE LABELS DEBUG ===
+Order ID: 97555
+Raw parameters JSON: {}
+Decoded parameters: Array
+(
+)
+
+Time: 2025-09-19 13:02:19
+
+=== GENERATE LABELS DEBUG ===
+Order ID: 97555
+Raw parameters JSON: {}
+Decoded parameters: Array
+(
+)
+
+Time: 2025-09-19 13:02:45
+
+=== GENERATE LABELS DEBUG ===
+Order ID: 97555
+Raw parameters JSON: {}
+Decoded parameters: Array
+(
+)
+
+Time: 2025-09-19 13:03:14
+
+=== GENERATE LABELS DEBUG ===
+Order ID: 97555
+Raw parameters JSON: {}
+Decoded parameters: Array
+(
+)
+
+Time: 2025-09-19 13:04:33
+
+=== GENERATE LABELS DEBUG ===
+Order ID: 97555
+Raw parameters JSON: {}
+Decoded parameters: Array
+(
+)
+
+Time: 2025-09-19 13:05:15
+
+=== GENERATE LABELS DEBUG ===
+Order ID: 97555
+Raw parameters JSON: {"schemaRef":"zam. [iai:order_sn]","schemaRef2":"[iai:delivery_notice]","schemaShipmentDescription":"","Height":"123","Width":"123","Length":"123","SMS":"yes","EMAIL":"no","W":"no","R":"no","Z":"no","ZNI":"no","ROD":"no","M":"no"}
+Decoded parameters: Array
+(
+    [schemaRef] => zam. [iai:order_sn]
+    [schemaRef2] => [iai:delivery_notice]
+    [schemaShipmentDescription] => 
+    [Height] => 123
+    [Width] => 123
+    [Length] => 123
+    [SMS] => yes
+    [EMAIL] => no
+    [W] => no
+    [R] => no
+    [Z] => no
+    [ZNI] => no
+    [ROD] => no
+    [M] => no
+)
+
+Time: 2025-09-19 13:05:56
+

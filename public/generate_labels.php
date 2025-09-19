@@ -12,7 +12,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     $debugLog .= "Raw parameters JSON: " . $_POST['parameters'] . "\n";
     $debugLog .= "Decoded parameters: " . print_r($parameters, true) . "\n";
     $debugLog .= "Time: " . date('Y-m-d H:i:s') . "\n\n";
-    file_put_contents(__DIR__ . '/../logs/debug_labels.log', $debugLog, FILE_APPEND);
+    
+    // Create logs directory if it doesn't exist
+    $logDir = __DIR__ . '/../storage/logs';
+    if (!is_dir($logDir)) {
+        mkdir($logDir, 0755, true);
+    }
+    file_put_contents($logDir . '/debug_labels.log', $debugLog, FILE_APPEND);
     
     // Include necessary files for API client
     require_once __DIR__ . '/../vendor/autoload.php';

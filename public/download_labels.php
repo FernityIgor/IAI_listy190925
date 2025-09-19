@@ -1,7 +1,7 @@
 <?php
 // Standalone handler for download_labels
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'download_labels') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_number'])) {
     // Parse parameters
     $orderNumber = (int)$_POST['order_number'];
     
@@ -27,23 +27,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     // Download the labels
     $result = $apiClient->downloadLabels($orderNumber);
     
-    // Return JSON response
-    header('Content-Type: application/json');
-    if ($result !== null) {
-        echo json_encode([
-            'success' => $result['success'] ?? false,
-            'result' => $result
-        ]);
+    if ($result && $result['success'] && !empty($result['files'])) {
+        // Get the first PDF file (or combine multiple if needed)
+        $firstFile = $result['files'][0];
+        $filePath = $firstFile['filepath'];
+        
+        if (file_exists($filePath)) {
+            // Set headers for direct PDF download
+            header('Content-Type: application/pdf');
+            header('Content-Disposition: attachment; filename="etykiety-' . $orderNumber . '.pdf"');
+            header('Content-Length: ' . filesize($filePath));
+            header('Cache-Control: no-cache, must-revalidate');
+            header('Pragma: no-cache');
+            
+            // Send file directly to browser
+            readfile($filePath);
+            
+            // Optional: Delete file after download to save server space
+            // unlink($filePath);
+            
+            exit;
+        } else {
+            header('Content-Type: application/json');
+            echo json_encode(['success' => false, 'error' => 'PDF file not found on server']);
+            exit;
+        }
     } else {
+        // Return error as JSON for AJAX handling
+        header('Content-Type: application/json');
         echo json_encode([
             'success' => false,
-            'error' => 'API call failed'
+            'error' => $result['error'] ?? 'Failed to download labels',
+            'api_response' => $result['api_response'] ?? null
         ]);
+        exit;
     }
-    exit;
 }
 
-// If not download_labels request, return error
+// If not proper request, return error
 header('Content-Type: application/json');
 echo json_encode(['success' => false, 'error' => 'Invalid request']);
 ?>

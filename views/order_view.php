@@ -584,51 +584,30 @@ function pobierzEtykiety(orderNumber) {
     button.textContent = 'Pobieranie...';
     button.disabled = true;
 
-    const formData = new FormData();
-    formData.append('action', 'download_labels');
-    formData.append('order_number', orderNumber);
+    // Create form for direct download
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = 'download_labels.php';
+    form.style.display = 'none';
 
-    fetch('download_labels.php', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => {
-        console.log('Fetch response status:', response.status);
-        return response.json();
-    })
-    .then(data => {
-        console.log('Received data:', data);
-        
+    const orderInput = document.createElement('input');
+    orderInput.type = 'hidden';
+    orderInput.name = 'order_number';
+    orderInput.value = orderNumber;
+
+    form.appendChild(orderInput);
+    document.body.appendChild(form);
+    
+    // Submit form to trigger download
+    form.submit();
+    
+    // Clean up
+    setTimeout(() => {
+        document.body.removeChild(form);
         // Reset button
         button.textContent = originalText;
         button.disabled = false;
-        
-        if (data.success) {
-            const result = data.result;
-            if (result.files && result.files.length > 0) {
-                let message = `Pobrano ${result.total_labels} etykiet(y):\n\n`;
-                result.files.forEach(file => {
-                    message += `• ${file.filename} (${Math.round(file.size / 1024)} KB)\n`;
-                });
-                message += `\nPliki zapisane w folderze: <?= $h($this->config['storage']['labels_directory'] ?? 'C:\listy_iai') ?>`;
-                alert(message);
-            } else {
-                alert('Brak etykiet do pobrania lub błąd w zapisie plików.');
-            }
-        } else {
-            console.error('Error:', data);
-            alert('Błąd podczas pobierania etykiet: ' + (data.error || 'Nieznany błąd'));
-        }
-    })
-    .catch(error => {
-        console.error('Network error:', error);
-        
-        // Reset button
-        button.textContent = originalText;
-        button.disabled = false;
-        
-        alert('Błąd sieci: ' + error.message);
-    });
+    }, 1000);
 }
 
 // Function to generate labels and immediately download them
@@ -708,15 +687,38 @@ function generujIPobierz() {
             
             console.log('Step 2: Downloading labels...');
             
-            // Step 2: Download the generated labels
-            const downloadFormData = new FormData();
-            downloadFormData.append('action', 'download_labels');
-            downloadFormData.append('order_number', orderNumber);
+            // Step 2: Download the generated labels using form submission for browser download
+            restoreButtons();
             
-            return fetch('download_labels.php', {
-                method: 'POST',
-                body: downloadFormData
-            });
+            // Create and submit a form for downloading
+            const downloadForm = document.createElement('form');
+            downloadForm.method = 'POST';
+            downloadForm.action = 'download_labels.php';
+            downloadForm.target = '_blank'; // Open download in new tab
+            
+            const actionInput = document.createElement('input');
+            actionInput.type = 'hidden';
+            actionInput.name = 'action';
+            actionInput.value = 'download_labels';
+            downloadForm.appendChild(actionInput);
+            
+            const orderInput = document.createElement('input');
+            orderInput.type = 'hidden';
+            orderInput.name = 'order_number';
+            orderInput.value = orderNumber;
+            downloadForm.appendChild(orderInput);
+            
+            document.body.appendChild(downloadForm);
+            downloadForm.submit();
+            document.body.removeChild(downloadForm);
+            
+            // Show success message and close modal
+            alert('Etykiety zostały wygenerowane i zostały pobrane do Twojej przeglądarki!');
+            closeZlecKurieraModal();
+            window.location.reload();
+            
+            return; // End the promise chain here since we're using form submission
+            
         } else {
             // Show detailed error information for generation step
             let errorMessage = 'Generowanie etykiet nie powiodło się:\n\n';
@@ -740,35 +742,8 @@ function generujIPobierz() {
                 errorMessage += '\n💡 Sugestia: Sprawdź ustawienia parametrów kuriera (np. "Wnosić paczki" na "nie").';
             }
             
+            restoreButtons();
             throw new Error(errorMessage);
-        }
-    })
-    .then(response => response.json())
-    .then(downloadData => {
-        console.log('Download response:', downloadData);
-        
-        restoreButtons();
-        
-        if (downloadData.success) {
-            const result = downloadData.result;
-            if (result.files && result.files.length > 0) {
-                let message = `Etykiety zostały wygenerowane i pobrane!\n\n`;
-                message += `Pobrano ${result.total_labels} etykiet(y):\n\n`;
-                result.files.forEach(file => {
-                    message += `• ${file.filename} (${Math.round(file.size / 1024)} KB)\n`;
-                });
-                message += `\nPliki zapisane w folderze: <?= $h($this->config['storage']['labels_directory'] ?? 'C:\listy_iai') ?>`;
-                alert(message);
-                
-                // Close the modal after successful generation and download
-                closeZlecKurieraModal();
-                // Reload the page to see updated package information
-                window.location.reload();
-            } else {
-                alert('Etykiety zostały wygenerowane, ale wystąpił błąd podczas pobierania plików.');
-            }
-        } else {
-            alert('Etykiety zostały wygenerowane, ale nie udało się ich pobrać: ' + (downloadData.error || 'Nieznany błąd'));
         }
     })
     .catch(error => {
