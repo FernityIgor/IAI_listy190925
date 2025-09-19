@@ -53,17 +53,6 @@ if (!empty($orderName) && (isset($_POST['submit']) || isset($_GET['order']))) {
         $error = "cURL Error #:" . $err;
     } else {
         $orderData = json_decode($response, true);
-        
-        // Debug: Save API response to logs (with error handling)
-        if ($orderData) {
-            $logDir = '/var/www/html/storage/logs';
-            if (!is_dir($logDir)) {
-                mkdir($logDir, 0755, true);
-            }
-            if (is_writable($logDir)) {
-                file_put_contents($logDir . '/debug_api_response.json', json_encode($orderData, JSON_PRETTY_PRINT));
-            }
-        }
     }
 }
 
@@ -235,15 +224,22 @@ if ($orderData) {
             line-height: 1.3;
         }
 
-        @media (max-width: 1024px) {
-            .container {
-                margin: 20px;
-            }
+        @media (max-width: 1200px) {
             .address-boxes {
                 flex-wrap: wrap;
             }
             .address-box, .search-container {
-                flex: 1 1 45%;
+                flex: 1 1 calc(50% - 5px);
+                margin-bottom: 10px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+            }
+            .address-box, .search-container {
+                flex: 1 1 100%;
             }
         }
     </style>
@@ -284,6 +280,11 @@ if ($orderData) {
                     <p><strong>City:</strong> <?= h($clientResult['clientBillingAddress']['clientCity']) ?> 
                         <?= h($clientResult['clientBillingAddress']['clientZipCode']) ?></p>
                     <p><strong>Phone:</strong> <?= h($clientResult['endClientAccount']['clientPhone1']) ?></p>
+                <?php else: ?>
+                    <p>No billing address data available</p>
+                    <?php if ($clientResult): ?>
+                        <p style="font-size: 11px;">Available keys: <?= h(implode(', ', array_keys($clientResult))) ?></p>
+                    <?php endif; ?>
                 <?php endif; ?>
             </div>
 
@@ -303,6 +304,11 @@ if ($orderData) {
                     <p><strong>City:</strong> <?= h($clientResult['clientDeliveryAddress']['clientDeliveryAddressCity']) ?> 
                         <?= h($clientResult['clientDeliveryAddress']['clientDeliveryAddressZipCode']) ?></p>
                     <p><strong>Phone:</strong> <?= h($clientResult['endClientAccount']['clientPhone1']) ?></p>
+                <?php else: ?>
+                    <p>No delivery address data available</p>
+                    <?php if ($clientResult): ?>
+                        <p style="font-size: 11px;">Looking for: clientPickupPointAddress or clientDeliveryAddress</p>
+                    <?php endif; ?>
                 <?php endif; ?>
             </div>
         </div>

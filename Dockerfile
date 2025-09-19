@@ -25,13 +25,14 @@ COPY composer.json composer.lock* ./
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-# Copy application code
+# Copy application code first
 COPY . .
 
 # Create necessary directories and set proper permissions
 RUN mkdir -p /var/www/html/storage/logs \
     && mkdir -p /var/www/html/storage/labels \
     && chown -R www-data:www-data /var/www/html \
+    && chmod -R 775 /var/www/html/storage \
     && chmod -R 755 /var/www/html
 
 # Update Apache configuration to serve from /var/www/html
