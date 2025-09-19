@@ -327,5 +327,10 @@
             });
         });
     </script>
+    
+    <!-- Footer with labels directory info -->
+    <div class="footer">
+        <p><strong>Pliki pobierane do:</strong> <?= $h($this->config['storage']['labels_directory'] ?? 'C:\listy_iai') ?></p>
+    </div>
 </body>
 </html>

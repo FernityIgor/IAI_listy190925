@@ -23,7 +23,8 @@ class OrderController
         // Create the API client with config values
         $this->apiClient = new OrderApiClient(
             $this->config['api']['url'],
-            $this->config['api']['key']
+            $this->config['api']['key'],
+            $this->config
         );
     }
 

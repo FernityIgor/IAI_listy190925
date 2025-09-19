@@ -762,3 +762,23 @@ select.form-control {
         flex: 1 1 45%;
     }
 }
+
+/* Footer styles */
+.footer {
+    margin-top: 30px;
+    padding: 15px;
+    background: #f8f9fa;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 0.9em;
+    color: #6b7280;
+}
+
+.footer p {
+    margin: 0;
+}
+
+.footer strong {
+    color: #374151;
+}

@@ -6,11 +6,13 @@ class OrderApiClient
 {
     private string $apiUrl;
     private string $apiKey;
+    private array $config;
 
-    public function __construct(string $apiUrl, string $apiKey)
+    public function __construct(string $apiUrl, string $apiKey, array $config = [])
     {
         $this->apiUrl = $apiUrl;
         $this->apiKey = $apiKey;
+        $this->config = $config;
     }
 
     public function fetchOrder(int $orderSerialNumber): ?array
@@ -505,7 +507,7 @@ class OrderApiClient
         }
 
         // Create labels directory if it doesn't exist
-        $labelsDir = __DIR__ . '/../../storage/labels';
+        $labelsDir = $this->config['storage']['labels_directory'] ?? __DIR__ . '/../../storage/labels';
         if (!is_dir($labelsDir)) {
             mkdir($labelsDir, 0755, true);
         }

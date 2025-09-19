@@ -15,7 +15,8 @@ $config = require __DIR__ . '/config/config.php';
 // Create API client
 $apiClient = new App\Api\OrderApiClient(
     $config['api']['url'],
-    $config['api']['key']
+    $config['api']['key'],
+    $config
 );
 
 // Download labels

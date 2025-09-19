@@ -610,7 +610,7 @@ function pobierzEtykiety(orderNumber) {
                 result.files.forEach(file => {
                     message += `• ${file.filename} (${Math.round(file.size / 1024)} KB)\n`;
                 });
-                message += `\nPliki zapisane w folderze: storage/labels/`;
+                message += `\nPliki zapisane w folderze: <?= $h($this->config['storage']['labels_directory'] ?? 'C:\listy_iai') ?>`;
                 alert(message);
             } else {
                 alert('Brak etykiet do pobrania lub błąd w zapisie plików.');
@@ -757,7 +757,7 @@ function generujIPobierz() {
                 result.files.forEach(file => {
                     message += `• ${file.filename} (${Math.round(file.size / 1024)} KB)\n`;
                 });
-                message += `\nPliki zapisane w folderze: storage/labels/`;
+                message += `\nPliki zapisane w folderze: <?= $h($this->config['storage']['labels_directory'] ?? 'C:\listy_iai') ?>`;
                 alert(message);
                 
                 // Close the modal after successful generation and download

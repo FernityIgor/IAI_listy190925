@@ -20,7 +20,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     // Create API client
     $apiClient = new App\Api\OrderApiClient(
         $config['api']['url'],
-        $config['api']['key']
+        $config['api']['key'],
+        $config
     );
     
     // Download the labels
