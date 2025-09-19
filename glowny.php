@@ -1,4 +1,7 @@
 <?php
+// Load configuration
+$config = include 'config/config.php';
+
 // Helper function to escape HTML
 function h($str) {
     return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
@@ -20,7 +23,7 @@ if (!empty($orderName) && (isset($_POST['submit']) || isset($_GET['order']))) {
     $curl = curl_init();
 
     curl_setopt_array($curl, [
-        CURLOPT_URL => "https://dkwadrat.pl/api/admin/v6/orders/orders/search",
+        CURLOPT_URL => $config['api']['url'],
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => "",
         CURLOPT_MAXREDIRS => 10,
@@ -35,7 +38,7 @@ if (!empty($orderName) && (isset($_POST['submit']) || isset($_GET['order']))) {
             ]
         ]),
         CURLOPT_HTTPHEADER => [
-            "X-API-KEY: YXBwbGljYXRpb24xOktvTnUyTkwrV0NEbUwvMzdhMmJFN3BFSzVTTkVEM2ZjRm9xbzQ5NDREKzd1SXRsNGlPQnFkL0pBb2NMZGZsR3c=",
+            "X-API-KEY: " . $config['api']['key'],
             "accept: application/json",
             "content-type: application/json"
         ],
@@ -50,18 +53,34 @@ if (!empty($orderName) && (isset($_POST['submit']) || isset($_GET['order']))) {
         $error = "cURL Error #:" . $err;
     } else {
         $orderData = json_decode($response, true);
+        
+        // Debug: Save API response to logs
+        if ($orderData) {
+            file_put_contents('/var/www/html/storage/logs/debug_api_response.json', json_encode($orderData, JSON_PRETTY_PRINT));
+        }
     }
 }
 
-// Add this right after the API response processing and before the HTML output
+// Process the API response data correctly
 if ($orderData && isset($orderData['Results'][0])) {
     $order = $orderData['Results'][0];
     $clientResult = $order['clientResult'];
-    $products = $order['orderDetails']['productsResults'];
+    // Fix: products are in orderDetails -> productsResults (not just productsResults)
+    $products = $order['orderDetails']['productsResults'] ?? [];
 } else {
     $order = null;
     $clientResult = null;
     $products = [];
+}
+
+// Debug information for troubleshooting
+$debugInfo = '';
+if ($orderData) {
+    $debugInfo = "Debug Info: " . count($orderData['Results'] ?? []) . " results found. ";
+    if (isset($orderData['Results'][0])) {
+        $productsCount = count($orderData['Results'][0]['orderDetails']['productsResults'] ?? []);
+        $debugInfo .= "Products found: " . $productsCount . ". ";
+    }
 }
 
 // Common HTML header and search form
@@ -236,6 +255,9 @@ if ($orderData && isset($orderData['Results'][0])) {
                 <?php if ($error): ?>
                     <p style="color: red;"><?= h($error) ?></p>
                 <?php endif; ?>
+                <?php if ($debugInfo): ?>
+                    <p style="color: blue; font-size: 12px;"><?= h($debugInfo) ?></p>
+                <?php endif; ?>
             </div>
 
             <div class="address-box">
@@ -281,21 +303,17 @@ if ($orderData && isset($orderData['Results'][0])) {
 
         <div class="order-details-box">
             <h3>Order Details</h3>
+            <?php if ($order): ?>
             <?php 
-            $shopNames = [
-                4 => 'furnizone.cz',
-                5 => 'dwkadrat.pl',
-                6 => 'b2b.fernity'
-            ];
-            
             $shopId = $order['orderDetails']['orderSourceResults']['shopId'] ?? null;
-            $shopName = $shopNames[$shopId] ?? 'Unknown Shop';
+            $shopName = $config['shops'][$shopId] ?? 'Unknown Shop';
             ?>
             <p><strong>Shop:</strong> <?= h($shopName) ?> (ID: <?= h($shopId) ?>)</p>
             <p><strong>Order Number:</strong> <?= h($order['orderSerialNumber']) ?></p>
             <p><strong>Order Date:</strong> <?= h($order['orderDetails']['orderAddDate']) ?></p>
             <p><strong>Payment Type:</strong> <?= h($order['orderDetails']['payments']['orderPaymentType']) ?></p>
             <p><strong>Estimated Delivery:</strong> <?= h($order['orderDetails']['dispatch']['estimatedDeliveryDate']) ?></p>
+            <?php endif; ?>
         </div>
 
         <div class="products-table">
