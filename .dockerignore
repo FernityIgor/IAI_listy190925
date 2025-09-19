@@ -1,0 +1,48 @@
+# Git
+.git
+.gitignore
+
+# Docker files
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Documentation
+README.md
+*.md
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+storage/logs/
+
+# Temporary files
+*.tmp
+*.temp
+*~
+
+# Node modules (if any)
+node_modules/
+
+# Vendor directory will be installed during build
+vendor/
+
+# Local development files
+.env.local
+.env.development
+
+# Debug files
+debug_parameters.log
+test_debug.txt
+
+# Volume config
+docker-volumes-config.txt

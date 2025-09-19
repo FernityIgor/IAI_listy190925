@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: iai_listy_app
+    ports:
+      - "8080:80"
+    volumes:
+      # Mount storage directory for persistent data
+      - ./storage:/var/www/html/storage
+      # Mount labels directory
+      - labels_data:/var/www/html/storage/labels
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/html
+    restart: unless-stopped
+    networks:
+      - iai_network
+
+volumes:
+  labels_data:
+    driver: local
+
+networks:
+  iai_network:
+    driver: bridge
