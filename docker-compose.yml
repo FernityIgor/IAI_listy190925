@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     container_name: iai_listy_app
     ports:
-      - "8080:80"
+      - "3080:80"
     volumes:
       # Mount storage directory for persistent data
       - ./storage:/var/www/html/storage
