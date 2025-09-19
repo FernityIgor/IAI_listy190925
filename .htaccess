@@ -3,14 +3,17 @@
 # Enable directory browsing if no index file is found
 Options +Indexes +FollowSymLinks
 
-# Default index files
-DirectoryIndex glowny.php index.php index.html
+# Default index files - redirect to public directory
+DirectoryIndex public/index.php index.php glowny.php
 
 # Enable URL rewriting
 RewriteEngine On
 
-# Redirect root to main application file
-RewriteRule ^$ glowny.php [L]
+# Redirect root to public/index.php (the proper MVC entry point)
+RewriteRule ^$ public/index.php [L]
+
+# Redirect any public access to the public directory
+RewriteRule ^(?!public/)(.*)$ public/$1 [L]
 
 # Allow access to all files
 <FilesMatch "\.(php|html|css|js|png|jpg|jpeg|gif|ico|pdf)$">

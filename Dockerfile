@@ -35,14 +35,19 @@ RUN mkdir -p /var/www/html/storage/logs \
     && chmod -R 775 /var/www/html/storage \
     && chmod -R 755 /var/www/html
 
-# Update Apache configuration to serve from /var/www/html
+# Update Apache configuration to serve from /var/www/html with proper routing
 RUN echo '<VirtualHost *:80>\n\
     DocumentRoot /var/www/html\n\
     <Directory /var/www/html>\n\
         Options Indexes FollowSymLinks\n\
         AllowOverride All\n\
         Require all granted\n\
-        DirectoryIndex glowny.php index.php index.html\n\
+        DirectoryIndex public/index.php index.php glowny.php\n\
+    </Directory>\n\
+    <Directory /var/www/html/public>\n\
+        Options Indexes FollowSymLinks\n\
+        AllowOverride All\n\
+        Require all granted\n\
     </Directory>\n\
     ErrorLog ${APACHE_LOG_DIR}/error.log\n\
     CustomLog ${APACHE_LOG_DIR}/access.log combined\n\
