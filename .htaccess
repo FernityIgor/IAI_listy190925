@@ -1,0 +1,18 @@
+# Apache configuration for IAI Lists application
+
+# Enable directory browsing if no index file is found
+Options +Indexes +FollowSymLinks
+
+# Default index files
+DirectoryIndex glowny.php index.php index.html
+
+# Enable URL rewriting
+RewriteEngine On
+
+# Redirect root to main application file
+RewriteRule ^$ glowny.php [L]
+
+# Allow access to all files
+<FilesMatch "\.(php|html|css|js|png|jpg|jpeg|gif|ico|pdf)$">
+    Require all granted
+</FilesMatch>
