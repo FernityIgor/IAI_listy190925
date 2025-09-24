@@ -182,6 +182,12 @@
         <div class="courier-params-header">
             <h3>Parametry przesyłki</h3>
             <div class="courier-action-buttons">
+                <div class="save-option-container" title="Zaznacz, aby wybrać miejsce zapisu w przeglądarce. Bez zaznaczenia pliki zostaną zapisane do domyślnego folderu.">
+                    <label class="save-option-label">
+                        <input type="checkbox" id="chooseSaveLocation" class="save-option-checkbox">
+                        <span class="save-option-text">Wybierz miejsce zapisu</span>
+                    </label>
+                </div>
                 <button 
                     type="button" 
                     class="courier-action-btn generate-btn"
@@ -753,44 +759,74 @@ function generujIPobierz() {
                 generateDownloadBtn.textContent = 'Pobieranie...';
             }
             
-            console.log('Step 2: Saving labels to configured directory...');
+            // Check if user wants to choose save location
+            const chooseSaveLocation = document.getElementById('chooseSaveLocation').checked;
             
-            // Step 2: Save the generated labels to configured directory
-            fetch('save_labels.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: `order_number=${orderNumber}`
-            })
-            .then(response => response.json())
-            .then(saveData => {
-                console.log('Save response:', saveData);
+            if (chooseSaveLocation) {
+                console.log('Step 2: Downloading labels to browser (user choice)...');
                 
-                if (saveData.success) {
-                    let message = 'Etykiety zostały wygenerowane i zapisane!';
-                    if (saveData.files && saveData.files.length > 0) {
-                        message += '\n\nZapisane pliki:';
-                        saveData.files.forEach(file => {
-                            message += `\n- ${file.filename}`;
-                        });
-                    }
-                    if (saveData.directory) {
-                        message += `\n\nLokalizacja: ${saveData.directory}`;
-                    }
-                    
-                    alert(message);
-                    restoreButtons();
-                    window.location.reload();
-                } else {
-                    throw new Error(saveData.error || 'Failed to save labels');
-                }
-            })
-            .catch(saveError => {
-                console.error('Save error:', saveError);
-                alert('Błąd podczas zapisywania etykiet: ' + saveError.message);
+                // User chose to select save location - use browser download
                 restoreButtons();
-            });
+                
+                // Create and submit a form for downloading
+                const downloadForm = document.createElement('form');
+                downloadForm.method = 'POST';
+                downloadForm.action = 'download_labels.php';
+                downloadForm.target = '_blank'; // Open download in new tab
+                
+                const orderInput = document.createElement('input');
+                orderInput.type = 'hidden';
+                orderInput.name = 'order_number';
+                orderInput.value = orderNumber;
+                downloadForm.appendChild(orderInput);
+                
+                document.body.appendChild(downloadForm);
+                downloadForm.submit();
+                document.body.removeChild(downloadForm);
+                
+                alert('Etykiety zostały wygenerowane i zostały pobrane do przeglądarki!');
+                window.location.reload();
+                
+            } else {
+                console.log('Step 2: Saving labels to configured directory...');
+                
+                // Default behavior - save to configured directory
+                fetch('save_labels.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `order_number=${orderNumber}`
+                })
+                .then(response => response.json())
+                .then(saveData => {
+                    console.log('Save response:', saveData);
+                    
+                    if (saveData.success) {
+                        let message = 'Etykiety zostały wygenerowane i zapisane!';
+                        if (saveData.files && saveData.files.length > 0) {
+                            message += '\n\nZapisane pliki:';
+                            saveData.files.forEach(file => {
+                                message += `\n- ${file.filename}`;
+                            });
+                        }
+                        if (saveData.directory) {
+                            message += `\n\nLokalizacja: ${saveData.directory}`;
+                        }
+                        
+                        alert(message);
+                        restoreButtons();
+                        window.location.reload();
+                    } else {
+                        throw new Error(saveData.error || 'Failed to save labels');
+                    }
+                })
+                .catch(saveError => {
+                    console.error('Save error:', saveError);
+                    alert('Błąd podczas zapisywania etykiet: ' + saveError.message);
+                    restoreButtons();
+                });
+            }
             
             return; // End the promise chain here since we're using form submission
             
@@ -895,6 +931,20 @@ function openGmailCompose(email, subject, body) {
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Page loaded, auto-loading courier parameters...');
     loadCourierParameters(<?= $h($order['orderSerialNumber']) ?>, '<?= $h($wfmagOrder ?? '') ?>');
+    
+    // Add event listener to checkbox to update button text
+    const chooseSaveLocationCheckbox = document.getElementById('chooseSaveLocation');
+    const generateDownloadBtn = document.getElementById('generateDownloadBtn');
+    
+    if (chooseSaveLocationCheckbox && generateDownloadBtn) {
+        chooseSaveLocationCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                generateDownloadBtn.textContent = 'Generuj i pobierz';
+            } else {
+                generateDownloadBtn.textContent = 'Generuj i zapisz';
+            }
+        });
+    }
 });
 <?php endif; ?>
 </script>

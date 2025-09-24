@@ -5539,3 +5539,154 @@ Total Time: 2.767612 seconds
 API Response (JSON): {"eventId":97555,"eventType":"order","packages":[{"id":"105616","shippingNumber":"2018002146631","packageNumber":"2018002146631"}],"labels":{"label":"JVBERi0xLjMNCjEgMCBvYmoNClsvUERGIC9UZXh0IC9JbWFnZUIgL0ltYWdlQyAvSW1hZ2VJXQ0KZW5kb2JqDQo5IDAgb2JqDQo8PCAvTGVuZ3RoIDE3MjYgL0ZpbHRlciAvRmxhdGVEZWNvZGUgPj4gc3RyZWFtIA0KWAmdWNtOG0kQfY+Uf+hHskraXX1vtIpEAlmhhVywJR5W+2DwYLEbcGIskeR790P29GWGmfEdJcYzPe6qrqpTp6rm5YvvTOCf9Ipra5rvecUu2f3LFyI9vfiDERfskf31N+4mTHBPzCjurGZ3jKzmurn\/yobrt5F2TDrJtYsbozLRWklbvzMZuFNYVfGpZ0ZyA\/HKcSN9ORgzkOVD0lIe9HZd37HB6Z1ixzP2JQo1XOGpJq6DZGQC116zwIW0ja3vRmzwQTPHRjcsGzCfMkWWByHZ6CyKgB6tuRSBjSbsdyGUEqIiIbQWwjh84vU1PpXAQ\/x3+Zs8PhafeH2FT8AHe8i8ZaN\/2Og3djJ6+eLLOscREfeh7bpmBccjbzd5XUrFpSFmDTcuRLeXBQ0nSGq8jj0EXzsdmIOpjlk4krreMcx0vCOl5cqE6B3sJwsJcI800T0HnyZXt7P59XhwUV3ffrut7heDk7tvN\/\/dT6v54atd7AYuFbBmKVocPFc4W71Sjp3jGiRXVjJr8cjuefAc1qC49ymsBx\/Hk\/Ejjj2s7ifVfHB09ZAudjxyTI0UFUEF4hGo9cqGOEUDg\/UpyAqIu3ta2R5kImQJgikBT1GSK8bSNStNmF1Mc3JANTFC8jiFhKCUmh2XWYbE6uaCCtwon6PtlIUXRUJhTgZ5k8FvbE6GCHw9zgniAHgzzgli8BuSeByvDa4nMRFKcuiSIKp8TFlzJWlCSSTdS5zvsEHzAAhKbbmBy2G\/MAq3OGIvyR1w2rHMOlCBs9EyUkBGdDr4zDuVEHF5efSqr04K4s7gd2A\/gjiHWEGr48K7PvZsF3uOuFWU3BiFaA0hhvuSNsPFvLoZ99EWFYqMBtinha4VUgBw9ZJ9\/dg5pIg0ycIYNYGgS5CorC0cvl9SGB2aMKUis1N0qAZIgBzyO1tIoNxAUKYMdzIn2OczJtQbGWhJpQYzCYPTO06Rp0PgFviKBxAN99erifzzk96+TP6+IX9t8mOLnzkPASYJIDiUdN8U38W8lZyQPtEU+COdKtJMRv2BTNQuSVvYuztBkMWaDa0aWK9synGABKoYzHfBp8KbF1ALVY8QSShuAnhHIFNhI0Ldz2\/DQsdSLRzia58oEXmX4h7tPB2+Y6fT2ZwNF+OHX21Dd5QF1nYmY234eFstqumMXd7eX6MqxMt9JIac0W2RJP3AqGccC6ngtKlRuY8A8qg1uiNhGdTbhCCVvZMdIexyPH\/4NX4c73WaYg4QHZugFLEmWnsJ0qiyJDuSTCRrjSZoR3xLpEuD0Yhv+QTaDkiNA9OGphtToBuk167Mkk0GKVmTz3k+no5\/\/bxnx39eHh1fHI2WzNbbhKHvCRnwsZxVuZShpJFA6dK29Ha69HaTcg8CQJUSRuYSl0qgq3\/3dtn36w9hUuV5OsWBCStit8UIGzjKyQZIb+DqvgAg2nuzjwwleUAhbcloAP0MU9DU2LAyuHsZZgE02ZZmBJpgBFHvTtmx9wHbNONOuW\/aKhvQazhuI7mL5IMApapfmNdOFw6bJAOnWZFjf37y7uRsj54TLtOt85X7TsLJVCgInY1FvkniUpt+vpHoUkMcCci3qwK+sheH50O20wEl2AStHygby960+uJ6ZYeyFydT2FD2Bl0v1BEgmXUgCA4SrUdI0A1aLkkt
 Time: 2025-09-24 12:01:00
 
+=== API GENERATE LABELS DEBUG ===
+Order Number: 97555
+Input parameters: Array
+(
+    [service] => 1
+    [labelFormat] => LBL_PRINTER
+    [carryIn] => 0
+    [cud] => 0
+    [duty] => 0
+    [inPers] => 0
+    [rod] => 0
+    [selfCol] => 0
+    [privpers] => 1
+    [tiresService] => 0
+    [dec] => 0
+    [schemaProductDescription] => IAI: 97555, wfmag: WF1231
+    [schemaNotice] => IAI: 97555, wfmag: WF1231
+)
+
+
+=== PARAMETER TRANSFORMATION DEBUG ===
+Transformed service: '1' (string) -> 1 (int)
+Kept labelFormat: 'LBL_PRINTER' (unchanged)
+Transformed carryIn: '0' (string) -> 0 (int)
+Transformed cud: '0' (string) -> 0 (int)
+Transformed duty: '0' (string) -> 0 (int)
+Transformed inPers: '0' (string) -> 0 (int)
+Transformed rod: '0' (string) -> 0 (int)
+Transformed selfCol: '0' (string) -> 0 (int)
+Transformed privpers: '1' (string) -> 1 (int)
+Transformed tiresService: '0' (string) -> 0 (int)
+Transformed dec: '0' (string) -> 0 (int)
+Kept schemaProductDescription: 'IAI: 97555, wfmag: WF1231' (unchanged)
+Kept schemaNotice: 'IAI: 97555, wfmag: WF1231' (unchanged)
+Processing parameter: key='service', value='1', type=string
+Converted service: '1' -> 1
+Added parameter: id='service', value='1'
+Processing parameter: key='labelFormat', value='LBL_PRINTER', type=string
+Added parameter: id='labelFormat', value='LBL_PRINTER'
+Processing parameter: key='carryIn', value='0', type=string
+Converted carryIn: '0' -> 0
+Added parameter: id='carryIn', value='0'
+Processing parameter: key='cud', value='0', type=string
+Converted cud: '0' -> 0
+Added parameter: id='cud', value='0'
+Processing parameter: key='duty', value='0', type=string
+Converted duty: '0' -> 0
+Added parameter: id='duty', value='0'
+Processing parameter: key='inPers', value='0', type=string
+Converted inPers: '0' -> 0
+Added parameter: id='inPers', value='0'
+Processing parameter: key='rod', value='0', type=string
+Converted rod: '0' -> 0
+Added parameter: id='rod', value='0'
+Processing parameter: key='selfCol', value='0', type=string
+Converted selfCol: '0' -> 0
+Added parameter: id='selfCol', value='0'
+Processing parameter: key='privpers', value='1', type=string
+Converted privpers: '1' -> 1
+Added parameter: id='privpers', value='1'
+Processing parameter: key='tiresService', value='0', type=string
+Converted tiresService: '0' -> 0
+Added parameter: id='tiresService', value='0'
+Processing parameter: key='dec', value='0', type=string
+Converted dec: '0' -> 0
+Added parameter: id='dec', value='0'
+Processing parameter: key='schemaProductDescription', value='IAI: 97555, wfmag: WF1231', type=string
+Added parameter: id='schemaProductDescription', value='IAI: 97555, wfmag: WF1231'
+Processing parameter: key='schemaNotice', value='IAI: 97555, wfmag: WF1231', type=string
+Added parameter: id='schemaNotice', value='IAI: 97555, wfmag: WF1231'
+Final payload to API: {
+    "params": {
+        "eventId": 97555,
+        "eventType": "order",
+        "parcelParameters": [
+            {
+                "id": "service",
+                "value": 1
+            },
+            {
+                "id": "labelFormat",
+                "value": "LBL_PRINTER"
+            },
+            {
+                "id": "carryIn",
+                "value": 0
+            },
+            {
+                "id": "cud",
+                "value": 0
+            },
+            {
+                "id": "duty",
+                "value": 0
+            },
+            {
+                "id": "inPers",
+                "value": 0
+            },
+            {
+                "id": "rod",
+                "value": 0
+            },
+            {
+                "id": "selfCol",
+                "value": 0
+            },
+            {
+                "id": "privpers",
+                "value": 1
+            },
+            {
+                "id": "tiresService",
+                "value": 0
+            },
+            {
+                "id": "dec",
+                "value": 0
+            },
+            {
+                "id": "schemaProductDescription",
+                "value": "IAI: 97555, wfmag: WF1231"
+            },
+            {
+                "id": "schemaNotice",
+                "value": "IAI: 97555, wfmag: WF1231"
+            }
+        ]
+    }
+}
+
+=== HTTP REQUEST DETAILS ===
+URL: https://dkwadrat.pl/api/admin/v6/packages/labels
+Method: POST
+Headers:
+  X-API-KEY: YXBwbGljYXRpb24xODpzSUdaNFU1ZzFwVnV2K3R4bExZU2lxRnR6dytHa0hiY3dhQ29HZ1BOdFdOSEtlekRYR0F3NkpFZEFCZGk0RWQ0
+  Accept: application/json, application/pdf
+  Content-Type: application/json
+Raw JSON Body:
+{"params":{"eventId":97555,"eventType":"order","parcelParameters":[{"id":"service","value":1},{"id":"labelFormat","value":"LBL_PRINTER"},{"id":"carryIn","value":0},{"id":"cud","value":0},{"id":"duty","value":0},{"id":"inPers","value":0},{"id":"rod","value":0},{"id":"selfCol","value":0},{"id":"privpers","value":1},{"id":"tiresService","value":0},{"id":"dec","value":0},{"id":"schemaProductDescription","value":"IAI: 97555, wfmag: WF1231"},{"id":"schemaNotice","value":"IAI: 97555, wfmag: WF1231"}]}}
+Body Length: 500 bytes
+
+=== HTTP RESPONSE DETAILS ===
+HTTP Status Code: 200
+Response Headers:
+  Content-Type: application/json
+  Content-Length: -1
+Total Time: 1.172235 seconds
+API Response (JSON): {"eventId":97555,"eventType":"order","packages":[{"id":"105616","packageNumber":"1026154063650U"}],"labels":{"label":"JVBERi0xLjQKJeLjz9MKMiAwIG9iago8PC9GaWx0ZXIvRmxhdGVEZWNvZGUvTGVuZ3RoIDQ5Pj5zdHJlYW0KeJwr5HIK4TI2UzC2NFMISeFyDeEK5CpUMFQwAEIImZyroB+RZqjgkq8QyAUA6zUJ9gplbmRzdHJlYW0KZW5kb2JqCjQgMCBvYmoKPDwvQ29udGVudHMgMiAwIFIvVHlwZS9QYWdlL1Jlc291cmNlczw8L1Byb2NTZXQgWy9QREYgL1RleHQgL0ltYWdlQiAvSW1hZ2VDIC9JbWFnZUldL1hPYmplY3Q8PC9YZjEgMSAwIFI+Pj4+L1BhcmVudCAzIDAgUi9NZWRpYUJveFswIDAgMjg4IDQzMl0+PgplbmRvYmoKMSAwIG9iago8PC9TdWJ0eXBlL0Zvcm0vRmlsdGVyL0ZsYXRlRGVjb2RlL1R5cGUvWE9iamVjdC9NYXRyaXhbMSAwIDAgMSAwIDBdL0Zvcm1UeXBlIDEvUmVzb3VyY2VzPDwvQ29sb3JTcGFjZTw8L0RlZmF1bHRSR0IgNSAwIFI+Pi9Qcm9jU2V0Wy9QREYvSW1hZ2VCL0ltYWdlQy9UZXh0XS9Gb250PDwvRjIxIDYgMCBSL0YzMSA3IDAgUi9GNDAgOCAwIFIvRjM0IDkgMCBSL0YyNCAxMCAwIFI+Pi9YT2JqZWN0PDwvSW0xIDExIDAgUj4+Pj4vTGVuZ3RoIDQzNjIvQkJveFswIDAgMjg4IDQzMl0+PnN0cmVhbQp4nOVdS7MdtRHe318xG5Ye9GxJVZSrfPG1K1RlQcWVLCgWSTCQlC8EQkJ+frr1fo6PIUAEdh3OjE6P1K1WP\/RNy3xzxw+Gf5\/Ql5Li+Ovj3TexjR\/6dFrgFTay44u7+1d3778Q2Hy8+rx57hROM\/xjj1ePxycf4JV8+unx6qOaiLORim4BP4Za8ePw8yy2Sfzcx+sP8fM8tj1EWvp+Eb+fVb\/jb5yFa44XXOBHxt+r\/nN713\/\/jP+mdhX49d8y8o5jcx3HhIpvG\/sx8VlZePdt\/nucIRhmKD9JPdrI5X1o9\/cvirReMmp3Tw9pjg+KnP7pJOuzqieipnuaZxW+Oc4Fn8wFf4htL4LMSTbq3vcX59CPB3FeYpvgkRZ\/E+PKEGJcGVEWoWKvOozMktyySMSTlM+7eUpzUmmn1jhJJHSk+7DVHq0U3+dDpK1nLEnrKonTCnLtiiTJBVS8+M\/TQ2vSj5\/D+zDP\/ttEiSNndO91oMOcPbyqbFNwfZLBsmCy39wpfUqtwrQKdnIlnXNkm2jCgp+GA1G+\/7tHfjz\/+u5j\/7d0h2pQJ3MqOgDDTmZQUHlwa07j8FIdj0RZbt\/EW0W3HG+7p3L7l8ef7r5CD\/Ly7pNP8ZnPDnbSnDA4vr9j7QDzgd8cf2iZPeXxhP7jmfVX9HmkRkCKhhV\/C+40xnqqcKeMcc4QJ16O8D1jFHkMvfoB6n59X5Gxqv\/HYfBKJmFPy6DiqG2JXFGjZpouJ9xeTWdmhNgYhmiZTe2PYS4LGVsy0LRf8dH0uGalI\/MTXWiyNrOGi6rY23lJbLBRwm45eeqw8IuslqNbwj\/ar\/ty98bftfNiF8tc0yPWL3PsQHpPHaejjBKbe654Mm1\/C\/JUzNITQh3fvvZDhXisDtfFY3NKyWhgPY20KXrVETd9kn+8jz6t+KzkgT72HOGoFUvoWiJLtTsh7lPKYDsWAS1CBLkji4KcXwzswpWPDwPPIqtQ\/zYGUPRghpOSsuA+5NzH0PYsfsgxf5hCXyVYO\/sq5j3vOPn25JpmkKs8+RCDQ0pZ7uN3UoCMQfyhhFwf2PmCNqYjPihCDBO2UVCRA
+Time: 2025-09-24 12:26:26
+

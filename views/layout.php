@@ -375,8 +375,8 @@
     
     <!-- Footer with labels directory info -->
     <div class="footer">
-        <p><strong>Pliki zapisywane do:</strong> <?= $h($config['storage']['labels_directory'] ?? 'C:\listy_iai') ?></p>
-        <p><em>"Generuj i pobierz" zapisuje bezpośrednio do folderu • "Pobierz etykiety" pobiera do przeglądarki</em></p>
+        <p><strong>Domyślna lokalizacja:</strong> <?= $h($config['storage']['labels_directory'] ?? 'C:\listy_iai') ?></p>
+        <p><em>"Generuj i zapisz" - automatycznie do folderu lub wybór lokalizacji (checkbox) • "Pobierz etykiety" - pobiera istniejące do przeglądarki</em></p>
     </div>
 </body>
 </html>
