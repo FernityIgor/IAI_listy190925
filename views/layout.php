@@ -226,6 +226,46 @@
             });
         }
 
+        function selectCourierDirect(orderId, courierId) {
+            // Find the clicked button to add loading state
+            const clickedButton = event.target;
+            const originalText = clickedButton.textContent;
+            
+            // Add loading state
+            clickedButton.textContent = 'Changing...';
+            clickedButton.disabled = true;
+            
+            // Disable all other courier selection buttons
+            const courierButtons = document.querySelectorAll('.direct-courier-btn');
+            courierButtons.forEach(btn => {
+                if (btn !== clickedButton) {
+                    btn.disabled = true;
+                }
+            });
+            
+            fetch('index.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `update_courier=1&order_id=${orderId}&courier_id=${courierId}`
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                window.location.reload();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Wystąpił błąd podczas zmiany kuriera.');
+                // Remove loading state if there's an error
+                clickedButton.textContent = originalText;
+                clickedButton.disabled = false;
+                courierButtons.forEach(btn => btn.disabled = false);
+            });
+        }
+
         // Add this to handle Enter key in the input
         document.getElementById('weightInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {

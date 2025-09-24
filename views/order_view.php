@@ -84,19 +84,39 @@
         <!-- Courier Information -->
         <div class="courier-info">
             <div class="courier-info-line">
-                <?php if (isset($changeableCouriers[$courierId])): ?>
-                    <button 
-                        type="button" 
-                        class="change-courier-btn"
-                        onclick="showCourierSelect(<?= $h($order['orderSerialNumber']) ?>, <?= $h($courierId) ?>)">
-                        Zmień kuriera
-                    </button>
-                <?php endif; ?>
                 <div class="courier-details">
-                    <strong>Courier:</strong> 
+                    <strong>Current Courier:</strong> 
                     <?= $h($packages[0]['deliveryPackage']['courierName'] ?? 'N/A') ?> 
                     (ID: <?= $h($courierId) ?>)
+                    <?php if ($courierId == 26): ?>
+                        <span class="special-courier-badge">Special Courier</span>
+                    <?php endif; ?>
                 </div>
+                <?php if (isset($changeableCouriers[$courierId])): ?>
+                    <div class="courier-selection">
+                        <?php if ($courierId == 26): ?>
+                            <strong>Change from K-EX to:</strong>
+                            <span class="courier-note">(K-EX can be changed but not selected again)</span>
+                        <?php else: ?>
+                            <strong>Change to:</strong>
+                        <?php endif; ?>
+                        <?php foreach ($changeableCouriers as $id => $name): ?>
+                            <?php 
+                            // Don't show current courier
+                            if ($id == $courierId) continue;
+                            
+                            // Special rule: Don't show K-EX (ID 26) as an option when current courier is NOT K-EX
+                            if ($id == 26 && $courierId != 26) continue;
+                            ?>
+                                <button 
+                                    type="button"
+                                    class="direct-courier-btn"
+                                    onclick="selectCourierDirect(<?= $h($order['orderSerialNumber']) ?>, <?= $h($id) ?>)">
+                                    <?= $h($name) ?>
+                                </button>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?></div>
                 <button 
                     type="button" 
                     class="zlec-kuriera-btn"

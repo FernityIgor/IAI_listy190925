@@ -782,3 +782,124 @@ select.form-control {
 .footer strong {
     color: #374151;
 }
+
+/* Courier selection styles */
+.courier-info {
+    margin-bottom: 15px;
+    padding: 15px;
+    background: #f8f9fa;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+}
+
+.courier-info-line {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+@media (min-width: 768px) {
+    .courier-info-line {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+    }
+    
+    .courier-selection {
+        flex-shrink: 0;
+    }
+}
+
+.courier-details {
+    font-size: 1em;
+    color: #374151;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.special-courier-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    background-color: #f59e0b;
+    color: white;
+    font-size: 0.75em;
+    font-weight: 600;
+    border-radius: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.courier-selection {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.courier-selection strong {
+    color: #6b7280;
+    font-size: 0.9em;
+    margin-right: 5px;
+}
+
+.courier-note {
+    font-size: 0.8em;
+    color: #9ca3af;
+    font-style: italic;
+    margin-left: 5px;
+}
+
+.direct-courier-btn {
+    padding: 6px 12px;
+    background-color: #10b981;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85em;
+    font-weight: 500;
+    transition: all 0.2s;
+    min-width: 80px;
+}
+
+.direct-courier-btn:hover:not(:disabled) {
+    background-color: #059669;
+    transform: translateY(-1px);
+}
+
+.direct-courier-btn:disabled {
+    background-color: #9ca3af;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.direct-courier-btn:active {
+    transform: translateY(0);
+}
+
+/* Responsive courier selection */
+@media (max-width: 768px) {
+    .courier-info-line {
+        gap: 8px;
+    }
+    
+    .courier-selection {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .direct-courier-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .courier-note {
+        display: block;
+        margin-left: 0;
+        margin-top: 4px;
+    }
+}
