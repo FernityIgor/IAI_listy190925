@@ -191,21 +191,21 @@
                 <button 
                     type="button" 
                     class="courier-action-btn generate-btn"
-                    onclick="generujEtykiety()"
+                    onclick="generateLabels()"
                     id="generateBtn">
                     Generuj etykiety
                 </button>
                 <button 
                     type="button" 
                     class="courier-action-btn generate-download-btn"
-                    onclick="generujIPobierz()"
+                    onclick="generateAndSave()"
                     id="generateDownloadBtn">
                     Generuj i zapisz
                 </button>
                 <button 
                     type="button" 
                     class="courier-action-btn download-labels-btn"
-                    onclick="pobierzEtykiety(<?= $h($order['orderSerialNumber']) ?>)">
+                    onclick="checkCheckboxAndSave(<?= $h($order['orderSerialNumber']) ?>)">
                     Pobierz etykiety
                 </button>
             </div>
@@ -565,6 +565,13 @@ function generujEtykiety() {
         return;
     }
     
+    const generateBtn = document.getElementById('generateBtn');
+    const originalText = generateBtn.textContent;
+    
+    // Set loading state  
+    generateBtn.textContent = 'Generowanie...';
+    generateBtn.disabled = true;
+    
     // Collect form data
     const form = document.getElementById('courierParametersForm');
     const formData = new FormData(form);
@@ -577,7 +584,7 @@ function generujEtykiety() {
     // Process parameters to append wfmag to [iai:order_sn] values
     const parameters = processParametersWithWfmag(rawParameters, currentWfmagOrder, currentOrderNumber);
     
-    // Send request to generate labels
+    // Send request to generate labels only
     const requestData = new FormData();
     requestData.append('action', 'generate_labels');
     requestData.append('order_id', currentOrderNumber);
@@ -599,7 +606,7 @@ function generujEtykiety() {
     })
     .then(data => {
         if (data.success) {
-            alert('Etykiety zostały wygenerowane pomyślnie!');
+            alert('Etykiety zostały wygenerowane pomyślnie w systemie Idosell!\n\nTeraz możesz użyć przycisku "Pobierz etykiety" aby je zapisać.');
             // Reload the page to see updated package information
             window.location.reload();
         } else {
@@ -631,6 +638,11 @@ function generujEtykiety() {
     .catch(error => {
         console.error('Error:', error);
         alert('Błąd przy generowaniu etykiet: ' + error.message);
+    })
+    .finally(() => {
+        // Restore button state
+        generateBtn.textContent = originalText;
+        generateBtn.disabled = false;
     });
 }
 
@@ -647,6 +659,278 @@ window.onclick = function(event) {
     }
 }
 
+// ========================================
+// MODULAR FUNCTIONS AS REQUESTED
+// ========================================
+
+// 1. Generate labels only (working well)
+function generateLabels() {
+    if (!currentOrderNumber) {
+        alert('Błąd: Brak numeru zamówienia');
+        return;
+    }
+    
+    const generateBtn = document.getElementById('generateBtn');
+    const originalText = generateBtn.textContent;
+    
+    generateBtn.textContent = 'Generowanie...';
+    generateBtn.disabled = true;
+    
+    // Collect form data
+    const form = document.getElementById('courierParametersForm');
+    const formData = new FormData(form);
+    const rawParameters = {};
+    
+    for (let [key, value] of formData.entries()) {
+        rawParameters[key] = value;
+    }
+    
+    const parameters = processParametersWithWfmag(rawParameters, currentWfmagOrder, currentOrderNumber);
+    
+    // Send request to generate labels only
+    const requestData = new FormData();
+    requestData.append('action', 'generate_labels');
+    requestData.append('order_id', currentOrderNumber);
+    requestData.append('parameters', JSON.stringify(parameters));
+
+    fetch('generate_labels.php', {
+        method: 'POST',
+        body: requestData
+    })
+    .then(response => {
+        return response.text().then(text => {
+            try {
+                return JSON.parse(text);
+            } catch (e) {
+                console.error('Server response (non-JSON):', text);
+                throw new Error('Server returned invalid JSON response');
+            }
+        });
+    })
+    .then(data => {
+        if (data.success) {
+            alert('Etykiety zostały wygenerowane pomyślnie w systemie Idosell!');
+            window.location.reload();
+        } else {
+            let errorMessage = 'Błąd przy generowaniu etykiet:\n\n';
+            if (data.error) {
+                errorMessage += 'Błąd: ' + data.error + '\n';
+            }
+            if (data.http_status) {
+                errorMessage += 'Status HTTP: ' + data.http_status + '\n';
+            }
+            if (data.error_code) {
+                errorMessage += 'Kod błędu: ' + data.error_code + '\n';
+            }
+            if (data.error && data.error.includes('już wygenerowana')) {
+                errorMessage += '\n💡 Sugestia: Usuń istniejącą etykietę przed wygenerowaniem nowej.';
+            } else if (data.http_status === 207) {
+                errorMessage += '\n💡 Sugestia: Sprawdź ustawienia parametrów kuriera.';
+            }
+            alert(errorMessage);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Błąd przy generowaniu etykiet: ' + error.message);
+    })
+    .finally(() => {
+        generateBtn.textContent = originalText;
+        generateBtn.disabled = false;
+    });
+}
+
+// 2. Save without checkbox (to config directory)
+function saveWithoutCheckbox(orderNumber) {
+    return fetch('save_labels.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `order_number=${orderNumber}`
+    })
+    .then(response => {
+        return response.text().then(text => {
+            try {
+                return JSON.parse(text);
+            } catch (e) {
+                console.error('JSON parse error. Raw response:', text);
+                throw new Error('Server returned invalid JSON: ' + text.substring(0, 200));
+            }
+        });
+    })
+    .then(data => {
+        if (data.success) {
+            let message = 'Etykiety zostały zapisane do folderu!';
+            if (data.files && data.files.length > 0) {
+                message += '\n\nZapisane pliki:';
+                data.files.forEach(file => {
+                    message += `\n- ${file.filename}`;
+                });
+            }
+            if (data.directory) {
+                message += `\n\nLokalizacja: ${data.directory}`;
+            }
+            alert(message);
+            return true;
+        } else {
+            throw new Error(data.error || 'Failed to save labels');
+        }
+    });
+}
+
+// 3. Save with checkbox (to browser)
+function saveWithCheckbox(orderNumber) {
+    return new Promise((resolve, reject) => {
+        // Create form for direct download to browser
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = 'download_labels.php';
+        form.target = '_blank'; // Open in new tab for download
+        form.style.display = 'none';
+
+        const orderInput = document.createElement('input');
+        orderInput.type = 'hidden';
+        orderInput.name = 'order_number';
+        orderInput.value = orderNumber;
+
+        form.appendChild(orderInput);
+        document.body.appendChild(form);
+        
+        // Submit form to trigger download
+        form.submit();
+        
+        // Clean up and resolve after a short delay
+        setTimeout(() => {
+            document.body.removeChild(form);
+            resolve(true);
+        }, 1000);
+    });
+}
+
+// 4. Check checkbox and save appropriately
+function checkCheckboxAndSave(orderNumber) {
+    console.log('checkCheckboxAndSave called with orderNumber:', orderNumber);
+    
+    if (!orderNumber) {
+        alert('Błąd: Brak numeru zamówienia');
+        return;
+    }
+
+    // Show loading state on button
+    const button = event.target;
+    const originalText = button.textContent;
+    button.textContent = 'Pobieranie...';
+    button.disabled = true;
+
+    // Check checkbox state
+    const chooseSaveLocation = document.getElementById('chooseSaveLocation').checked;
+    
+    let savePromise;
+    
+    if (chooseSaveLocation) {
+        console.log('Checkbox checked: saving to browser');
+        savePromise = saveWithCheckbox(orderNumber);
+    } else {
+        console.log('Checkbox unchecked: saving to config directory');
+        savePromise = saveWithoutCheckbox(orderNumber);
+    }
+    
+    savePromise
+    .then(() => {
+        // Success handled in individual save functions
+    })
+    .catch(error => {
+        console.error('Save error:', error);
+        alert('Błąd podczas zapisywania etykiet: ' + error.message);
+    })
+    .finally(() => {
+        button.textContent = originalText;
+        button.disabled = false;
+    });
+}
+
+// 5. Combined function: Generate + Save
+function generateAndSave() {
+    if (!currentOrderNumber) {
+        alert('Błąd: Brak numeru zamówienia');
+        return;
+    }
+    
+    const generateDownloadBtn = document.getElementById('generateDownloadBtn');
+    const originalText = generateDownloadBtn.textContent;
+    
+    generateDownloadBtn.textContent = 'Generowanie...';
+    generateDownloadBtn.disabled = true;
+    
+    // First generate labels
+    const form = document.getElementById('courierParametersForm');
+    const formData = new FormData(form);
+    const rawParameters = {};
+    
+    for (let [key, value] of formData.entries()) {
+        rawParameters[key] = value;
+    }
+    
+    const parameters = processParametersWithWfmag(rawParameters, currentWfmagOrder, currentOrderNumber);
+    
+    const requestData = new FormData();
+    requestData.append('action', 'generate_labels');
+    requestData.append('order_id', currentOrderNumber);
+    requestData.append('parameters', JSON.stringify(parameters));
+
+    fetch('generate_labels.php', {
+        method: 'POST',
+        body: requestData
+    })
+    .then(response => {
+        return response.text().then(text => {
+            try {
+                return JSON.parse(text);
+            } catch (e) {
+                console.error('Server response (non-JSON):', text);
+                throw new Error('Server returned invalid JSON response');
+            }
+        });
+    })
+    .then(data => {
+        if (data.success) {
+            generateDownloadBtn.textContent = 'Zapisywanie...';
+            
+            // Then check checkbox and save
+            const chooseSaveLocation = document.getElementById('chooseSaveLocation').checked;
+            
+            if (chooseSaveLocation) {
+                return saveWithCheckbox(currentOrderNumber);
+            } else {
+                return saveWithoutCheckbox(currentOrderNumber);
+            }
+        } else {
+            let errorMessage = 'Błąd przy generowaniu etykiet:\n\n';
+            if (data.error) {
+                errorMessage += 'Błąd: ' + data.error + '\n';
+            }
+            throw new Error(errorMessage);
+        }
+    })
+    .then(() => {
+        // Success message already shown by saveWithCheckbox/saveWithoutCheckbox functions
+        window.location.reload();
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Błąd: ' + error.message);
+    })
+    .finally(() => {
+        generateDownloadBtn.textContent = originalText;
+        generateDownloadBtn.disabled = false;
+    });
+}
+
+// ========================================
+// OLD FUNCTION (keeping for compatibility)
+// ========================================
+
 // Function to download labels for an order
 function pobierzEtykiety(orderNumber) {
     console.log('pobierzEtykiety called with orderNumber:', orderNumber);
@@ -662,30 +946,83 @@ function pobierzEtykiety(orderNumber) {
     button.textContent = 'Pobieranie...';
     button.disabled = true;
 
-    // Create form for direct download
-    const form = document.createElement('form');
-    form.method = 'POST';
-    form.action = 'download_labels.php';
-    form.style.display = 'none';
-
-    const orderInput = document.createElement('input');
-    orderInput.type = 'hidden';
-    orderInput.name = 'order_number';
-    orderInput.value = orderNumber;
-
-    form.appendChild(orderInput);
-    document.body.appendChild(form);
+    // Check if user wants to choose save location
+    const chooseSaveLocation = document.getElementById('chooseSaveLocation').checked;
     
-    // Submit form to trigger download
-    form.submit();
-    
-    // Clean up
-    setTimeout(() => {
-        document.body.removeChild(form);
-        // Reset button
-        button.textContent = originalText;
-        button.disabled = false;
-    }, 1000);
+    if (chooseSaveLocation) {
+        console.log('Downloading to browser (user choice)...');
+        
+        // Create form for direct download to browser
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = 'download_labels.php';
+        form.style.display = 'none';
+
+        const orderInput = document.createElement('input');
+        orderInput.type = 'hidden';
+        orderInput.name = 'order_number';
+        orderInput.value = orderNumber;
+
+        form.appendChild(orderInput);
+        document.body.appendChild(form);
+        
+        // Submit form to trigger download
+        form.submit();
+        
+        // Clean up
+        setTimeout(() => {
+            document.body.removeChild(form);
+            button.textContent = originalText;
+            button.disabled = false;
+        }, 1000);
+        
+    } else {
+        console.log('Downloading to configured directory...');
+        
+        // Download to configured directory using save_labels.php
+        fetch('save_labels.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `order_number=${orderNumber}`
+        })
+        .then(response => {
+            return response.text().then(text => {
+                try {
+                    return JSON.parse(text);
+                } catch (e) {
+                    console.error('JSON parse error. Raw response:', text);
+                    throw new Error('Server returned invalid JSON: ' + text.substring(0, 200));
+                }
+            });
+        })
+        .then(data => {
+            if (data.success) {
+                let message = 'Etykiety zostały pobrane i zapisane!';
+                if (data.files && data.files.length > 0) {
+                    message += '\n\nZapisane pliki:';
+                    data.files.forEach(file => {
+                        message += `\n- ${file.filename}`;
+                    });
+                }
+                if (data.directory) {
+                    message += `\n\nLokalizacja: ${data.directory}`;
+                }
+                alert(message);
+            } else {
+                throw new Error(data.error || 'Failed to save labels');
+            }
+        })
+        .catch(error => {
+            console.error('Download error:', error);
+            alert('Błąd podczas pobierania etykiet: ' + error.message);
+        })
+        .finally(() => {
+            button.textContent = originalText;
+            button.disabled = false;
+        });
+    }
 }
 
 // Function to generate labels and immediately download them
@@ -708,8 +1045,11 @@ function generujIPobierz() {
     // Get current order number from global variable or extract from UI
     const orderNumber = currentOrderNumber; // This should be set when modal opens
     
+    console.log('Current order number:', orderNumber);
+    console.log('Current order number type:', typeof orderNumber);
+    
     if (!orderNumber) {
-        alert('Błąd: Brak numeru zamówienia');
+        alert('Błąd: Brak numeru zamówienia. currentOrderNumber = ' + currentOrderNumber);
         restoreButtons();
         return;
     }
@@ -763,42 +1103,61 @@ function generujIPobierz() {
             const chooseSaveLocation = document.getElementById('chooseSaveLocation').checked;
             
             if (chooseSaveLocation) {
-                console.log('Step 2: Downloading labels to browser (user choice)...');
+                console.log('Step 2: Generating and downloading to browser (user choice)...');
                 
-                // User chose to select save location - use browser download
+                // User chose to select save location - generate and download in one step
                 restoreButtons();
                 
-                // Create and submit a form for downloading
+                // Create and submit a form for direct generation + download
                 const downloadForm = document.createElement('form');
                 downloadForm.method = 'POST';
-                downloadForm.action = 'download_labels.php';
+                downloadForm.action = 'generate_and_download.php';
                 downloadForm.target = '_blank'; // Open download in new tab
                 
+                // Add order number
                 const orderInput = document.createElement('input');
                 orderInput.type = 'hidden';
                 orderInput.name = 'order_number';
                 orderInput.value = orderNumber;
                 downloadForm.appendChild(orderInput);
                 
+                // Add parameters
+                const paramsInput = document.createElement('input');
+                paramsInput.type = 'hidden';
+                paramsInput.name = 'parameters';
+                paramsInput.value = JSON.stringify(parameters);
+                downloadForm.appendChild(paramsInput);
+                
                 document.body.appendChild(downloadForm);
                 downloadForm.submit();
                 document.body.removeChild(downloadForm);
                 
-                alert('Etykiety zostały wygenerowane i zostały pobrane do przeglądarki!');
+                alert('Etykiety zostały wygenerowane i pobrane do przeglądarki!');
                 window.location.reload();
                 
             } else {
-                console.log('Step 2: Saving labels to configured directory...');
+                console.log('Step 2: Generating and saving to configured directory...');
                 
-                // Default behavior - save to configured directory
-                fetch('save_labels.php', {
+                // Default behavior - generate and save to configured directory in one step
+                fetch('generate_and_save.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
                     },
-                    body: `order_number=${orderNumber}`
+                    body: `order_number=${orderNumber}&parameters=${encodeURIComponent(JSON.stringify(parameters))}`
                 })
-                .then(response => response.json())
+                .then(response => {
+                    console.log('Save response status:', response.status);
+                    return response.text().then(text => {
+                        console.log('Save response text:', text);
+                        try {
+                            return JSON.parse(text);
+                        } catch (e) {
+                            console.error('JSON parse error. Raw response:', text);
+                            throw new Error('Server returned invalid JSON. Check server logs. Response: ' + text.substring(0, 200));
+                        }
+                    });
+                })
                 .then(saveData => {
                     console.log('Save response:', saveData);
                     
@@ -823,7 +1182,16 @@ function generujIPobierz() {
                 })
                 .catch(saveError => {
                     console.error('Save error:', saveError);
-                    alert('Błąd podczas zapisywania etykiet: ' + saveError.message);
+                    
+                    // Try to get more detailed error information
+                    let errorMessage = 'Błąd podczas zapisywania etykiet: ' + saveError.message;
+                    
+                    // If it's a JSON parse error, the server likely returned HTML
+                    if (saveError.message.includes('JSON') || saveError.message.includes('Unexpected token')) {
+                        errorMessage = 'Błąd serwera - sprawdź konfigurację ścieżki zapisu w Docker/Linux';
+                    }
+                    
+                    alert(errorMessage);
                     restoreButtons();
                 });
             }
@@ -871,6 +1239,8 @@ function generujIPobierz() {
         generateDownloadBtn.disabled = false;
     }
 }
+
+
 
 // Function to send email to BOK
 function sendEmailToBOK(orderNumber, wfmagOrder) {

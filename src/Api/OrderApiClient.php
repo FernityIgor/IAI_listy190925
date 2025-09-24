@@ -506,13 +506,7 @@ class OrderApiClient
             return ['error' => 'Invalid JSON response', 'raw_response' => $response];
         }
 
-        // Create labels directory if it doesn't exist
-        $labelsDir = $this->config['storage']['labels_directory'] ?? __DIR__ . '/../../storage/labels';
-        if (!is_dir($labelsDir)) {
-            mkdir($labelsDir, 0755, true);
-        }
-
-        $savedFiles = [];
+        $labelFiles = [];
         
         if (!empty($data['labels']) && is_array($data['labels'])) {
             foreach ($data['labels'] as $idx => $b64) {
@@ -522,25 +516,19 @@ class OrderApiClient
                     continue;
                 }
                 
-                $filename = "label_{$orderSerialNumber}_" . ($idx + 1) . ".pdf";
-                $filepath = $labelsDir . "/" . $filename;
-                
-                if (file_put_contents($filepath, $pdf) !== false) {
-                    $savedFiles[] = [
-                        'filename' => $filename,
-                        'filepath' => $filepath,
-                        'size' => strlen($pdf)
-                    ];
-                } else {
-                    error_log("Failed to save label file: {$filepath}");
-                }
+                // Return PDF binary data without saving to file automatically
+                $labelFiles[] = [
+                    'filename' => "etykiety_{$orderSerialNumber}_" . ($idx + 1) . ".pdf",
+                    'binary_data' => $pdf,
+                    'size' => strlen($pdf)
+                ];
             }
         }
 
         return [
-            'success' => !empty($savedFiles),
-            'files' => $savedFiles,
-            'total_labels' => count($savedFiles),
+            'success' => !empty($labelFiles),
+            'files' => $labelFiles,
+            'total_labels' => count($labelFiles),
             'api_response' => $data
         ];
     }

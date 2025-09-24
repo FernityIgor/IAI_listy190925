@@ -28,23 +28,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_number'])) {
     $result = $apiClient->downloadLabels($orderNumber);
     
     if ($result && $result['success'] && !empty($result['files'])) {
-        // Get the first PDF file (or combine multiple if needed)
+        // Get the first PDF binary data
         $firstFile = $result['files'][0];
-        $filePath = $firstFile['filepath'];
+        $binaryData = $firstFile['binary_data'];
         
-        if (file_exists($filePath)) {
+        if ($binaryData) {
             // Set headers for direct PDF download
             header('Content-Type: application/pdf');
             header('Content-Disposition: attachment; filename="etykiety-' . $orderNumber . '.pdf"');
-            header('Content-Length: ' . filesize($filePath));
+            header('Content-Length: ' . strlen($binaryData));
             header('Cache-Control: no-cache, must-revalidate');
             header('Pragma: no-cache');
             
-            // Send file directly to browser
-            readfile($filePath);
-            
-            // Optional: Delete file after download to save server space
-            // unlink($filePath);
+            // Send binary data directly to browser
+            echo $binaryData;
             
             exit;
         } else {

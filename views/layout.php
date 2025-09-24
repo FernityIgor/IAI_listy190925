@@ -375,7 +375,7 @@
     
     <!-- Footer with labels directory info -->
     <div class="footer">
-        <p><strong>Domyślna lokalizacja:</strong> <?= $h($config['storage']['labels_directory'] ?? 'C:\listy_iai') ?></p>
+        <p><strong>Domyślna lokalizacja:</strong> <?= $h($config['storage']['labels_directory'] ?? (DIRECTORY_SEPARATOR === '/' ? '/tmp/listy_iai' : 'C:\listy_iai')) ?></p>
         <p><em>"Generuj i zapisz" - automatycznie do folderu lub wybór lokalizacji (checkbox) • "Pobierz etykiety" - pobiera istniejące do przeglądarki</em></p>
     </div>
 </body>
