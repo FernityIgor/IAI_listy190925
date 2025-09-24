@@ -137,3 +137,28 @@ Decoded parameters: Array
 
 Time: 2025-09-19 13:05:56
 
+=== GENERATE LABELS DEBUG ===
+Order ID: 97555
+Raw parameters JSON: {"service":"1","labelFormat":"LBL_PRINTER","carryIn":"0","cud":"0","duty":"0","inPers":"1","rod":"0","selfCol":"0","privpers":"0","tiresService":"0","dec":"0","schemaProductDescription":"[iai:order_sn]","schemaNotice":"[iai:delivery_notice]","schemaRef1":"","schemaRef2":"","schemaRef3":""}
+Decoded parameters: Array
+(
+    [service] => 1
+    [labelFormat] => LBL_PRINTER
+    [carryIn] => 0
+    [cud] => 0
+    [duty] => 0
+    [inPers] => 1
+    [rod] => 0
+    [selfCol] => 0
+    [privpers] => 0
+    [tiresService] => 0
+    [dec] => 0
+    [schemaProductDescription] => [iai:order_sn]
+    [schemaNotice] => [iai:delivery_notice]
+    [schemaRef1] => 
+    [schemaRef2] => 
+    [schemaRef3] => 
+)
+
+Time: 2025-09-23 21:31:56
+

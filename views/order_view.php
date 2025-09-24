@@ -121,12 +121,7 @@
                         <button 
                             type="button" 
                             class="change-weight-btn"
-                            onclick="showWeightModal(
-                                <?= $h($order['orderSerialNumber']) ?>, 
-                                <?= $h($package['deliveryPackage']['deliveryPackageId']) ?>,
-                                <?= $h($courierId) ?>,
-                                <?= $h($package['deliveryPackage']['deliveryPackageParameters']['deliveryWeight'] ?? 1000) ?>
-                            )">
+                            onclick="showWeightInput(<?= $h($order['orderSerialNumber']) ?>, <?= $h($package['deliveryPackage']['deliveryPackageId']) ?>, <?= $h($courierId) ?>)">
                             Zmień wagę
                         </button>
                         <span class="package-title">

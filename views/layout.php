@@ -124,6 +124,11 @@
             currentPackageId = packageId;
             currentCourierId = courierId;
             
+            // Set the hidden form fields
+            document.getElementById('weightOrderId').value = orderId;
+            document.getElementById('weightPackageId').value = packageId;
+            document.getElementById('weightCourierId').value = courierId;
+            
             document.getElementById('weightModal').style.display = 'flex';
             document.getElementById('weightInput').focus();
         }
