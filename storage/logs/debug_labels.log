@@ -162,3 +162,88 @@ Decoded parameters: Array
 
 Time: 2025-09-23 21:31:56
 
+=== GENERATE LABELS DEBUG ===
+Order ID: 97555
+Raw parameters JSON: {"service":"1","labelFormat":"LBL_PRINTER","carryIn":"0","cud":"0","duty":"0","inPers":"0","rod":"0","selfCol":"0","privpers":"1","tiresService":"0","dec":"0","schemaProductDescription":"IAI: 97555, wfmag: WF1231","schemaNotice":"IAI: 97555, wfmag: WF1231"}
+Decoded parameters: Array
+(
+    [service] => 1
+    [labelFormat] => LBL_PRINTER
+    [carryIn] => 0
+    [cud] => 0
+    [duty] => 0
+    [inPers] => 0
+    [rod] => 0
+    [selfCol] => 0
+    [privpers] => 1
+    [tiresService] => 0
+    [dec] => 0
+    [schemaProductDescription] => IAI: 97555, wfmag: WF1231
+    [schemaNotice] => IAI: 97555, wfmag: WF1231
+)
+
+Time: 2025-09-24 11:54:12
+
+=== GENERATE LABELS DEBUG ===
+Order ID: 97555
+Raw parameters JSON: {"service":"1","labelFormat":"LBL_PRINTER","carryIn":"0","cud":"0","duty":"0","inPers":"0","rod":"0","selfCol":"0","privpers":"1","tiresService":"0","dec":"0","schemaProductDescription":"IAI: 97555, wfmag: WF1231","schemaNotice":"IAI: 97555, wfmag: WF1231"}
+Decoded parameters: Array
+(
+    [service] => 1
+    [labelFormat] => LBL_PRINTER
+    [carryIn] => 0
+    [cud] => 0
+    [duty] => 0
+    [inPers] => 0
+    [rod] => 0
+    [selfCol] => 0
+    [privpers] => 1
+    [tiresService] => 0
+    [dec] => 0
+    [schemaProductDescription] => IAI: 97555, wfmag: WF1231
+    [schemaNotice] => IAI: 97555, wfmag: WF1231
+)
+
+Time: 2025-09-24 11:59:26
+
+=== GENERATE LABELS DEBUG ===
+Order ID: 97555
+Raw parameters JSON: {"schemaRef":"IAI: 97555, wfmag: WF1231","schemaRef2":"IAI: 97555, wfmag: WF1231","SMS":"yes","EMAIL":"no","W":"no","R":"no","Z":"no","ZNI":"no","ROD":"no","M":"no"}
+Decoded parameters: Array
+(
+    [schemaRef] => IAI: 97555, wfmag: WF1231
+    [schemaRef2] => IAI: 97555, wfmag: WF1231
+    [SMS] => yes
+    [EMAIL] => no
+    [W] => no
+    [R] => no
+    [Z] => no
+    [ZNI] => no
+    [ROD] => no
+    [M] => no
+)
+
+Time: 2025-09-24 12:00:41
+
+=== GENERATE LABELS DEBUG ===
+Order ID: 97555
+Raw parameters JSON: {"schemaRef":"IAI: 97555, wfmag: WF1231","schemaRef2":"IAI: 97555, wfmag: WF1231","Height":"100","Width":"100","Length":"100","SMS":"yes","EMAIL":"no","W":"no","R":"no","Z":"no","ZNI":"no","ROD":"no","M":"no"}
+Decoded parameters: Array
+(
+    [schemaRef] => IAI: 97555, wfmag: WF1231
+    [schemaRef2] => IAI: 97555, wfmag: WF1231
+    [Height] => 100
+    [Width] => 100
+    [Length] => 100
+    [SMS] => yes
+    [EMAIL] => no
+    [W] => no
+    [R] => no
+    [Z] => no
+    [ZNI] => no
+    [ROD] => no
+    [M] => no
+)
+
+Time: 2025-09-24 12:00:56
+

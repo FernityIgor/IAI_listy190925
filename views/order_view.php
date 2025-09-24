@@ -117,18 +117,6 @@
                         <?php endforeach; ?>
                     </div>
                 <?php endif; ?></div>
-                <button 
-                    type="button" 
-                    class="zlec-kuriera-btn"
-                    onclick="zlecKuriera(<?= $h($order['orderSerialNumber']) ?>, '<?= $h($wfmagOrder ?? '') ?>')">
-                    Zleć kuriera
-                </button>
-                <button 
-                    type="button" 
-                    class="download-labels-btn"
-                    onclick="pobierzEtykiety(<?= $h($order['orderSerialNumber']) ?>)">
-                    Pobierz etykiety
-                </button>
             </div>
         </div>
 
@@ -187,6 +175,42 @@
         <?php else: ?>
             <p>No packages found for this order.</p>
         <?php endif; ?>
+    </div>
+
+    <!-- Courier Parameters Section (Always Visible) -->
+    <div class="courier-parameters-box">
+        <div class="courier-params-header">
+            <h3>Parametry przesyłki</h3>
+            <div class="courier-action-buttons">
+                <button 
+                    type="button" 
+                    class="courier-action-btn generate-btn"
+                    onclick="generujEtykiety()"
+                    id="generateBtn">
+                    Generuj etykiety
+                </button>
+                <button 
+                    type="button" 
+                    class="courier-action-btn generate-download-btn"
+                    onclick="generujIPobierz()"
+                    id="generateDownloadBtn">
+                    Generuj i zapisz
+                </button>
+                <button 
+                    type="button" 
+                    class="courier-action-btn download-labels-btn"
+                    onclick="pobierzEtykiety(<?= $h($order['orderSerialNumber']) ?>)">
+                    Pobierz etykiety
+                </button>
+            </div>
+        </div>
+        
+        <form id="courierParametersForm">
+            <div id="courierParametersContainer" class="parameters-grid">
+                <!-- Parameters will be populated by JavaScript when page loads or courier changes -->
+                <div class="loading-message">Ładowanie parametrów kuriera...</div>
+            </div>
+        </form>
     </div>
 
     <div class="products-table">
@@ -270,6 +294,40 @@ function confirmDelete(orderId) {
 let currentOrderNumber = null;
 let currentWfmagOrder = null;
 
+// Function to load courier parameters automatically
+function loadCourierParameters(orderNumber, wfmagOrder) {
+    console.log('Loading courier parameters for order:', orderNumber);
+    currentOrderNumber = orderNumber;
+    currentWfmagOrder = wfmagOrder || '';
+    
+    const container = document.getElementById('courierParametersContainer');
+    container.innerHTML = '<div class="loading-message">Ładowanie parametrów kuriera...</div>';
+    
+    // Fetch package parameters via AJAX
+    fetch(`?action=get_package_params&order=${orderNumber}`)
+        .then(response => {
+            console.log('Fetch response status:', response.status);
+            return response.json();
+        })
+        .then(data => {
+            console.log('Received courier parameters:', data);
+            if (data.error) {
+                container.innerHTML = '<div class="error-message">Błąd przy pobieraniu parametrów: ' + data.error + '</div>';
+                return;
+            }
+            
+            if (data.parameters) {
+                populateParametersForm(data.parameters);
+            } else {
+                container.innerHTML = '<div class="no-params-message">Brak dostępnych parametrów dla tego kuriera.</div>';
+            }
+        })
+        .catch(error => {
+            console.error('Error loading courier parameters:', error);
+            container.innerHTML = '<div class="error-message">Błąd przy pobieraniu parametrów kuriera.</div>';
+        });
+}
+
 function zlecKuriera(orderNumber, wfmagOrder) {
     console.log('zlecKuriera called with orderNumber:', orderNumber, 'wfmagOrder:', wfmagOrder);
     currentOrderNumber = orderNumber;
@@ -310,7 +368,7 @@ function zlecKuriera(orderNumber, wfmagOrder) {
 }
 
 function populateParametersForm(parameters) {
-    const container = document.getElementById('parametersContainer');
+    const container = document.getElementById('courierParametersContainer');
     container.innerHTML = '';
     
     parameters.forEach((param, index) => {
@@ -502,7 +560,7 @@ function generujEtykiety() {
     }
     
     // Collect form data
-    const form = document.getElementById('zlecKurieraForm');
+    const form = document.getElementById('courierParametersForm');
     const formData = new FormData(form);
     const rawParameters = {};
     
@@ -536,7 +594,6 @@ function generujEtykiety() {
     .then(data => {
         if (data.success) {
             alert('Etykiety zostały wygenerowane pomyślnie!');
-            closeZlecKurieraModal();
             // Reload the page to see updated package information
             window.location.reload();
         } else {
@@ -630,21 +687,17 @@ function generujIPobierz() {
     console.log('generujIPobierz called');
     
     // Disable all buttons during the process
-    const buttons = document.querySelectorAll('.modal-button');
-    const originalStates = [];
+    const generateBtn = document.getElementById('generateBtn');
+    const generateDownloadBtn = document.getElementById('generateDownloadBtn');
     
-    buttons.forEach((btn, index) => {
-        originalStates[index] = {
-            text: btn.textContent,
-            disabled: btn.disabled
-        };
-        if (btn.classList.contains('generate-download')) {
-            btn.textContent = 'Generowanie...';
-            btn.disabled = true;
-        } else {
-            btn.disabled = true;
-        }
-    });
+    const originalGenerateText = generateBtn.textContent;
+    const originalGenerateDownloadText = generateDownloadBtn.textContent;
+    
+    // Set loading state
+    generateBtn.textContent = 'Generowanie...';
+    generateBtn.disabled = true;
+    generateDownloadBtn.textContent = 'Generowanie...';
+    generateDownloadBtn.disabled = true;
     
     // Get current order number from global variable or extract from UI
     const orderNumber = currentOrderNumber; // This should be set when modal opens
@@ -656,7 +709,7 @@ function generujIPobierz() {
     }
     
     // Step 1: Generate labels (same as generujEtykiety but without modal close)
-    const form = document.getElementById('zlecKurieraForm');
+    const form = document.getElementById('courierParametersForm');
     const formData = new FormData();
     
     // Collect all form parameters
@@ -695,42 +748,49 @@ function generujIPobierz() {
         
         if (generateData.success) {
             // Update button text for download phase
-            const generateDownloadBtn = document.querySelector('.modal-button.generate-download');
+            const generateDownloadBtn = document.getElementById('generateDownloadBtn');
             if (generateDownloadBtn) {
                 generateDownloadBtn.textContent = 'Pobieranie...';
             }
             
-            console.log('Step 2: Downloading labels...');
+            console.log('Step 2: Saving labels to configured directory...');
             
-            // Step 2: Download the generated labels using form submission for browser download
-            restoreButtons();
-            
-            // Create and submit a form for downloading
-            const downloadForm = document.createElement('form');
-            downloadForm.method = 'POST';
-            downloadForm.action = 'download_labels.php';
-            downloadForm.target = '_blank'; // Open download in new tab
-            
-            const actionInput = document.createElement('input');
-            actionInput.type = 'hidden';
-            actionInput.name = 'action';
-            actionInput.value = 'download_labels';
-            downloadForm.appendChild(actionInput);
-            
-            const orderInput = document.createElement('input');
-            orderInput.type = 'hidden';
-            orderInput.name = 'order_number';
-            orderInput.value = orderNumber;
-            downloadForm.appendChild(orderInput);
-            
-            document.body.appendChild(downloadForm);
-            downloadForm.submit();
-            document.body.removeChild(downloadForm);
-            
-            // Show success message and close modal
-            alert('Etykiety zostały wygenerowane i zostały pobrane do Twojej przeglądarki!');
-            closeZlecKurieraModal();
-            window.location.reload();
+            // Step 2: Save the generated labels to configured directory
+            fetch('save_labels.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `order_number=${orderNumber}`
+            })
+            .then(response => response.json())
+            .then(saveData => {
+                console.log('Save response:', saveData);
+                
+                if (saveData.success) {
+                    let message = 'Etykiety zostały wygenerowane i zapisane!';
+                    if (saveData.files && saveData.files.length > 0) {
+                        message += '\n\nZapisane pliki:';
+                        saveData.files.forEach(file => {
+                            message += `\n- ${file.filename}`;
+                        });
+                    }
+                    if (saveData.directory) {
+                        message += `\n\nLokalizacja: ${saveData.directory}`;
+                    }
+                    
+                    alert(message);
+                    restoreButtons();
+                    window.location.reload();
+                } else {
+                    throw new Error(saveData.error || 'Failed to save labels');
+                }
+            })
+            .catch(saveError => {
+                console.error('Save error:', saveError);
+                alert('Błąd podczas zapisywania etykiet: ' + saveError.message);
+                restoreButtons();
+            });
             
             return; // End the promise chain here since we're using form submission
             
@@ -769,12 +829,10 @@ function generujIPobierz() {
     
     // Helper function to restore button states
     function restoreButtons() {
-        buttons.forEach((btn, index) => {
-            if (originalStates[index]) {
-                btn.textContent = originalStates[index].text;
-                btn.disabled = originalStates[index].disabled;
-            }
-        });
+        generateBtn.textContent = originalGenerateText;
+        generateBtn.disabled = false;
+        generateDownloadBtn.textContent = originalGenerateDownloadText;
+        generateDownloadBtn.disabled = false;
     }
 }
 
@@ -831,4 +889,12 @@ function openGmailCompose(email, subject, body) {
     // Open in new tab/window
     window.open(gmailUrl, '_blank', 'width=800,height=600,scrollbars=yes,resizable=yes');
 }
+
+// Auto-load courier parameters when page loads
+<?php if ($order): ?>
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Page loaded, auto-loading courier parameters...');
+    loadCourierParameters(<?= $h($order['orderSerialNumber']) ?>, '<?= $h($wfmagOrder ?? '') ?>');
+});
+<?php endif; ?>
 </script>
