@@ -215,6 +215,12 @@
                     onclick="checkCheckboxAndSave(<?= $h($order['orderSerialNumber']) ?>)">
                     Pobierz etykiety
                 </button>
+                <button 
+                    type="button" 
+                    class="courier-action-btn print-custom-btn"
+                    onclick="openFilePicker()">
+                    Drukuj
+                </button>
             </div>
         </div>
         
@@ -1046,6 +1052,72 @@ function printLabels(orderNumber, saveResult) {
         } else {
             throw new Error(data.error || 'Failed to print labels');
         }
+    });
+}
+
+// 8. Custom file picker and print function
+function openFilePicker() {
+    // Create hidden file input
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = '.pdf';
+    fileInput.style.display = 'none';
+    
+    fileInput.addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file && file.type === 'application/pdf') {
+            printCustomFile(file);
+        } else if (file) {
+            alert('Proszę wybrać plik PDF.');
+        }
+        // Clean up
+        document.body.removeChild(fileInput);
+    });
+    
+    // Add to DOM and trigger click
+    document.body.appendChild(fileInput);
+    fileInput.click();
+}
+
+function printCustomFile(file) {
+    const printBtn = event.target;
+    const originalText = printBtn.textContent;
+    
+    printBtn.textContent = 'Drukowanie...';
+    printBtn.disabled = true;
+    
+    // Create FormData and upload file
+    const formData = new FormData();
+    formData.append('pdf_file', file);
+    
+    fetch('print_custom_file.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        return response.text().then(text => {
+            try {
+                return JSON.parse(text);
+            } catch (e) {
+                console.error('JSON parse error. Raw response:', text);
+                throw new Error('Server returned invalid JSON: ' + text.substring(0, 200));
+            }
+        });
+    })
+    .then(data => {
+        if (data.success) {
+            alert(`Plik "${file.name}" został wysłany do drukarki!`);
+        } else {
+            throw new Error(data.error || 'Failed to print file');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Błąd podczas drukowania: ' + error.message);
+    })
+    .finally(() => {
+        printBtn.textContent = originalText;
+        printBtn.disabled = false;
     });
 }
 

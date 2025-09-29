@@ -976,12 +976,30 @@ select.form-control {
     background-color: #047857;
 }
 
+.courier-action-btn.generate-download-print-btn {
+    background-color: #ec4899;
+    color: white;
+}
+
+.courier-action-btn.generate-download-print-btn:hover:not(:disabled) {
+    background-color: #db2777;
+}
+
 .courier-action-btn.download-labels-btn {
     background-color: #0ea5e9;
     color: white;
 }
 
 .courier-action-btn.download-labels-btn:hover:not(:disabled) {
+    background-color: #0284c7;
+}
+
+.courier-action-btn.print-custom-btn {
+    background-color: #0ea5e9;
+    color: white;
+}
+
+.courier-action-btn.print-custom-btn:hover:not(:disabled) {
     background-color: #0284c7;
 }
 
