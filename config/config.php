@@ -8,6 +8,10 @@ return [
     'storage' => [
         'labels_directory' => DIRECTORY_SEPARATOR === '/' ? '/tmp/listy_iai' : 'C:\listy_iai'
     ],
+    'printing' => [
+        'sumatra_path' => 'C:\Program Files\SumatraPDF\SumatraPDF.exe',
+        'default_printer' => 'Microsoft Print to PDF'
+    ],
     'shops' => [
         4 => 'furnizone.cz',
         5 => 'dwkadrat.pl',

@@ -204,6 +204,13 @@
                 </button>
                 <button 
                     type="button" 
+                    class="courier-action-btn generate-download-print-btn"
+                    onclick="generateSaveAndPrint()"
+                    id="generateDownloadPrintBtn">
+                    Generuj, zapisz i drukuj
+                </button>
+                <button 
+                    type="button" 
                     class="courier-action-btn download-labels-btn"
                     onclick="checkCheckboxAndSave(<?= $h($order['orderSerialNumber']) ?>)">
                     Pobierz etykiety
@@ -924,6 +931,121 @@ function generateAndSave() {
     .finally(() => {
         generateDownloadBtn.textContent = originalText;
         generateDownloadBtn.disabled = false;
+    });
+}
+
+// 6. Combined function: Generate + Save + Print
+function generateSaveAndPrint() {
+    if (!currentOrderNumber) {
+        alert('Błąd: Brak numeru zamówienia');
+        return;
+    }
+    
+    const generateDownloadPrintBtn = document.getElementById('generateDownloadPrintBtn');
+    const originalText = generateDownloadPrintBtn.textContent;
+    
+    generateDownloadPrintBtn.textContent = 'Generowanie...';
+    generateDownloadPrintBtn.disabled = true;
+    
+    // First generate labels
+    const form = document.getElementById('courierParametersForm');
+    const formData = new FormData(form);
+    const rawParameters = {};
+    
+    for (let [key, value] of formData.entries()) {
+        rawParameters[key] = value;
+    }
+    
+    const parameters = processParametersWithWfmag(rawParameters, currentWfmagOrder, currentOrderNumber);
+    
+    const requestData = new FormData();
+    requestData.append('action', 'generate_labels');
+    requestData.append('order_id', currentOrderNumber);
+    requestData.append('parameters', JSON.stringify(parameters));
+
+    fetch('generate_labels.php', {
+        method: 'POST',
+        body: requestData
+    })
+    .then(response => {
+        return response.text().then(text => {
+            try {
+                return JSON.parse(text);
+            } catch (e) {
+                console.error('Server response (non-JSON):', text);
+                throw new Error('Server returned invalid JSON response');
+            }
+        });
+    })
+    .then(data => {
+        if (data.success) {
+            generateDownloadPrintBtn.textContent = 'Zapisywanie...';
+            
+            // Check checkbox state and save accordingly
+            const chooseSaveLocation = document.getElementById('chooseSaveLocation').checked;
+            
+            if (chooseSaveLocation) {
+                // If checkbox is checked, save to browser download and show message
+                alert('Uwaga: Dla funkcji drukowania plik zostanie zapisany do domyślnego folderu, nie do przeglądarki.');
+                return saveWithoutCheckbox(currentOrderNumber);
+            } else {
+                // Save to configured directory (needed for printing)
+                return saveWithoutCheckbox(currentOrderNumber);
+            }
+        } else {
+            let errorMessage = 'Błąd przy generowaniu etykiet:\n\n';
+            if (data.error) {
+                errorMessage += 'Błąd: ' + data.error + '\n';
+            }
+            throw new Error(errorMessage);
+        }
+    })
+    .then((saveResult) => {
+        generateDownloadPrintBtn.textContent = 'Drukowanie...';
+        
+        // Now print the saved file using the information from save result
+        return printLabels(currentOrderNumber, saveResult);
+    })
+    .then(() => {
+        alert('Etykiety zostały wygenerowane, zapisane i wysłane do drukarki!');
+        window.location.reload();
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Błąd: ' + error.message);
+    })
+    .finally(() => {
+        generateDownloadPrintBtn.textContent = originalText;
+        generateDownloadPrintBtn.disabled = false;
+    });
+}
+
+// 7. Print labels function
+function printLabels(orderNumber, saveResult) {
+    return fetch('print_labels.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `order_number=${orderNumber}`
+    })
+    .then(response => {
+        return response.text().then(text => {
+            try {
+                return JSON.parse(text);
+            } catch (e) {
+                console.error('JSON parse error. Raw response:', text);
+                throw new Error('Server returned invalid JSON: ' + text.substring(0, 200));
+            }
+        });
+    })
+    .then(data => {
+        if (data.success) {
+            console.log('Printing completed successfully');
+            return true;
+        } else {
+            throw new Error(data.error || 'Failed to print labels');
+        }
     });
 }
 
