@@ -18,6 +18,15 @@ try {
             exit;
         }
         
+        // Check if sqlsrv extension is loaded
+        if (!extension_loaded('sqlsrv')) {
+            echo json_encode([
+                'success' => false, 
+                'error' => 'SQL Server extension (sqlsrv) is not installed or enabled in PHP. Please install Microsoft SQL Server driver for PHP or enable the extension in php.ini'
+            ]);
+            exit;
+        }
+        
         // Load config
         $config = require __DIR__ . '/../config/config.php';
         
@@ -33,7 +42,12 @@ try {
         $conn = sqlsrv_connect($server, $connection);
         
         if (!$conn) {
-            echo json_encode(['success' => false, 'error' => 'Failed to connect to database']);
+            $errors = sqlsrv_errors();
+            echo json_encode([
+                'success' => false, 
+                'error' => 'Failed to connect to database', 
+                'details' => $errors
+            ]);
             exit;
         }
         
