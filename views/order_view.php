@@ -1616,11 +1616,52 @@ function selectOrder(zlNumer, iaiZamowienie) {
 
 // Function to show final order result
 function showOrderResult(zlNumer, iaiZamowienie) {
-    let message = `Znaleziono zamówienie:\n\n`;
-    message += `Numer zlecenia: ${zlNumer}\n`;
-    message += `IAI zamówienie: ${iaiZamowienie || 'Brak'}`;
+    if (!iaiZamowienie) {
+        let message = `Znaleziono zamówienie:\n\n`;
+        message += `Numer zlecenia: ${zlNumer}\n`;
+        message += `IAI zamówienie: Brak\n\n`;
+        message += `Nie można automatycznie załadować szczegółów zamówienia bez numeru IAI.`;
+        alert(message);
+        return;
+    }
     
-    alert(message);
+    // Show confirmation before loading order details
+    const message = `Znaleziono zamówienie:\n\n` +
+                   `Numer zlecenia: ${zlNumer}\n` +
+                   `IAI zamówienie: ${iaiZamowienie}\n\n` +
+                   `Czy chcesz załadować szczegóły tego zamówienia?`;
+    
+    if (confirm(message)) {
+        // Load order details by submitting the main search form programmatically
+        loadOrderDetails(iaiZamowienie, zlNumer);
+    }
+}
+
+// Function to load order details using the main application logic
+function loadOrderDetails(iaiZamowienie, zlNumer) {
+    // Create a form and submit it to load the order details
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = 'index.php';
+    form.style.display = 'none';
+    
+    // Add order parameter (IAI zamówienie)
+    const orderInput = document.createElement('input');
+    orderInput.type = 'hidden';
+    orderInput.name = 'order';
+    orderInput.value = iaiZamowienie;
+    form.appendChild(orderInput);
+    
+    // Add wfmag parameter (zl_Numer)
+    const wfmagInput = document.createElement('input');
+    wfmagInput.type = 'hidden';
+    wfmagInput.name = 'wfmag';
+    wfmagInput.value = zlNumer;
+    form.appendChild(wfmagInput);
+    
+    // Add form to document and submit
+    document.body.appendChild(form);
+    form.submit();
 }
 
 // Function to close order popup
