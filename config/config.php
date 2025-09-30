@@ -12,6 +12,12 @@ return [
         'sumatra_path' => 'C:\Program Files\SumatraPDF\SumatraPDF.exe',
         'default_printer' => 'Microsoft Print to PDF'
     ],
+    'mssql' => [
+        'server' => '192.168.230.100,11519',
+        'database' => 'D2',
+        'username' => 'd2wms',
+        'password' => 'Pc$x271'
+    ],
     'shops' => [
         4 => 'furnizone.cz',
         5 => 'dwkadrat.pl',

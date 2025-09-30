@@ -258,6 +258,15 @@
     <?php endif; ?>
 </div>
 
+<!-- Order Search Section -->
+<div class="order-search-section">
+    <h3>Wyszukaj zamówienie</h3>
+    <div class="search-form">
+        <input type="text" id="searchInput" placeholder="Wprowadź kod etykiety lub numer zlecenia..." class="search-input">
+        <button type="button" onclick="searchOrders()" class="search-button" id="searchBtn">Szukaj</button>
+    </div>
+</div>
+
 <!-- Modal for Zleć kuriera -->
 <div id="zlecKurieraModal" class="modal" style="display: none;">
     <div class="modal-content">
@@ -1490,6 +1499,150 @@ function openGmailCompose(email, subject, body) {
     window.open(gmailUrl, '_blank', 'width=800,height=600,scrollbars=yes,resizable=yes');
 }
 
+// ========================================
+// ORDER SEARCH FUNCTIONALITY (ALWAYS AVAILABLE)
+// ========================================
+
+// Function to search orders
+function searchOrders() {
+    const searchInput = document.getElementById('searchInput');
+    const searchBtn = document.getElementById('searchBtn');
+    const searchTerm = searchInput.value.trim();
+    
+    if (!searchTerm) {
+        alert('Proszę wprowadzić tekst do wyszukania.');
+        return;
+    }
+    
+    // Show loading state
+    const originalText = searchBtn.textContent;
+    searchBtn.textContent = 'Szukanie...';
+    searchBtn.disabled = true;
+    
+    // Make API request
+    fetch('search_orders.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `search_term=${encodeURIComponent(searchTerm)}`
+    })
+    .then(response => {
+        return response.text().then(text => {
+            try {
+                return JSON.parse(text);
+            } catch (e) {
+                console.error('JSON parse error. Raw response:', text);
+                throw new Error('Server returned invalid JSON: ' + text.substring(0, 200));
+            }
+        });
+    })
+    .then(data => {
+        if (data.success) {
+            handleSearchResults(data.results, searchTerm);
+        } else {
+            throw new Error(data.error || 'Search failed');
+        }
+    })
+    .catch(error => {
+        console.error('Search error:', error);
+        alert('Błąd podczas wyszukiwania: ' + error.message);
+    })
+    .finally(() => {
+        searchBtn.textContent = originalText;
+        searchBtn.disabled = false;
+    });
+}
+
+// Function to handle search results
+function handleSearchResults(results, searchTerm) {
+    if (results.length === 0) {
+        alert(`Nie znaleziono wyników dla: "${searchTerm}"`);
+        return;
+    }
+    
+    // Group results by unique combination of zl_Numer and iai_zamowienie
+    const uniqueResults = [];
+    const seen = new Set();
+    
+    results.forEach(result => {
+        const key = `${result.zl_Numer}|${result.iai_zamowienie || ''}`;
+        if (!seen.has(key)) {
+            seen.add(key);
+            uniqueResults.push(result);
+        }
+    });
+    
+    if (uniqueResults.length === 1) {
+        // Single unique result - show direct popup
+        const result = uniqueResults[0];
+        showOrderResult(result.zl_Numer, result.iai_zamowienie);
+    } else {
+        // Multiple unique results - show selection popup
+        showOrderSelection(uniqueResults);
+    }
+}
+
+// Function to show order selection popup when multiple results found
+function showOrderSelection(results) {
+    let html = '<div class="order-selection-popup">';
+    html += '<h3>Znaleziono wiele wyników - wybierz numer zlecenia:</h3>';
+    html += '<div class="order-list">';
+    
+    results.forEach((result, index) => {
+        html += `<button class="order-option" onclick="selectOrder('${result.zl_Numer}', '${result.iai_zamowienie || ''}')">`;
+        html += `<strong>Zlecenie:</strong> ${result.zl_Numer}<br>`;
+        html += `<strong>IAI zamówienie:</strong> ${result.iai_zamowienie || 'Brak'}`;
+        html += '</button>';
+    });
+    
+    html += '</div>';
+    html += '<button class="close-popup" onclick="closeOrderPopup()">Zamknij</button>';
+    html += '</div>';
+    
+    // Create and show popup
+    const popup = document.createElement('div');
+    popup.id = 'orderSelectionPopup';
+    popup.className = 'popup-overlay';
+    popup.innerHTML = html;
+    document.body.appendChild(popup);
+}
+
+// Function to select specific order from list
+function selectOrder(zlNumer, iaiZamowienie) {
+    closeOrderPopup();
+    showOrderResult(zlNumer, iaiZamowienie);
+}
+
+// Function to show final order result
+function showOrderResult(zlNumer, iaiZamowienie) {
+    let message = `Znaleziono zamówienie:\n\n`;
+    message += `Numer zlecenia: ${zlNumer}\n`;
+    message += `IAI zamówienie: ${iaiZamowienie || 'Brak'}`;
+    
+    alert(message);
+}
+
+// Function to close order popup
+function closeOrderPopup() {
+    const popup = document.getElementById('orderSelectionPopup');
+    if (popup) {
+        document.body.removeChild(popup);
+    }
+}
+
+// Add Enter key support for search input - ALWAYS AVAILABLE
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchOrders();
+            }
+        });
+    }
+});
+
 // Auto-load courier parameters when page loads
 <?php if ($order): ?>
 document.addEventListener('DOMContentLoaded', function() {
@@ -1510,5 +1663,16 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
 <?php endif; ?>
+
+</script>
+
+<script>
+// ========================================
+// GLOBAL SEARCH FUNCTIONALITY (ALWAYS AVAILABLE)
+// ========================================
+
+// Search functionality is now defined above, outside conditional blocks
+
 </script>
