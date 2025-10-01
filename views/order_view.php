@@ -86,17 +86,37 @@
             <div class="courier-info-line">
                 <div class="courier-details">
                     <strong>Current Courier:</strong> 
-                    <?= $h($packages[0]['deliveryPackage']['courierName'] ?? 'N/A') ?> 
+                    <?php 
+                    $apiCourierName = $packages[0]['deliveryPackage']['courierName'] ?? '';
+                    $fallbackCourierName = $changeableCouriers[$courierId] ?? 'N/A';
+                    $displayCourierName = !empty($apiCourierName) ? $apiCourierName : $fallbackCourierName;
+                    ?>
+                    <?= $h($displayCourierName) ?> 
                     (ID: <?= $h($courierId) ?>)
-                    <?php if ($courierId == 26): ?>
+                    <?php 
+                    // Check if current courier is special
+                    $isSpecialCourier = false;
+                    $currentSpecialGroup = null;
+                    foreach ($specialCourierGroups as $groupKey => $group) {
+                        if ($courierId == $group['special_courier']) {
+                            $isSpecialCourier = true;
+                            $currentSpecialGroup = $group;
+                            break;
+                        }
+                    }
+                    if ($isSpecialCourier): ?>
                         <span class="special-courier-badge">Special Courier</span>
                     <?php endif; ?>
                 </div>
                 <?php if (isset($changeableCouriers[$courierId])): ?>
                     <div class="courier-selection">
-                        <?php if ($courierId == 26): ?>
-                            <strong>Change from K-EX to:</strong>
-                            <span class="courier-note">(K-EX can be changed but not selected again)</span>
+                        <?php if ($isSpecialCourier): ?>
+                            <strong>Change from <?= $h($changeableCouriers[$courierId]) ?> to:</strong>
+                            <?php if ($courierId == 26): ?>
+                                <span class="courier-note">(K-EX can be changed but not selected again)</span>
+                            <?php elseif ($courierId == 690000): ?>
+                                <span class="courier-note">(Kurier 1 must be changed to one of the specified alternatives)</span>
+                            <?php endif; ?>
                         <?php else: ?>
                             <strong>Change to:</strong>
                         <?php endif; ?>
@@ -105,8 +125,49 @@
                             // Don't show current courier
                             if ($id == $courierId) continue;
                             
-                            // Special rule: Don't show K-EX (ID 26) as an option when current courier is NOT K-EX
-                            if ($id == 26 && $courierId != 26) continue;
+                            // Handle special courier group restrictions
+                            $showCourier = false; // Default to false, only show if explicitly allowed
+                            
+                            // Check if we're dealing with special courier groups
+                            if (!empty($specialCourierGroups)) {
+                                $currentCourierGroup = null;
+                                $targetCourierGroup = null;
+                                
+                                // Find which group the current courier belongs to
+                                foreach ($specialCourierGroups as $groupKey => $group) {
+                                    if ($courierId == $group['special_courier'] || in_array($courierId, $group['alternatives'])) {
+                                        $currentCourierGroup = $group;
+                                        break;
+                                    }
+                                }
+                                
+                                // Find which group the target courier belongs to
+                                foreach ($specialCourierGroups as $groupKey => $group) {
+                                    if ($id == $group['special_courier'] || in_array($id, $group['alternatives'])) {
+                                        $targetCourierGroup = $group;
+                                        break;
+                                    }
+                                }
+                                
+                                if ($currentCourierGroup) {
+                                    // Current courier is in a special group
+                                    if ($courierId == $currentCourierGroup['special_courier']) {
+                                        // Current is the special courier, only show its alternatives
+                                        $showCourier = in_array($id, $currentCourierGroup['alternatives']);
+                                    } else {
+                                        // Current is an alternative in a group, only show other alternatives from same group
+                                        $showCourier = in_array($id, $currentCourierGroup['alternatives']);
+                                    }
+                                } else {
+                                    // Current courier is not in any special group, only show regular couriers
+                                    $showCourier = !$targetCourierGroup; // Only show if target is also not in a special group
+                                }
+                            } else {
+                                // No special groups defined, show all except current
+                                $showCourier = true;
+                            }
+                            
+                            if (!$showCourier) continue;
                             ?>
                                 <button 
                                     type="button"

@@ -8694,3 +8694,2190 @@ Total Time: 2.369957 seconds
 API Response (JSON): {"eventId":97555,"eventType":"order","packages":[{"id":"105616","packageNumber":"1026438978626U"}],"labels":{"label":"JVBERi0xLjQKJeLjz9MKMiAwIG9iago8PC9GaWx0ZXIvRmxhdGVEZWNvZGUvTGVuZ3RoIDQ5Pj5zdHJlYW0KeJwr5HIK4TI2UzC2NFMISeFyDeEK5CpUMFQwAEIImZyroB+RZqjgkq8QyAUA6zUJ9gplbmRzdHJlYW0KZW5kb2JqCjQgMCBvYmoKPDwvQ29udGVudHMgMiAwIFIvVHlwZS9QYWdlL1Jlc291cmNlczw8L1Byb2NTZXQgWy9QREYgL1RleHQgL0ltYWdlQiAvSW1hZ2VDIC9JbWFnZUldL1hPYmplY3Q8PC9YZjEgMSAwIFI+Pj4+L1BhcmVudCAzIDAgUi9NZWRpYUJveFswIDAgMjg4IDQzMl0+PgplbmRvYmoKMSAwIG9iago8PC9TdWJ0eXBlL0Zvcm0vRmlsdGVyL0ZsYXRlRGVjb2RlL1R5cGUvWE9iamVjdC9NYXRyaXhbMSAwIDAgMSAwIDBdL0Zvcm1UeXBlIDEvUmVzb3VyY2VzPDwvQ29sb3JTcGFjZTw8L0RlZmF1bHRSR0IgNSAwIFI+Pi9Qcm9jU2V0Wy9QREYvSW1hZ2VCL0ltYWdlQy9UZXh0XS9Gb250PDwvRjIxIDYgMCBSL0YzMSA3IDAgUi9GNDAgOCAwIFIvRjM0IDkgMCBSL0YyNCAxMCAwIFI+Pi9YT2JqZWN0PDwvSW0xIDExIDAgUj4+Pj4vTGVuZ3RoIDQzNzEvQkJveFswIDAgMjg4IDQzMl0+PnN0cmVhbQp4nOVdW48dxRF+318xLzx66Gt1t4QsefHaClIeUKzkAfGQBAOJvBAICfn5qer7dXwMAdLg1fGZ6anprurqun3Ts\/vNHT8Y\/jyhLyXF8dfHu29iGz\/06bTAI2xkxxd396\/u3n8hsPl49Xlz3ymcZvjPHq8ej08+wCP59NPj1Uc1EWcjFZ0Cfgy14sfh51lsk\/i5j8cf4ud5bHuItPT9In4\/q67jNc7CMccDLvAj4\/Wq\/9ze9d\/f47+pXQV+\/beMvOPYXMcxoeLbxn5MvFcW3n2b\/x5nCIYZyndSjzZyeR\/a\/fmLIq2XjNrd00Oa44Mip787yfqs6omo6ZzmWYVvjnPBJ3PBH2LbiyBzko269\/3FOfTjQZyX2CZ4pMVrYlwZQowrI8oiVOxVh5FZklsWiXiS8nk3T2lOKu3UGieJhI50H7bao5Xi+3yItPWMJWldJXFaQa5dkSS5gIoX\/3l6aE368XN4H+bZf5soceSMzr0OdJizh1eVbQquTzJYFkz2mzulT6lVmFbBTq6kc45sE01Y8NNwIMr3f\/fIj+df333sf0p3qAZ1MqeiAzDsZAYFlQe35jQOD9XxSJTl9E08VXTK8bS7K7d\/efzp7iv0IC\/vPvkU7\/nsYCfNCYPj+zvWDjAf+M3xh5bZUx5P6D\/PrD+izyM1AlI0rPhTcKcx1lOFM2WMc4Y48XKE7xmjyGPo1Q9Q9+v7ioxV\/T8Og1cyCXtaBhVHbUvkiho103Q44fZqOjMjxMYwRMtsan8Mc1nI2JKBpv2Kj6bHNSsdmZ\/oQpO1mTVcVMXezktig40SdsvJU4eFX2S1HN0S\/tN+3ZezN\/6snRe7WOaabrF+mWMH0nvqOB1llNjcc8WTaftTkKdilu4Q6vj2tR8qxGN1uC4em1NKRgPraaRN0auOuOmT\/ON99GnFZyUP9LHnCEetWELXElmq3Qlxn1IG27EIaBEiyB1ZFOT8YmAXrnx8GHgWWYX62hhA0YMZTkrKgvuQcx9D27P4Icf8YQp9lWDt7KuY97zj5NuTa5pBrvLkQwwOKWW5j99JATIG8YcScn1g5wvamI74oAgxTNhGQUUK0EUNq
 Time: 2025-09-29 14:00:52
 
+=== API GENERATE LABELS DEBUG ===
+Order Number: 97555
+Input parameters: Array
+(
+)
+
+
+=== PARAMETER TRANSFORMATION DEBUG ===
+Final payload to API: {
+    "params": {
+        "eventId": 97555,
+        "eventType": "order",
+        "parcelParameters": []
+    }
+}
+
+=== HTTP REQUEST DETAILS ===
+URL: https://dkwadrat.pl/api/admin/v6/packages/labels
+Method: POST
+Headers:
+  X-API-KEY: YXBwbGljYXRpb24xODpzSUdaNFU1ZzFwVnV2K3R4bExZU2lxRnR6dytHa0hiY3dhQ29HZ1BOdFdOSEtlekRYR0F3NkpFZEFCZGk0RWQ0
+  Accept: application/json, application/pdf
+  Content-Type: application/json
+Raw JSON Body:
+{"params":{"eventId":97555,"eventType":"order","parcelParameters":[]}}
+Body Length: 70 bytes
+
+=== HTTP RESPONSE DETAILS ===
+HTTP Status Code: 207
+Response Headers:
+  Content-Type: application/json
+  Content-Length: 161
+Total Time: 0.918123 seconds
+API Response: HTTP 207 (Content-Type: application/json)
+Response preview: {"errors":{"faultCode":6,"faultString":"Ten kurier nie obs\u0142uguje API do generowania numer\u00f3w paczek"},"eventId":97555,"eventType":"order","packages":[]}
+Time: 2025-10-01 16:00:12
+
+=== API GENERATE LABELS DEBUG ===
+Order Number: 97555
+Input parameters: Array
+(
+    [restrictedDelivery] => 0
+    [returnOfGoods] => 0
+    [moneyOrder] => 0
+    [returnReceipt] => 0
+    [isCodA] => 0
+    [isCodC] => 0
+    [replyMail] => 0
+    [declaredValue] => 0
+    [deliveryToAddress] => 0
+    [cumbersome] => 0
+    [fragile] => 0
+    [noLongerCollectionTime] => 0
+    [deposit3days] => 0
+    [failedDeliveryAttempt] => 0
+    [doNotRedirect] => 0
+    [longerCollectionTime] => 0
+    [smsAlert] => 0
+    [confirmationOnDelivery] => 0
+    [dataVerification] => 0
+    [provisionOfInformation] => 0
+    [noCardCash] => 0
+    [replyMailEnvelope] => 0
+    [smsAndMail] => 0
+    [mailAlert] => 0
+    [multiPackage] => 0
+    [intermediationOfOrder] => 0
+    [preProcessed] => 0
+    [eReturnReceiptSms] => 0
+    [eReturnReceiptEmail] => 0
+    [eReturnReceiptEmailSms] => 0
+    [receiptAndRestricted] => 0
+    [receiptAnDeliveryToAddr] => 0
+    [delivery8to2] => 0
+    [delivery1to7] => 0
+    [guaranteedDeliveryTime] => 0
+    [doNotDeposit] => 0
+    [completeDelivery] => 0
+    [oldApplianceRemoval] => 0
+    [15discount] => 0
+    [over30kg] => 0
+    [posteRestante] => 0
+    [businessDelivery] => 0
+    [doNotTilt] => 0
+    [postBox] => 0
+)
+
+
+=== PARAMETER TRANSFORMATION DEBUG ===
+Kept restrictedDelivery: '0' (unchanged)
+Kept returnOfGoods: '0' (unchanged)
+Kept moneyOrder: '0' (unchanged)
+Kept returnReceipt: '0' (unchanged)
+Kept isCodA: '0' (unchanged)
+Kept isCodC: '0' (unchanged)
+Kept replyMail: '0' (unchanged)
+Kept declaredValue: '0' (unchanged)
+Kept deliveryToAddress: '0' (unchanged)
+Kept cumbersome: '0' (unchanged)
+Kept fragile: '0' (unchanged)
+Kept noLongerCollectionTime: '0' (unchanged)
+Kept deposit3days: '0' (unchanged)
+Kept failedDeliveryAttempt: '0' (unchanged)
+Kept doNotRedirect: '0' (unchanged)
+Kept longerCollectionTime: '0' (unchanged)
+Kept smsAlert: '0' (unchanged)
+Kept confirmationOnDelivery: '0' (unchanged)
+Kept dataVerification: '0' (unchanged)
+Kept provisionOfInformation: '0' (unchanged)
+Kept noCardCash: '0' (unchanged)
+Kept replyMailEnvelope: '0' (unchanged)
+Kept smsAndMail: '0' (unchanged)
+Kept mailAlert: '0' (unchanged)
+Kept multiPackage: '0' (unchanged)
+Kept intermediationOfOrder: '0' (unchanged)
+Kept preProcessed: '0' (unchanged)
+Kept eReturnReceiptSms: '0' (unchanged)
+Kept eReturnReceiptEmail: '0' (unchanged)
+Kept eReturnReceiptEmailSms: '0' (unchanged)
+Kept receiptAndRestricted: '0' (unchanged)
+Kept receiptAnDeliveryToAddr: '0' (unchanged)
+Kept delivery8to2: '0' (unchanged)
+Kept delivery1to7: '0' (unchanged)
+Kept guaranteedDeliveryTime: '0' (unchanged)
+Kept doNotDeposit: '0' (unchanged)
+Kept completeDelivery: '0' (unchanged)
+Kept oldApplianceRemoval: '0' (unchanged)
+Kept 15discount: '0' (unchanged)
+Kept over30kg: '0' (unchanged)
+Kept posteRestante: '0' (unchanged)
+Kept businessDelivery: '0' (unchanged)
+Kept doNotTilt: '0' (unchanged)
+Kept postBox: '0' (unchanged)
+Processing parameter: key='restrictedDelivery', value='0', type=string
+Added parameter: id='restrictedDelivery', value='0'
+Processing parameter: key='returnOfGoods', value='0', type=string
+Added parameter: id='returnOfGoods', value='0'
+Processing parameter: key='moneyOrder', value='0', type=string
+Added parameter: id='moneyOrder', value='0'
+Processing parameter: key='returnReceipt', value='0', type=string
+Added parameter: id='returnReceipt', value='0'
+Processing parameter: key='isCodA', value='0', type=string
+Added parameter: id='isCodA', value='0'
+Processing parameter: key='isCodC', value='0', type=string
+Added parameter: id='isCodC', value='0'
+Processing parameter: key='replyMail', value='0', type=string
+Added parameter: id='replyMail', value='0'
+Processing parameter: key='declaredValue', value='0', type=string
+Added parameter: id='declaredValue', value='0'
+Processing parameter: key='deliveryToAddress', value='0', type=string
+Added parameter: id='deliveryToAddress', value='0'
+Processing parameter: key='cumbersome', value='0', type=string
+Added parameter: id='cumbersome', value='0'
+Processing parameter: key='fragile', value='0', type=string
+Added parameter: id='fragile', value='0'
+Processing parameter: key='noLongerCollectionTime', value='0', type=string
+Added parameter: id='noLongerCollectionTime', value='0'
+Processing parameter: key='deposit3days', value='0', type=string
+Added parameter: id='deposit3days', value='0'
+Processing parameter: key='failedDeliveryAttempt', value='0', type=string
+Added parameter: id='failedDeliveryAttempt', value='0'
+Processing parameter: key='doNotRedirect', value='0', type=string
+Added parameter: id='doNotRedirect', value='0'
+Processing parameter: key='longerCollectionTime', value='0', type=string
+Added parameter: id='longerCollectionTime', value='0'
+Processing parameter: key='smsAlert', value='0', type=string
+Added parameter: id='smsAlert', value='0'
+Processing parameter: key='confirmationOnDelivery', value='0', type=string
+Added parameter: id='confirmationOnDelivery', value='0'
+Processing parameter: key='dataVerification', value='0', type=string
+Added parameter: id='dataVerification', value='0'
+Processing parameter: key='provisionOfInformation', value='0', type=string
+Added parameter: id='provisionOfInformation', value='0'
+Processing parameter: key='noCardCash', value='0', type=string
+Added parameter: id='noCardCash', value='0'
+Processing parameter: key='replyMailEnvelope', value='0', type=string
+Added parameter: id='replyMailEnvelope', value='0'
+Processing parameter: key='smsAndMail', value='0', type=string
+Added parameter: id='smsAndMail', value='0'
+Processing parameter: key='mailAlert', value='0', type=string
+Added parameter: id='mailAlert', value='0'
+Processing parameter: key='multiPackage', value='0', type=string
+Added parameter: id='multiPackage', value='0'
+Processing parameter: key='intermediationOfOrder', value='0', type=string
+Added parameter: id='intermediationOfOrder', value='0'
+Processing parameter: key='preProcessed', value='0', type=string
+Added parameter: id='preProcessed', value='0'
+Processing parameter: key='eReturnReceiptSms', value='0', type=string
+Added parameter: id='eReturnReceiptSms', value='0'
+Processing parameter: key='eReturnReceiptEmail', value='0', type=string
+Added parameter: id='eReturnReceiptEmail', value='0'
+Processing parameter: key='eReturnReceiptEmailSms', value='0', type=string
+Added parameter: id='eReturnReceiptEmailSms', value='0'
+Processing parameter: key='receiptAndRestricted', value='0', type=string
+Added parameter: id='receiptAndRestricted', value='0'
+Processing parameter: key='receiptAnDeliveryToAddr', value='0', type=string
+Added parameter: id='receiptAnDeliveryToAddr', value='0'
+Processing parameter: key='delivery8to2', value='0', type=string
+Added parameter: id='delivery8to2', value='0'
+Processing parameter: key='delivery1to7', value='0', type=string
+Added parameter: id='delivery1to7', value='0'
+Processing parameter: key='guaranteedDeliveryTime', value='0', type=string
+Added parameter: id='guaranteedDeliveryTime', value='0'
+Processing parameter: key='doNotDeposit', value='0', type=string
+Added parameter: id='doNotDeposit', value='0'
+Processing parameter: key='completeDelivery', value='0', type=string
+Added parameter: id='completeDelivery', value='0'
+Processing parameter: key='oldApplianceRemoval', value='0', type=string
+Added parameter: id='oldApplianceRemoval', value='0'
+Processing parameter: key='15discount', value='0', type=string
+Added parameter: id='15discount', value='0'
+Processing parameter: key='over30kg', value='0', type=string
+Added parameter: id='over30kg', value='0'
+Processing parameter: key='posteRestante', value='0', type=string
+Added parameter: id='posteRestante', value='0'
+Processing parameter: key='businessDelivery', value='0', type=string
+Added parameter: id='businessDelivery', value='0'
+Processing parameter: key='doNotTilt', value='0', type=string
+Added parameter: id='doNotTilt', value='0'
+Processing parameter: key='postBox', value='0', type=string
+Added parameter: id='postBox', value='0'
+Final payload to API: {
+    "params": {
+        "eventId": 97555,
+        "eventType": "order",
+        "parcelParameters": [
+            {
+                "id": "restrictedDelivery",
+                "value": "0"
+            },
+            {
+                "id": "returnOfGoods",
+                "value": "0"
+            },
+            {
+                "id": "moneyOrder",
+                "value": "0"
+            },
+            {
+                "id": "returnReceipt",
+                "value": "0"
+            },
+            {
+                "id": "isCodA",
+                "value": "0"
+            },
+            {
+                "id": "isCodC",
+                "value": "0"
+            },
+            {
+                "id": "replyMail",
+                "value": "0"
+            },
+            {
+                "id": "declaredValue",
+                "value": "0"
+            },
+            {
+                "id": "deliveryToAddress",
+                "value": "0"
+            },
+            {
+                "id": "cumbersome",
+                "value": "0"
+            },
+            {
+                "id": "fragile",
+                "value": "0"
+            },
+            {
+                "id": "noLongerCollectionTime",
+                "value": "0"
+            },
+            {
+                "id": "deposit3days",
+                "value": "0"
+            },
+            {
+                "id": "failedDeliveryAttempt",
+                "value": "0"
+            },
+            {
+                "id": "doNotRedirect",
+                "value": "0"
+            },
+            {
+                "id": "longerCollectionTime",
+                "value": "0"
+            },
+            {
+                "id": "smsAlert",
+                "value": "0"
+            },
+            {
+                "id": "confirmationOnDelivery",
+                "value": "0"
+            },
+            {
+                "id": "dataVerification",
+                "value": "0"
+            },
+            {
+                "id": "provisionOfInformation",
+                "value": "0"
+            },
+            {
+                "id": "noCardCash",
+                "value": "0"
+            },
+            {
+                "id": "replyMailEnvelope",
+                "value": "0"
+            },
+            {
+                "id": "smsAndMail",
+                "value": "0"
+            },
+            {
+                "id": "mailAlert",
+                "value": "0"
+            },
+            {
+                "id": "multiPackage",
+                "value": "0"
+            },
+            {
+                "id": "intermediationOfOrder",
+                "value": "0"
+            },
+            {
+                "id": "preProcessed",
+                "value": "0"
+            },
+            {
+                "id": "eReturnReceiptSms",
+                "value": "0"
+            },
+            {
+                "id": "eReturnReceiptEmail",
+                "value": "0"
+            },
+            {
+                "id": "eReturnReceiptEmailSms",
+                "value": "0"
+            },
+            {
+                "id": "receiptAndRestricted",
+                "value": "0"
+            },
+            {
+                "id": "receiptAnDeliveryToAddr",
+                "value": "0"
+            },
+            {
+                "id": "delivery8to2",
+                "value": "0"
+            },
+            {
+                "id": "delivery1to7",
+                "value": "0"
+            },
+            {
+                "id": "guaranteedDeliveryTime",
+                "value": "0"
+            },
+            {
+                "id": "doNotDeposit",
+                "value": "0"
+            },
+            {
+                "id": "completeDelivery",
+                "value": "0"
+            },
+            {
+                "id": "oldApplianceRemoval",
+                "value": "0"
+            },
+            {
+                "id": "15discount",
+                "value": "0"
+            },
+            {
+                "id": "over30kg",
+                "value": "0"
+            },
+            {
+                "id": "posteRestante",
+                "value": "0"
+            },
+            {
+                "id": "businessDelivery",
+                "value": "0"
+            },
+            {
+                "id": "doNotTilt",
+                "value": "0"
+            },
+            {
+                "id": "postBox",
+                "value": "0"
+            }
+        ]
+    }
+}
+
+=== HTTP REQUEST DETAILS ===
+URL: https://dkwadrat.pl/api/admin/v6/packages/labels
+Method: POST
+Headers:
+  X-API-KEY: YXBwbGljYXRpb24xODpzSUdaNFU1ZzFwVnV2K3R4bExZU2lxRnR6dytHa0hiY3dhQ29HZ1BOdFdOSEtlekRYR0F3NkpFZEFCZGk0RWQ0
+  Accept: application/json, application/pdf
+  Content-Type: application/json
+Raw JSON Body:
+{"params":{"eventId":97555,"eventType":"order","parcelParameters":[{"id":"restrictedDelivery","value":"0"},{"id":"returnOfGoods","value":"0"},{"id":"moneyOrder","value":"0"},{"id":"returnReceipt","value":"0"},{"id":"isCodA","value":"0"},{"id":"isCodC","value":"0"},{"id":"replyMail","value":"0"},{"id":"declaredValue","value":"0"},{"id":"deliveryToAddress","value":"0"},{"id":"cumbersome","value":"0"},{"id":"fragile","value":"0"},{"id":"noLongerCollectionTime","value":"0"},{"id":"deposit3days","value":"0"},{"id":"failedDeliveryAttempt","value":"0"},{"id":"doNotRedirect","value":"0"},{"id":"longerCollectionTime","value":"0"},{"id":"smsAlert","value":"0"},{"id":"confirmationOnDelivery","value":"0"},{"id":"dataVerification","value":"0"},{"id":"provisionOfInformation","value":"0"},{"id":"noCardCash","value":"0"},{"id":"replyMailEnvelope","value":"0"},{"id":"smsAndMail","value":"0"},{"id":"mailAlert","value":"0"},{"id":"multiPackage","value":"0"},{"id":"intermediationOfOrder","value":"0"},{"id":"preProcessed","value":"0"},{"id":"eReturnReceiptSms","value":"0"},{"id":"eReturnReceiptEmail","value":"0"},{"id":"eReturnReceiptEmailSms","value":"0"},{"id":"receiptAndRestricted","value":"0"},{"id":"receiptAnDeliveryToAddr","value":"0"},{"id":"delivery8to2","value":"0"},{"id":"delivery1to7","value":"0"},{"id":"guaranteedDeliveryTime","value":"0"},{"id":"doNotDeposit","value":"0"},{"id":"completeDelivery","value":"0"},{"id":"oldApplianceRemoval","value":"0"},{"id":"15discount","value":"0"},{"id":"over30kg","value":"0"},{"id":"posteRestante","value":"0"},{"id":"businessDelivery","value":"0"},{"id":"doNotTilt","value":"0"},{"id":"postBox","value":"0"}]}}
+Body Length: 1663 bytes
+
+=== HTTP RESPONSE DETAILS ===
+HTTP Status Code: 207
+Response Headers:
+  Content-Type: application/json
+  Content-Length: 161
+Total Time: 0.707049 seconds
+API Response: HTTP 207 (Content-Type: application/json)
+Response preview: {"errors":{"faultCode":6,"faultString":"Ten kurier nie obs\u0142uguje API do generowania numer\u00f3w paczek"},"eventId":97555,"eventType":"order","packages":[]}
+Time: 2025-10-01 16:00:38
+
+=== API GENERATE LABELS DEBUG ===
+Order Number: 97555
+Input parameters: Array
+(
+    [restrictedDelivery] => 0
+    [returnOfGoods] => 0
+    [moneyOrder] => 0
+    [returnReceipt] => 0
+    [isCodA] => 0
+    [isCodC] => 0
+    [replyMail] => 0
+    [declaredValue] => 0
+    [deliveryToAddress] => 0
+    [cumbersome] => 0
+    [fragile] => 0
+    [noLongerCollectionTime] => 0
+    [deposit3days] => 0
+    [failedDeliveryAttempt] => 0
+    [doNotRedirect] => 0
+    [longerCollectionTime] => 0
+    [smsAlert] => 0
+    [confirmationOnDelivery] => 0
+    [dataVerification] => 0
+    [provisionOfInformation] => 0
+    [noCardCash] => 0
+    [replyMailEnvelope] => 0
+    [smsAndMail] => 0
+    [mailAlert] => 0
+    [multiPackage] => 0
+    [intermediationOfOrder] => 0
+    [preProcessed] => 0
+    [eReturnReceiptSms] => 0
+    [eReturnReceiptEmail] => 0
+    [eReturnReceiptEmailSms] => 0
+    [receiptAndRestricted] => 0
+    [receiptAnDeliveryToAddr] => 0
+    [delivery8to2] => 0
+    [delivery1to7] => 0
+    [guaranteedDeliveryTime] => 0
+    [doNotDeposit] => 0
+    [completeDelivery] => 0
+    [oldApplianceRemoval] => 0
+    [15discount] => 0
+    [over30kg] => 0
+    [posteRestante] => 0
+    [businessDelivery] => 0
+    [doNotTilt] => 0
+    [postBox] => 0
+)
+
+
+=== PARAMETER TRANSFORMATION DEBUG ===
+Kept restrictedDelivery: '0' (unchanged)
+Kept returnOfGoods: '0' (unchanged)
+Kept moneyOrder: '0' (unchanged)
+Kept returnReceipt: '0' (unchanged)
+Kept isCodA: '0' (unchanged)
+Kept isCodC: '0' (unchanged)
+Kept replyMail: '0' (unchanged)
+Kept declaredValue: '0' (unchanged)
+Kept deliveryToAddress: '0' (unchanged)
+Kept cumbersome: '0' (unchanged)
+Kept fragile: '0' (unchanged)
+Kept noLongerCollectionTime: '0' (unchanged)
+Kept deposit3days: '0' (unchanged)
+Kept failedDeliveryAttempt: '0' (unchanged)
+Kept doNotRedirect: '0' (unchanged)
+Kept longerCollectionTime: '0' (unchanged)
+Kept smsAlert: '0' (unchanged)
+Kept confirmationOnDelivery: '0' (unchanged)
+Kept dataVerification: '0' (unchanged)
+Kept provisionOfInformation: '0' (unchanged)
+Kept noCardCash: '0' (unchanged)
+Kept replyMailEnvelope: '0' (unchanged)
+Kept smsAndMail: '0' (unchanged)
+Kept mailAlert: '0' (unchanged)
+Kept multiPackage: '0' (unchanged)
+Kept intermediationOfOrder: '0' (unchanged)
+Kept preProcessed: '0' (unchanged)
+Kept eReturnReceiptSms: '0' (unchanged)
+Kept eReturnReceiptEmail: '0' (unchanged)
+Kept eReturnReceiptEmailSms: '0' (unchanged)
+Kept receiptAndRestricted: '0' (unchanged)
+Kept receiptAnDeliveryToAddr: '0' (unchanged)
+Kept delivery8to2: '0' (unchanged)
+Kept delivery1to7: '0' (unchanged)
+Kept guaranteedDeliveryTime: '0' (unchanged)
+Kept doNotDeposit: '0' (unchanged)
+Kept completeDelivery: '0' (unchanged)
+Kept oldApplianceRemoval: '0' (unchanged)
+Kept 15discount: '0' (unchanged)
+Kept over30kg: '0' (unchanged)
+Kept posteRestante: '0' (unchanged)
+Kept businessDelivery: '0' (unchanged)
+Kept doNotTilt: '0' (unchanged)
+Kept postBox: '0' (unchanged)
+Processing parameter: key='restrictedDelivery', value='0', type=string
+Added parameter: id='restrictedDelivery', value='0'
+Processing parameter: key='returnOfGoods', value='0', type=string
+Added parameter: id='returnOfGoods', value='0'
+Processing parameter: key='moneyOrder', value='0', type=string
+Added parameter: id='moneyOrder', value='0'
+Processing parameter: key='returnReceipt', value='0', type=string
+Added parameter: id='returnReceipt', value='0'
+Processing parameter: key='isCodA', value='0', type=string
+Added parameter: id='isCodA', value='0'
+Processing parameter: key='isCodC', value='0', type=string
+Added parameter: id='isCodC', value='0'
+Processing parameter: key='replyMail', value='0', type=string
+Added parameter: id='replyMail', value='0'
+Processing parameter: key='declaredValue', value='0', type=string
+Added parameter: id='declaredValue', value='0'
+Processing parameter: key='deliveryToAddress', value='0', type=string
+Added parameter: id='deliveryToAddress', value='0'
+Processing parameter: key='cumbersome', value='0', type=string
+Added parameter: id='cumbersome', value='0'
+Processing parameter: key='fragile', value='0', type=string
+Added parameter: id='fragile', value='0'
+Processing parameter: key='noLongerCollectionTime', value='0', type=string
+Added parameter: id='noLongerCollectionTime', value='0'
+Processing parameter: key='deposit3days', value='0', type=string
+Added parameter: id='deposit3days', value='0'
+Processing parameter: key='failedDeliveryAttempt', value='0', type=string
+Added parameter: id='failedDeliveryAttempt', value='0'
+Processing parameter: key='doNotRedirect', value='0', type=string
+Added parameter: id='doNotRedirect', value='0'
+Processing parameter: key='longerCollectionTime', value='0', type=string
+Added parameter: id='longerCollectionTime', value='0'
+Processing parameter: key='smsAlert', value='0', type=string
+Added parameter: id='smsAlert', value='0'
+Processing parameter: key='confirmationOnDelivery', value='0', type=string
+Added parameter: id='confirmationOnDelivery', value='0'
+Processing parameter: key='dataVerification', value='0', type=string
+Added parameter: id='dataVerification', value='0'
+Processing parameter: key='provisionOfInformation', value='0', type=string
+Added parameter: id='provisionOfInformation', value='0'
+Processing parameter: key='noCardCash', value='0', type=string
+Added parameter: id='noCardCash', value='0'
+Processing parameter: key='replyMailEnvelope', value='0', type=string
+Added parameter: id='replyMailEnvelope', value='0'
+Processing parameter: key='smsAndMail', value='0', type=string
+Added parameter: id='smsAndMail', value='0'
+Processing parameter: key='mailAlert', value='0', type=string
+Added parameter: id='mailAlert', value='0'
+Processing parameter: key='multiPackage', value='0', type=string
+Added parameter: id='multiPackage', value='0'
+Processing parameter: key='intermediationOfOrder', value='0', type=string
+Added parameter: id='intermediationOfOrder', value='0'
+Processing parameter: key='preProcessed', value='0', type=string
+Added parameter: id='preProcessed', value='0'
+Processing parameter: key='eReturnReceiptSms', value='0', type=string
+Added parameter: id='eReturnReceiptSms', value='0'
+Processing parameter: key='eReturnReceiptEmail', value='0', type=string
+Added parameter: id='eReturnReceiptEmail', value='0'
+Processing parameter: key='eReturnReceiptEmailSms', value='0', type=string
+Added parameter: id='eReturnReceiptEmailSms', value='0'
+Processing parameter: key='receiptAndRestricted', value='0', type=string
+Added parameter: id='receiptAndRestricted', value='0'
+Processing parameter: key='receiptAnDeliveryToAddr', value='0', type=string
+Added parameter: id='receiptAnDeliveryToAddr', value='0'
+Processing parameter: key='delivery8to2', value='0', type=string
+Added parameter: id='delivery8to2', value='0'
+Processing parameter: key='delivery1to7', value='0', type=string
+Added parameter: id='delivery1to7', value='0'
+Processing parameter: key='guaranteedDeliveryTime', value='0', type=string
+Added parameter: id='guaranteedDeliveryTime', value='0'
+Processing parameter: key='doNotDeposit', value='0', type=string
+Added parameter: id='doNotDeposit', value='0'
+Processing parameter: key='completeDelivery', value='0', type=string
+Added parameter: id='completeDelivery', value='0'
+Processing parameter: key='oldApplianceRemoval', value='0', type=string
+Added parameter: id='oldApplianceRemoval', value='0'
+Processing parameter: key='15discount', value='0', type=string
+Added parameter: id='15discount', value='0'
+Processing parameter: key='over30kg', value='0', type=string
+Added parameter: id='over30kg', value='0'
+Processing parameter: key='posteRestante', value='0', type=string
+Added parameter: id='posteRestante', value='0'
+Processing parameter: key='businessDelivery', value='0', type=string
+Added parameter: id='businessDelivery', value='0'
+Processing parameter: key='doNotTilt', value='0', type=string
+Added parameter: id='doNotTilt', value='0'
+Processing parameter: key='postBox', value='0', type=string
+Added parameter: id='postBox', value='0'
+Final payload to API: {
+    "params": {
+        "eventId": 97555,
+        "eventType": "order",
+        "parcelParameters": [
+            {
+                "id": "restrictedDelivery",
+                "value": "0"
+            },
+            {
+                "id": "returnOfGoods",
+                "value": "0"
+            },
+            {
+                "id": "moneyOrder",
+                "value": "0"
+            },
+            {
+                "id": "returnReceipt",
+                "value": "0"
+            },
+            {
+                "id": "isCodA",
+                "value": "0"
+            },
+            {
+                "id": "isCodC",
+                "value": "0"
+            },
+            {
+                "id": "replyMail",
+                "value": "0"
+            },
+            {
+                "id": "declaredValue",
+                "value": "0"
+            },
+            {
+                "id": "deliveryToAddress",
+                "value": "0"
+            },
+            {
+                "id": "cumbersome",
+                "value": "0"
+            },
+            {
+                "id": "fragile",
+                "value": "0"
+            },
+            {
+                "id": "noLongerCollectionTime",
+                "value": "0"
+            },
+            {
+                "id": "deposit3days",
+                "value": "0"
+            },
+            {
+                "id": "failedDeliveryAttempt",
+                "value": "0"
+            },
+            {
+                "id": "doNotRedirect",
+                "value": "0"
+            },
+            {
+                "id": "longerCollectionTime",
+                "value": "0"
+            },
+            {
+                "id": "smsAlert",
+                "value": "0"
+            },
+            {
+                "id": "confirmationOnDelivery",
+                "value": "0"
+            },
+            {
+                "id": "dataVerification",
+                "value": "0"
+            },
+            {
+                "id": "provisionOfInformation",
+                "value": "0"
+            },
+            {
+                "id": "noCardCash",
+                "value": "0"
+            },
+            {
+                "id": "replyMailEnvelope",
+                "value": "0"
+            },
+            {
+                "id": "smsAndMail",
+                "value": "0"
+            },
+            {
+                "id": "mailAlert",
+                "value": "0"
+            },
+            {
+                "id": "multiPackage",
+                "value": "0"
+            },
+            {
+                "id": "intermediationOfOrder",
+                "value": "0"
+            },
+            {
+                "id": "preProcessed",
+                "value": "0"
+            },
+            {
+                "id": "eReturnReceiptSms",
+                "value": "0"
+            },
+            {
+                "id": "eReturnReceiptEmail",
+                "value": "0"
+            },
+            {
+                "id": "eReturnReceiptEmailSms",
+                "value": "0"
+            },
+            {
+                "id": "receiptAndRestricted",
+                "value": "0"
+            },
+            {
+                "id": "receiptAnDeliveryToAddr",
+                "value": "0"
+            },
+            {
+                "id": "delivery8to2",
+                "value": "0"
+            },
+            {
+                "id": "delivery1to7",
+                "value": "0"
+            },
+            {
+                "id": "guaranteedDeliveryTime",
+                "value": "0"
+            },
+            {
+                "id": "doNotDeposit",
+                "value": "0"
+            },
+            {
+                "id": "completeDelivery",
+                "value": "0"
+            },
+            {
+                "id": "oldApplianceRemoval",
+                "value": "0"
+            },
+            {
+                "id": "15discount",
+                "value": "0"
+            },
+            {
+                "id": "over30kg",
+                "value": "0"
+            },
+            {
+                "id": "posteRestante",
+                "value": "0"
+            },
+            {
+                "id": "businessDelivery",
+                "value": "0"
+            },
+            {
+                "id": "doNotTilt",
+                "value": "0"
+            },
+            {
+                "id": "postBox",
+                "value": "0"
+            }
+        ]
+    }
+}
+
+=== HTTP REQUEST DETAILS ===
+URL: https://dkwadrat.pl/api/admin/v6/packages/labels
+Method: POST
+Headers:
+  X-API-KEY: YXBwbGljYXRpb24xODpzSUdaNFU1ZzFwVnV2K3R4bExZU2lxRnR6dytHa0hiY3dhQ29HZ1BOdFdOSEtlekRYR0F3NkpFZEFCZGk0RWQ0
+  Accept: application/json, application/pdf
+  Content-Type: application/json
+Raw JSON Body:
+{"params":{"eventId":97555,"eventType":"order","parcelParameters":[{"id":"restrictedDelivery","value":"0"},{"id":"returnOfGoods","value":"0"},{"id":"moneyOrder","value":"0"},{"id":"returnReceipt","value":"0"},{"id":"isCodA","value":"0"},{"id":"isCodC","value":"0"},{"id":"replyMail","value":"0"},{"id":"declaredValue","value":"0"},{"id":"deliveryToAddress","value":"0"},{"id":"cumbersome","value":"0"},{"id":"fragile","value":"0"},{"id":"noLongerCollectionTime","value":"0"},{"id":"deposit3days","value":"0"},{"id":"failedDeliveryAttempt","value":"0"},{"id":"doNotRedirect","value":"0"},{"id":"longerCollectionTime","value":"0"},{"id":"smsAlert","value":"0"},{"id":"confirmationOnDelivery","value":"0"},{"id":"dataVerification","value":"0"},{"id":"provisionOfInformation","value":"0"},{"id":"noCardCash","value":"0"},{"id":"replyMailEnvelope","value":"0"},{"id":"smsAndMail","value":"0"},{"id":"mailAlert","value":"0"},{"id":"multiPackage","value":"0"},{"id":"intermediationOfOrder","value":"0"},{"id":"preProcessed","value":"0"},{"id":"eReturnReceiptSms","value":"0"},{"id":"eReturnReceiptEmail","value":"0"},{"id":"eReturnReceiptEmailSms","value":"0"},{"id":"receiptAndRestricted","value":"0"},{"id":"receiptAnDeliveryToAddr","value":"0"},{"id":"delivery8to2","value":"0"},{"id":"delivery1to7","value":"0"},{"id":"guaranteedDeliveryTime","value":"0"},{"id":"doNotDeposit","value":"0"},{"id":"completeDelivery","value":"0"},{"id":"oldApplianceRemoval","value":"0"},{"id":"15discount","value":"0"},{"id":"over30kg","value":"0"},{"id":"posteRestante","value":"0"},{"id":"businessDelivery","value":"0"},{"id":"doNotTilt","value":"0"},{"id":"postBox","value":"0"}]}}
+Body Length: 1663 bytes
+
+=== HTTP RESPONSE DETAILS ===
+HTTP Status Code: 207
+Response Headers:
+  Content-Type: application/json
+  Content-Length: 161
+Total Time: 0.676831 seconds
+API Response: HTTP 207 (Content-Type: application/json)
+Response preview: {"errors":{"faultCode":6,"faultString":"Ten kurier nie obs\u0142uguje API do generowania numer\u00f3w paczek"},"eventId":97555,"eventType":"order","packages":[]}
+Time: 2025-10-01 16:03:54
+
+=== API GENERATE LABELS DEBUG ===
+Order Number: 97555
+Input parameters: Array
+(
+    [restrictedDelivery] => 0
+    [returnOfGoods] => 0
+    [moneyOrder] => 0
+    [returnReceipt] => 0
+    [isCodA] => 0
+    [isCodC] => 0
+    [replyMail] => 0
+    [declaredValue] => 0
+    [deliveryToAddress] => 0
+    [cumbersome] => 0
+    [fragile] => 0
+    [noLongerCollectionTime] => 0
+    [deposit3days] => 0
+    [failedDeliveryAttempt] => 0
+    [doNotRedirect] => 0
+    [longerCollectionTime] => 0
+    [smsAlert] => 0
+    [confirmationOnDelivery] => 0
+    [dataVerification] => 0
+    [provisionOfInformation] => 0
+    [noCardCash] => 0
+    [replyMailEnvelope] => 0
+    [smsAndMail] => 0
+    [mailAlert] => 0
+    [multiPackage] => 0
+    [intermediationOfOrder] => 0
+    [preProcessed] => 0
+    [eReturnReceiptSms] => 0
+    [eReturnReceiptEmail] => 0
+    [eReturnReceiptEmailSms] => 0
+    [receiptAndRestricted] => 0
+    [receiptAnDeliveryToAddr] => 0
+    [delivery8to2] => 0
+    [delivery1to7] => 0
+    [guaranteedDeliveryTime] => 0
+    [doNotDeposit] => 0
+    [completeDelivery] => 0
+    [oldApplianceRemoval] => 0
+    [15discount] => 0
+    [over30kg] => 0
+    [posteRestante] => 0
+    [businessDelivery] => 0
+    [doNotTilt] => 0
+    [postBox] => 0
+)
+
+
+=== PARAMETER TRANSFORMATION DEBUG ===
+Kept restrictedDelivery: '0' (unchanged)
+Kept returnOfGoods: '0' (unchanged)
+Kept moneyOrder: '0' (unchanged)
+Kept returnReceipt: '0' (unchanged)
+Kept isCodA: '0' (unchanged)
+Kept isCodC: '0' (unchanged)
+Kept replyMail: '0' (unchanged)
+Kept declaredValue: '0' (unchanged)
+Kept deliveryToAddress: '0' (unchanged)
+Kept cumbersome: '0' (unchanged)
+Kept fragile: '0' (unchanged)
+Kept noLongerCollectionTime: '0' (unchanged)
+Kept deposit3days: '0' (unchanged)
+Kept failedDeliveryAttempt: '0' (unchanged)
+Kept doNotRedirect: '0' (unchanged)
+Kept longerCollectionTime: '0' (unchanged)
+Kept smsAlert: '0' (unchanged)
+Kept confirmationOnDelivery: '0' (unchanged)
+Kept dataVerification: '0' (unchanged)
+Kept provisionOfInformation: '0' (unchanged)
+Kept noCardCash: '0' (unchanged)
+Kept replyMailEnvelope: '0' (unchanged)
+Kept smsAndMail: '0' (unchanged)
+Kept mailAlert: '0' (unchanged)
+Kept multiPackage: '0' (unchanged)
+Kept intermediationOfOrder: '0' (unchanged)
+Kept preProcessed: '0' (unchanged)
+Kept eReturnReceiptSms: '0' (unchanged)
+Kept eReturnReceiptEmail: '0' (unchanged)
+Kept eReturnReceiptEmailSms: '0' (unchanged)
+Kept receiptAndRestricted: '0' (unchanged)
+Kept receiptAnDeliveryToAddr: '0' (unchanged)
+Kept delivery8to2: '0' (unchanged)
+Kept delivery1to7: '0' (unchanged)
+Kept guaranteedDeliveryTime: '0' (unchanged)
+Kept doNotDeposit: '0' (unchanged)
+Kept completeDelivery: '0' (unchanged)
+Kept oldApplianceRemoval: '0' (unchanged)
+Kept 15discount: '0' (unchanged)
+Kept over30kg: '0' (unchanged)
+Kept posteRestante: '0' (unchanged)
+Kept businessDelivery: '0' (unchanged)
+Kept doNotTilt: '0' (unchanged)
+Kept postBox: '0' (unchanged)
+Processing parameter: key='restrictedDelivery', value='0', type=string
+Added parameter: id='restrictedDelivery', value='0'
+Processing parameter: key='returnOfGoods', value='0', type=string
+Added parameter: id='returnOfGoods', value='0'
+Processing parameter: key='moneyOrder', value='0', type=string
+Added parameter: id='moneyOrder', value='0'
+Processing parameter: key='returnReceipt', value='0', type=string
+Added parameter: id='returnReceipt', value='0'
+Processing parameter: key='isCodA', value='0', type=string
+Added parameter: id='isCodA', value='0'
+Processing parameter: key='isCodC', value='0', type=string
+Added parameter: id='isCodC', value='0'
+Processing parameter: key='replyMail', value='0', type=string
+Added parameter: id='replyMail', value='0'
+Processing parameter: key='declaredValue', value='0', type=string
+Added parameter: id='declaredValue', value='0'
+Processing parameter: key='deliveryToAddress', value='0', type=string
+Added parameter: id='deliveryToAddress', value='0'
+Processing parameter: key='cumbersome', value='0', type=string
+Added parameter: id='cumbersome', value='0'
+Processing parameter: key='fragile', value='0', type=string
+Added parameter: id='fragile', value='0'
+Processing parameter: key='noLongerCollectionTime', value='0', type=string
+Added parameter: id='noLongerCollectionTime', value='0'
+Processing parameter: key='deposit3days', value='0', type=string
+Added parameter: id='deposit3days', value='0'
+Processing parameter: key='failedDeliveryAttempt', value='0', type=string
+Added parameter: id='failedDeliveryAttempt', value='0'
+Processing parameter: key='doNotRedirect', value='0', type=string
+Added parameter: id='doNotRedirect', value='0'
+Processing parameter: key='longerCollectionTime', value='0', type=string
+Added parameter: id='longerCollectionTime', value='0'
+Processing parameter: key='smsAlert', value='0', type=string
+Added parameter: id='smsAlert', value='0'
+Processing parameter: key='confirmationOnDelivery', value='0', type=string
+Added parameter: id='confirmationOnDelivery', value='0'
+Processing parameter: key='dataVerification', value='0', type=string
+Added parameter: id='dataVerification', value='0'
+Processing parameter: key='provisionOfInformation', value='0', type=string
+Added parameter: id='provisionOfInformation', value='0'
+Processing parameter: key='noCardCash', value='0', type=string
+Added parameter: id='noCardCash', value='0'
+Processing parameter: key='replyMailEnvelope', value='0', type=string
+Added parameter: id='replyMailEnvelope', value='0'
+Processing parameter: key='smsAndMail', value='0', type=string
+Added parameter: id='smsAndMail', value='0'
+Processing parameter: key='mailAlert', value='0', type=string
+Added parameter: id='mailAlert', value='0'
+Processing parameter: key='multiPackage', value='0', type=string
+Added parameter: id='multiPackage', value='0'
+Processing parameter: key='intermediationOfOrder', value='0', type=string
+Added parameter: id='intermediationOfOrder', value='0'
+Processing parameter: key='preProcessed', value='0', type=string
+Added parameter: id='preProcessed', value='0'
+Processing parameter: key='eReturnReceiptSms', value='0', type=string
+Added parameter: id='eReturnReceiptSms', value='0'
+Processing parameter: key='eReturnReceiptEmail', value='0', type=string
+Added parameter: id='eReturnReceiptEmail', value='0'
+Processing parameter: key='eReturnReceiptEmailSms', value='0', type=string
+Added parameter: id='eReturnReceiptEmailSms', value='0'
+Processing parameter: key='receiptAndRestricted', value='0', type=string
+Added parameter: id='receiptAndRestricted', value='0'
+Processing parameter: key='receiptAnDeliveryToAddr', value='0', type=string
+Added parameter: id='receiptAnDeliveryToAddr', value='0'
+Processing parameter: key='delivery8to2', value='0', type=string
+Added parameter: id='delivery8to2', value='0'
+Processing parameter: key='delivery1to7', value='0', type=string
+Added parameter: id='delivery1to7', value='0'
+Processing parameter: key='guaranteedDeliveryTime', value='0', type=string
+Added parameter: id='guaranteedDeliveryTime', value='0'
+Processing parameter: key='doNotDeposit', value='0', type=string
+Added parameter: id='doNotDeposit', value='0'
+Processing parameter: key='completeDelivery', value='0', type=string
+Added parameter: id='completeDelivery', value='0'
+Processing parameter: key='oldApplianceRemoval', value='0', type=string
+Added parameter: id='oldApplianceRemoval', value='0'
+Processing parameter: key='15discount', value='0', type=string
+Added parameter: id='15discount', value='0'
+Processing parameter: key='over30kg', value='0', type=string
+Added parameter: id='over30kg', value='0'
+Processing parameter: key='posteRestante', value='0', type=string
+Added parameter: id='posteRestante', value='0'
+Processing parameter: key='businessDelivery', value='0', type=string
+Added parameter: id='businessDelivery', value='0'
+Processing parameter: key='doNotTilt', value='0', type=string
+Added parameter: id='doNotTilt', value='0'
+Processing parameter: key='postBox', value='0', type=string
+Added parameter: id='postBox', value='0'
+Final payload to API: {
+    "params": {
+        "eventId": 97555,
+        "eventType": "order",
+        "parcelParameters": [
+            {
+                "id": "restrictedDelivery",
+                "value": "0"
+            },
+            {
+                "id": "returnOfGoods",
+                "value": "0"
+            },
+            {
+                "id": "moneyOrder",
+                "value": "0"
+            },
+            {
+                "id": "returnReceipt",
+                "value": "0"
+            },
+            {
+                "id": "isCodA",
+                "value": "0"
+            },
+            {
+                "id": "isCodC",
+                "value": "0"
+            },
+            {
+                "id": "replyMail",
+                "value": "0"
+            },
+            {
+                "id": "declaredValue",
+                "value": "0"
+            },
+            {
+                "id": "deliveryToAddress",
+                "value": "0"
+            },
+            {
+                "id": "cumbersome",
+                "value": "0"
+            },
+            {
+                "id": "fragile",
+                "value": "0"
+            },
+            {
+                "id": "noLongerCollectionTime",
+                "value": "0"
+            },
+            {
+                "id": "deposit3days",
+                "value": "0"
+            },
+            {
+                "id": "failedDeliveryAttempt",
+                "value": "0"
+            },
+            {
+                "id": "doNotRedirect",
+                "value": "0"
+            },
+            {
+                "id": "longerCollectionTime",
+                "value": "0"
+            },
+            {
+                "id": "smsAlert",
+                "value": "0"
+            },
+            {
+                "id": "confirmationOnDelivery",
+                "value": "0"
+            },
+            {
+                "id": "dataVerification",
+                "value": "0"
+            },
+            {
+                "id": "provisionOfInformation",
+                "value": "0"
+            },
+            {
+                "id": "noCardCash",
+                "value": "0"
+            },
+            {
+                "id": "replyMailEnvelope",
+                "value": "0"
+            },
+            {
+                "id": "smsAndMail",
+                "value": "0"
+            },
+            {
+                "id": "mailAlert",
+                "value": "0"
+            },
+            {
+                "id": "multiPackage",
+                "value": "0"
+            },
+            {
+                "id": "intermediationOfOrder",
+                "value": "0"
+            },
+            {
+                "id": "preProcessed",
+                "value": "0"
+            },
+            {
+                "id": "eReturnReceiptSms",
+                "value": "0"
+            },
+            {
+                "id": "eReturnReceiptEmail",
+                "value": "0"
+            },
+            {
+                "id": "eReturnReceiptEmailSms",
+                "value": "0"
+            },
+            {
+                "id": "receiptAndRestricted",
+                "value": "0"
+            },
+            {
+                "id": "receiptAnDeliveryToAddr",
+                "value": "0"
+            },
+            {
+                "id": "delivery8to2",
+                "value": "0"
+            },
+            {
+                "id": "delivery1to7",
+                "value": "0"
+            },
+            {
+                "id": "guaranteedDeliveryTime",
+                "value": "0"
+            },
+            {
+                "id": "doNotDeposit",
+                "value": "0"
+            },
+            {
+                "id": "completeDelivery",
+                "value": "0"
+            },
+            {
+                "id": "oldApplianceRemoval",
+                "value": "0"
+            },
+            {
+                "id": "15discount",
+                "value": "0"
+            },
+            {
+                "id": "over30kg",
+                "value": "0"
+            },
+            {
+                "id": "posteRestante",
+                "value": "0"
+            },
+            {
+                "id": "businessDelivery",
+                "value": "0"
+            },
+            {
+                "id": "doNotTilt",
+                "value": "0"
+            },
+            {
+                "id": "postBox",
+                "value": "0"
+            }
+        ]
+    }
+}
+
+=== HTTP REQUEST DETAILS ===
+URL: https://dkwadrat.pl/api/admin/v6/packages/labels
+Method: POST
+Headers:
+  X-API-KEY: YXBwbGljYXRpb24xODpzSUdaNFU1ZzFwVnV2K3R4bExZU2lxRnR6dytHa0hiY3dhQ29HZ1BOdFdOSEtlekRYR0F3NkpFZEFCZGk0RWQ0
+  Accept: application/json, application/pdf
+  Content-Type: application/json
+Raw JSON Body:
+{"params":{"eventId":97555,"eventType":"order","parcelParameters":[{"id":"restrictedDelivery","value":"0"},{"id":"returnOfGoods","value":"0"},{"id":"moneyOrder","value":"0"},{"id":"returnReceipt","value":"0"},{"id":"isCodA","value":"0"},{"id":"isCodC","value":"0"},{"id":"replyMail","value":"0"},{"id":"declaredValue","value":"0"},{"id":"deliveryToAddress","value":"0"},{"id":"cumbersome","value":"0"},{"id":"fragile","value":"0"},{"id":"noLongerCollectionTime","value":"0"},{"id":"deposit3days","value":"0"},{"id":"failedDeliveryAttempt","value":"0"},{"id":"doNotRedirect","value":"0"},{"id":"longerCollectionTime","value":"0"},{"id":"smsAlert","value":"0"},{"id":"confirmationOnDelivery","value":"0"},{"id":"dataVerification","value":"0"},{"id":"provisionOfInformation","value":"0"},{"id":"noCardCash","value":"0"},{"id":"replyMailEnvelope","value":"0"},{"id":"smsAndMail","value":"0"},{"id":"mailAlert","value":"0"},{"id":"multiPackage","value":"0"},{"id":"intermediationOfOrder","value":"0"},{"id":"preProcessed","value":"0"},{"id":"eReturnReceiptSms","value":"0"},{"id":"eReturnReceiptEmail","value":"0"},{"id":"eReturnReceiptEmailSms","value":"0"},{"id":"receiptAndRestricted","value":"0"},{"id":"receiptAnDeliveryToAddr","value":"0"},{"id":"delivery8to2","value":"0"},{"id":"delivery1to7","value":"0"},{"id":"guaranteedDeliveryTime","value":"0"},{"id":"doNotDeposit","value":"0"},{"id":"completeDelivery","value":"0"},{"id":"oldApplianceRemoval","value":"0"},{"id":"15discount","value":"0"},{"id":"over30kg","value":"0"},{"id":"posteRestante","value":"0"},{"id":"businessDelivery","value":"0"},{"id":"doNotTilt","value":"0"},{"id":"postBox","value":"0"}]}}
+Body Length: 1663 bytes
+
+=== HTTP RESPONSE DETAILS ===
+HTTP Status Code: 207
+Response Headers:
+  Content-Type: application/json
+  Content-Length: 161
+Total Time: 0.709797 seconds
+API Response: HTTP 207 (Content-Type: application/json)
+Response preview: {"errors":{"faultCode":6,"faultString":"Ten kurier nie obs\u0142uguje API do generowania numer\u00f3w paczek"},"eventId":97555,"eventType":"order","packages":[]}
+Time: 2025-10-01 16:04:20
+
+=== API GENERATE LABELS DEBUG ===
+Order Number: 97555
+Input parameters: Array
+(
+)
+
+
+=== PARAMETER TRANSFORMATION DEBUG ===
+Final payload to API: {
+    "params": {
+        "eventId": 97555,
+        "eventType": "order",
+        "parcelParameters": []
+    }
+}
+
+=== HTTP REQUEST DETAILS ===
+URL: https://dkwadrat.pl/api/admin/v6/packages/labels
+Method: POST
+Headers:
+  X-API-KEY: YXBwbGljYXRpb24xODpzSUdaNFU1ZzFwVnV2K3R4bExZU2lxRnR6dytHa0hiY3dhQ29HZ1BOdFdOSEtlekRYR0F3NkpFZEFCZGk0RWQ0
+  Accept: application/json, application/pdf
+  Content-Type: application/json
+Raw JSON Body:
+{"params":{"eventId":97555,"eventType":"order","parcelParameters":[]}}
+Body Length: 70 bytes
+
+=== HTTP RESPONSE DETAILS ===
+HTTP Status Code: 207
+Response Headers:
+  Content-Type: application/json
+  Content-Length: 161
+Total Time: 0.730715 seconds
+API Response: HTTP 207 (Content-Type: application/json)
+Response preview: {"errors":{"faultCode":6,"faultString":"Ten kurier nie obs\u0142uguje API do generowania numer\u00f3w paczek"},"eventId":97555,"eventType":"order","packages":[]}
+Time: 2025-10-01 16:08:39
+
+=== API GENERATE LABELS DEBUG ===
+Order Number: 97555
+Input parameters: Array
+(
+    [restrictedDelivery] => 0
+    [returnOfGoods] => 0
+    [moneyOrder] => 0
+    [returnReceipt] => 0
+    [isCodA] => 0
+    [isCodC] => 0
+    [replyMail] => 0
+    [declaredValue] => 0
+    [deliveryToAddress] => 0
+    [cumbersome] => 0
+    [fragile] => 0
+    [noLongerCollectionTime] => 0
+    [deposit3days] => 0
+    [failedDeliveryAttempt] => 0
+    [doNotRedirect] => 0
+    [longerCollectionTime] => 0
+    [smsAlert] => 0
+    [confirmationOnDelivery] => 0
+    [dataVerification] => 0
+    [provisionOfInformation] => 0
+    [noCardCash] => 0
+    [replyMailEnvelope] => 0
+    [smsAndMail] => 0
+    [mailAlert] => 0
+    [multiPackage] => 0
+    [intermediationOfOrder] => 0
+    [preProcessed] => 0
+    [eReturnReceiptSms] => 0
+    [eReturnReceiptEmail] => 0
+    [eReturnReceiptEmailSms] => 0
+    [receiptAndRestricted] => 0
+    [receiptAnDeliveryToAddr] => 0
+    [delivery8to2] => 0
+    [delivery1to7] => 0
+    [guaranteedDeliveryTime] => 0
+    [doNotDeposit] => 0
+    [completeDelivery] => 0
+    [oldApplianceRemoval] => 0
+    [15discount] => 0
+    [over30kg] => 0
+    [posteRestante] => 0
+    [businessDelivery] => 0
+    [doNotTilt] => 0
+    [postBox] => 0
+)
+
+
+=== PARAMETER TRANSFORMATION DEBUG ===
+Kept restrictedDelivery: '0' (unchanged)
+Kept returnOfGoods: '0' (unchanged)
+Kept moneyOrder: '0' (unchanged)
+Kept returnReceipt: '0' (unchanged)
+Kept isCodA: '0' (unchanged)
+Kept isCodC: '0' (unchanged)
+Kept replyMail: '0' (unchanged)
+Kept declaredValue: '0' (unchanged)
+Kept deliveryToAddress: '0' (unchanged)
+Kept cumbersome: '0' (unchanged)
+Kept fragile: '0' (unchanged)
+Kept noLongerCollectionTime: '0' (unchanged)
+Kept deposit3days: '0' (unchanged)
+Kept failedDeliveryAttempt: '0' (unchanged)
+Kept doNotRedirect: '0' (unchanged)
+Kept longerCollectionTime: '0' (unchanged)
+Kept smsAlert: '0' (unchanged)
+Kept confirmationOnDelivery: '0' (unchanged)
+Kept dataVerification: '0' (unchanged)
+Kept provisionOfInformation: '0' (unchanged)
+Kept noCardCash: '0' (unchanged)
+Kept replyMailEnvelope: '0' (unchanged)
+Kept smsAndMail: '0' (unchanged)
+Kept mailAlert: '0' (unchanged)
+Kept multiPackage: '0' (unchanged)
+Kept intermediationOfOrder: '0' (unchanged)
+Kept preProcessed: '0' (unchanged)
+Kept eReturnReceiptSms: '0' (unchanged)
+Kept eReturnReceiptEmail: '0' (unchanged)
+Kept eReturnReceiptEmailSms: '0' (unchanged)
+Kept receiptAndRestricted: '0' (unchanged)
+Kept receiptAnDeliveryToAddr: '0' (unchanged)
+Kept delivery8to2: '0' (unchanged)
+Kept delivery1to7: '0' (unchanged)
+Kept guaranteedDeliveryTime: '0' (unchanged)
+Kept doNotDeposit: '0' (unchanged)
+Kept completeDelivery: '0' (unchanged)
+Kept oldApplianceRemoval: '0' (unchanged)
+Kept 15discount: '0' (unchanged)
+Kept over30kg: '0' (unchanged)
+Kept posteRestante: '0' (unchanged)
+Kept businessDelivery: '0' (unchanged)
+Kept doNotTilt: '0' (unchanged)
+Kept postBox: '0' (unchanged)
+Processing parameter: key='restrictedDelivery', value='0', type=string
+Added parameter: id='restrictedDelivery', value='0'
+Processing parameter: key='returnOfGoods', value='0', type=string
+Added parameter: id='returnOfGoods', value='0'
+Processing parameter: key='moneyOrder', value='0', type=string
+Added parameter: id='moneyOrder', value='0'
+Processing parameter: key='returnReceipt', value='0', type=string
+Added parameter: id='returnReceipt', value='0'
+Processing parameter: key='isCodA', value='0', type=string
+Added parameter: id='isCodA', value='0'
+Processing parameter: key='isCodC', value='0', type=string
+Added parameter: id='isCodC', value='0'
+Processing parameter: key='replyMail', value='0', type=string
+Added parameter: id='replyMail', value='0'
+Processing parameter: key='declaredValue', value='0', type=string
+Added parameter: id='declaredValue', value='0'
+Processing parameter: key='deliveryToAddress', value='0', type=string
+Added parameter: id='deliveryToAddress', value='0'
+Processing parameter: key='cumbersome', value='0', type=string
+Added parameter: id='cumbersome', value='0'
+Processing parameter: key='fragile', value='0', type=string
+Added parameter: id='fragile', value='0'
+Processing parameter: key='noLongerCollectionTime', value='0', type=string
+Added parameter: id='noLongerCollectionTime', value='0'
+Processing parameter: key='deposit3days', value='0', type=string
+Added parameter: id='deposit3days', value='0'
+Processing parameter: key='failedDeliveryAttempt', value='0', type=string
+Added parameter: id='failedDeliveryAttempt', value='0'
+Processing parameter: key='doNotRedirect', value='0', type=string
+Added parameter: id='doNotRedirect', value='0'
+Processing parameter: key='longerCollectionTime', value='0', type=string
+Added parameter: id='longerCollectionTime', value='0'
+Processing parameter: key='smsAlert', value='0', type=string
+Added parameter: id='smsAlert', value='0'
+Processing parameter: key='confirmationOnDelivery', value='0', type=string
+Added parameter: id='confirmationOnDelivery', value='0'
+Processing parameter: key='dataVerification', value='0', type=string
+Added parameter: id='dataVerification', value='0'
+Processing parameter: key='provisionOfInformation', value='0', type=string
+Added parameter: id='provisionOfInformation', value='0'
+Processing parameter: key='noCardCash', value='0', type=string
+Added parameter: id='noCardCash', value='0'
+Processing parameter: key='replyMailEnvelope', value='0', type=string
+Added parameter: id='replyMailEnvelope', value='0'
+Processing parameter: key='smsAndMail', value='0', type=string
+Added parameter: id='smsAndMail', value='0'
+Processing parameter: key='mailAlert', value='0', type=string
+Added parameter: id='mailAlert', value='0'
+Processing parameter: key='multiPackage', value='0', type=string
+Added parameter: id='multiPackage', value='0'
+Processing parameter: key='intermediationOfOrder', value='0', type=string
+Added parameter: id='intermediationOfOrder', value='0'
+Processing parameter: key='preProcessed', value='0', type=string
+Added parameter: id='preProcessed', value='0'
+Processing parameter: key='eReturnReceiptSms', value='0', type=string
+Added parameter: id='eReturnReceiptSms', value='0'
+Processing parameter: key='eReturnReceiptEmail', value='0', type=string
+Added parameter: id='eReturnReceiptEmail', value='0'
+Processing parameter: key='eReturnReceiptEmailSms', value='0', type=string
+Added parameter: id='eReturnReceiptEmailSms', value='0'
+Processing parameter: key='receiptAndRestricted', value='0', type=string
+Added parameter: id='receiptAndRestricted', value='0'
+Processing parameter: key='receiptAnDeliveryToAddr', value='0', type=string
+Added parameter: id='receiptAnDeliveryToAddr', value='0'
+Processing parameter: key='delivery8to2', value='0', type=string
+Added parameter: id='delivery8to2', value='0'
+Processing parameter: key='delivery1to7', value='0', type=string
+Added parameter: id='delivery1to7', value='0'
+Processing parameter: key='guaranteedDeliveryTime', value='0', type=string
+Added parameter: id='guaranteedDeliveryTime', value='0'
+Processing parameter: key='doNotDeposit', value='0', type=string
+Added parameter: id='doNotDeposit', value='0'
+Processing parameter: key='completeDelivery', value='0', type=string
+Added parameter: id='completeDelivery', value='0'
+Processing parameter: key='oldApplianceRemoval', value='0', type=string
+Added parameter: id='oldApplianceRemoval', value='0'
+Processing parameter: key='15discount', value='0', type=string
+Added parameter: id='15discount', value='0'
+Processing parameter: key='over30kg', value='0', type=string
+Added parameter: id='over30kg', value='0'
+Processing parameter: key='posteRestante', value='0', type=string
+Added parameter: id='posteRestante', value='0'
+Processing parameter: key='businessDelivery', value='0', type=string
+Added parameter: id='businessDelivery', value='0'
+Processing parameter: key='doNotTilt', value='0', type=string
+Added parameter: id='doNotTilt', value='0'
+Processing parameter: key='postBox', value='0', type=string
+Added parameter: id='postBox', value='0'
+Final payload to API: {
+    "params": {
+        "eventId": 97555,
+        "eventType": "order",
+        "parcelParameters": [
+            {
+                "id": "restrictedDelivery",
+                "value": "0"
+            },
+            {
+                "id": "returnOfGoods",
+                "value": "0"
+            },
+            {
+                "id": "moneyOrder",
+                "value": "0"
+            },
+            {
+                "id": "returnReceipt",
+                "value": "0"
+            },
+            {
+                "id": "isCodA",
+                "value": "0"
+            },
+            {
+                "id": "isCodC",
+                "value": "0"
+            },
+            {
+                "id": "replyMail",
+                "value": "0"
+            },
+            {
+                "id": "declaredValue",
+                "value": "0"
+            },
+            {
+                "id": "deliveryToAddress",
+                "value": "0"
+            },
+            {
+                "id": "cumbersome",
+                "value": "0"
+            },
+            {
+                "id": "fragile",
+                "value": "0"
+            },
+            {
+                "id": "noLongerCollectionTime",
+                "value": "0"
+            },
+            {
+                "id": "deposit3days",
+                "value": "0"
+            },
+            {
+                "id": "failedDeliveryAttempt",
+                "value": "0"
+            },
+            {
+                "id": "doNotRedirect",
+                "value": "0"
+            },
+            {
+                "id": "longerCollectionTime",
+                "value": "0"
+            },
+            {
+                "id": "smsAlert",
+                "value": "0"
+            },
+            {
+                "id": "confirmationOnDelivery",
+                "value": "0"
+            },
+            {
+                "id": "dataVerification",
+                "value": "0"
+            },
+            {
+                "id": "provisionOfInformation",
+                "value": "0"
+            },
+            {
+                "id": "noCardCash",
+                "value": "0"
+            },
+            {
+                "id": "replyMailEnvelope",
+                "value": "0"
+            },
+            {
+                "id": "smsAndMail",
+                "value": "0"
+            },
+            {
+                "id": "mailAlert",
+                "value": "0"
+            },
+            {
+                "id": "multiPackage",
+                "value": "0"
+            },
+            {
+                "id": "intermediationOfOrder",
+                "value": "0"
+            },
+            {
+                "id": "preProcessed",
+                "value": "0"
+            },
+            {
+                "id": "eReturnReceiptSms",
+                "value": "0"
+            },
+            {
+                "id": "eReturnReceiptEmail",
+                "value": "0"
+            },
+            {
+                "id": "eReturnReceiptEmailSms",
+                "value": "0"
+            },
+            {
+                "id": "receiptAndRestricted",
+                "value": "0"
+            },
+            {
+                "id": "receiptAnDeliveryToAddr",
+                "value": "0"
+            },
+            {
+                "id": "delivery8to2",
+                "value": "0"
+            },
+            {
+                "id": "delivery1to7",
+                "value": "0"
+            },
+            {
+                "id": "guaranteedDeliveryTime",
+                "value": "0"
+            },
+            {
+                "id": "doNotDeposit",
+                "value": "0"
+            },
+            {
+                "id": "completeDelivery",
+                "value": "0"
+            },
+            {
+                "id": "oldApplianceRemoval",
+                "value": "0"
+            },
+            {
+                "id": "15discount",
+                "value": "0"
+            },
+            {
+                "id": "over30kg",
+                "value": "0"
+            },
+            {
+                "id": "posteRestante",
+                "value": "0"
+            },
+            {
+                "id": "businessDelivery",
+                "value": "0"
+            },
+            {
+                "id": "doNotTilt",
+                "value": "0"
+            },
+            {
+                "id": "postBox",
+                "value": "0"
+            }
+        ]
+    }
+}
+
+=== HTTP REQUEST DETAILS ===
+URL: https://dkwadrat.pl/api/admin/v6/packages/labels
+Method: POST
+Headers:
+  X-API-KEY: YXBwbGljYXRpb24xODpzSUdaNFU1ZzFwVnV2K3R4bExZU2lxRnR6dytHa0hiY3dhQ29HZ1BOdFdOSEtlekRYR0F3NkpFZEFCZGk0RWQ0
+  Accept: application/json, application/pdf
+  Content-Type: application/json
+Raw JSON Body:
+{"params":{"eventId":97555,"eventType":"order","parcelParameters":[{"id":"restrictedDelivery","value":"0"},{"id":"returnOfGoods","value":"0"},{"id":"moneyOrder","value":"0"},{"id":"returnReceipt","value":"0"},{"id":"isCodA","value":"0"},{"id":"isCodC","value":"0"},{"id":"replyMail","value":"0"},{"id":"declaredValue","value":"0"},{"id":"deliveryToAddress","value":"0"},{"id":"cumbersome","value":"0"},{"id":"fragile","value":"0"},{"id":"noLongerCollectionTime","value":"0"},{"id":"deposit3days","value":"0"},{"id":"failedDeliveryAttempt","value":"0"},{"id":"doNotRedirect","value":"0"},{"id":"longerCollectionTime","value":"0"},{"id":"smsAlert","value":"0"},{"id":"confirmationOnDelivery","value":"0"},{"id":"dataVerification","value":"0"},{"id":"provisionOfInformation","value":"0"},{"id":"noCardCash","value":"0"},{"id":"replyMailEnvelope","value":"0"},{"id":"smsAndMail","value":"0"},{"id":"mailAlert","value":"0"},{"id":"multiPackage","value":"0"},{"id":"intermediationOfOrder","value":"0"},{"id":"preProcessed","value":"0"},{"id":"eReturnReceiptSms","value":"0"},{"id":"eReturnReceiptEmail","value":"0"},{"id":"eReturnReceiptEmailSms","value":"0"},{"id":"receiptAndRestricted","value":"0"},{"id":"receiptAnDeliveryToAddr","value":"0"},{"id":"delivery8to2","value":"0"},{"id":"delivery1to7","value":"0"},{"id":"guaranteedDeliveryTime","value":"0"},{"id":"doNotDeposit","value":"0"},{"id":"completeDelivery","value":"0"},{"id":"oldApplianceRemoval","value":"0"},{"id":"15discount","value":"0"},{"id":"over30kg","value":"0"},{"id":"posteRestante","value":"0"},{"id":"businessDelivery","value":"0"},{"id":"doNotTilt","value":"0"},{"id":"postBox","value":"0"}]}}
+Body Length: 1663 bytes
+
+=== HTTP RESPONSE DETAILS ===
+HTTP Status Code: 207
+Response Headers:
+  Content-Type: application/json
+  Content-Length: 161
+Total Time: 0.686033 seconds
+API Response: HTTP 207 (Content-Type: application/json)
+Response preview: {"errors":{"faultCode":6,"faultString":"Ten kurier nie obs\u0142uguje API do generowania numer\u00f3w paczek"},"eventId":97555,"eventType":"order","packages":[]}
+Time: 2025-10-01 16:08:51
+
+=== API GENERATE LABELS DEBUG ===
+Order Number: 97555
+Input parameters: Array
+(
+    [restrictedDelivery] => 0
+    [returnOfGoods] => 0
+    [moneyOrder] => 0
+    [returnReceipt] => 0
+    [isCodA] => 0
+    [isCodC] => 0
+    [replyMail] => 0
+    [declaredValue] => 0
+    [deliveryToAddress] => 0
+    [cumbersome] => 0
+    [fragile] => 0
+    [noLongerCollectionTime] => 0
+    [deposit3days] => 0
+    [failedDeliveryAttempt] => 0
+    [doNotRedirect] => 0
+    [longerCollectionTime] => 0
+    [smsAlert] => 0
+    [confirmationOnDelivery] => 0
+    [dataVerification] => 0
+    [provisionOfInformation] => 0
+    [noCardCash] => 0
+    [replyMailEnvelope] => 0
+    [smsAndMail] => 0
+    [mailAlert] => 0
+    [multiPackage] => 0
+    [intermediationOfOrder] => 0
+    [preProcessed] => 0
+    [eReturnReceiptSms] => 0
+    [eReturnReceiptEmail] => 0
+    [eReturnReceiptEmailSms] => 0
+    [receiptAndRestricted] => 0
+    [receiptAnDeliveryToAddr] => 0
+    [delivery8to2] => 0
+    [delivery1to7] => 0
+    [guaranteedDeliveryTime] => 0
+    [doNotDeposit] => 0
+    [completeDelivery] => 0
+    [oldApplianceRemoval] => 0
+    [15discount] => 0
+    [over30kg] => 0
+    [posteRestante] => 0
+    [businessDelivery] => 0
+    [doNotTilt] => 0
+    [postBox] => 0
+)
+
+
+=== PARAMETER TRANSFORMATION DEBUG ===
+Kept restrictedDelivery: '0' (unchanged)
+Kept returnOfGoods: '0' (unchanged)
+Kept moneyOrder: '0' (unchanged)
+Kept returnReceipt: '0' (unchanged)
+Kept isCodA: '0' (unchanged)
+Kept isCodC: '0' (unchanged)
+Kept replyMail: '0' (unchanged)
+Kept declaredValue: '0' (unchanged)
+Kept deliveryToAddress: '0' (unchanged)
+Kept cumbersome: '0' (unchanged)
+Kept fragile: '0' (unchanged)
+Kept noLongerCollectionTime: '0' (unchanged)
+Kept deposit3days: '0' (unchanged)
+Kept failedDeliveryAttempt: '0' (unchanged)
+Kept doNotRedirect: '0' (unchanged)
+Kept longerCollectionTime: '0' (unchanged)
+Kept smsAlert: '0' (unchanged)
+Kept confirmationOnDelivery: '0' (unchanged)
+Kept dataVerification: '0' (unchanged)
+Kept provisionOfInformation: '0' (unchanged)
+Kept noCardCash: '0' (unchanged)
+Kept replyMailEnvelope: '0' (unchanged)
+Kept smsAndMail: '0' (unchanged)
+Kept mailAlert: '0' (unchanged)
+Kept multiPackage: '0' (unchanged)
+Kept intermediationOfOrder: '0' (unchanged)
+Kept preProcessed: '0' (unchanged)
+Kept eReturnReceiptSms: '0' (unchanged)
+Kept eReturnReceiptEmail: '0' (unchanged)
+Kept eReturnReceiptEmailSms: '0' (unchanged)
+Kept receiptAndRestricted: '0' (unchanged)
+Kept receiptAnDeliveryToAddr: '0' (unchanged)
+Kept delivery8to2: '0' (unchanged)
+Kept delivery1to7: '0' (unchanged)
+Kept guaranteedDeliveryTime: '0' (unchanged)
+Kept doNotDeposit: '0' (unchanged)
+Kept completeDelivery: '0' (unchanged)
+Kept oldApplianceRemoval: '0' (unchanged)
+Kept 15discount: '0' (unchanged)
+Kept over30kg: '0' (unchanged)
+Kept posteRestante: '0' (unchanged)
+Kept businessDelivery: '0' (unchanged)
+Kept doNotTilt: '0' (unchanged)
+Kept postBox: '0' (unchanged)
+Processing parameter: key='restrictedDelivery', value='0', type=string
+Added parameter: id='restrictedDelivery', value='0'
+Processing parameter: key='returnOfGoods', value='0', type=string
+Added parameter: id='returnOfGoods', value='0'
+Processing parameter: key='moneyOrder', value='0', type=string
+Added parameter: id='moneyOrder', value='0'
+Processing parameter: key='returnReceipt', value='0', type=string
+Added parameter: id='returnReceipt', value='0'
+Processing parameter: key='isCodA', value='0', type=string
+Added parameter: id='isCodA', value='0'
+Processing parameter: key='isCodC', value='0', type=string
+Added parameter: id='isCodC', value='0'
+Processing parameter: key='replyMail', value='0', type=string
+Added parameter: id='replyMail', value='0'
+Processing parameter: key='declaredValue', value='0', type=string
+Added parameter: id='declaredValue', value='0'
+Processing parameter: key='deliveryToAddress', value='0', type=string
+Added parameter: id='deliveryToAddress', value='0'
+Processing parameter: key='cumbersome', value='0', type=string
+Added parameter: id='cumbersome', value='0'
+Processing parameter: key='fragile', value='0', type=string
+Added parameter: id='fragile', value='0'
+Processing parameter: key='noLongerCollectionTime', value='0', type=string
+Added parameter: id='noLongerCollectionTime', value='0'
+Processing parameter: key='deposit3days', value='0', type=string
+Added parameter: id='deposit3days', value='0'
+Processing parameter: key='failedDeliveryAttempt', value='0', type=string
+Added parameter: id='failedDeliveryAttempt', value='0'
+Processing parameter: key='doNotRedirect', value='0', type=string
+Added parameter: id='doNotRedirect', value='0'
+Processing parameter: key='longerCollectionTime', value='0', type=string
+Added parameter: id='longerCollectionTime', value='0'
+Processing parameter: key='smsAlert', value='0', type=string
+Added parameter: id='smsAlert', value='0'
+Processing parameter: key='confirmationOnDelivery', value='0', type=string
+Added parameter: id='confirmationOnDelivery', value='0'
+Processing parameter: key='dataVerification', value='0', type=string
+Added parameter: id='dataVerification', value='0'
+Processing parameter: key='provisionOfInformation', value='0', type=string
+Added parameter: id='provisionOfInformation', value='0'
+Processing parameter: key='noCardCash', value='0', type=string
+Added parameter: id='noCardCash', value='0'
+Processing parameter: key='replyMailEnvelope', value='0', type=string
+Added parameter: id='replyMailEnvelope', value='0'
+Processing parameter: key='smsAndMail', value='0', type=string
+Added parameter: id='smsAndMail', value='0'
+Processing parameter: key='mailAlert', value='0', type=string
+Added parameter: id='mailAlert', value='0'
+Processing parameter: key='multiPackage', value='0', type=string
+Added parameter: id='multiPackage', value='0'
+Processing parameter: key='intermediationOfOrder', value='0', type=string
+Added parameter: id='intermediationOfOrder', value='0'
+Processing parameter: key='preProcessed', value='0', type=string
+Added parameter: id='preProcessed', value='0'
+Processing parameter: key='eReturnReceiptSms', value='0', type=string
+Added parameter: id='eReturnReceiptSms', value='0'
+Processing parameter: key='eReturnReceiptEmail', value='0', type=string
+Added parameter: id='eReturnReceiptEmail', value='0'
+Processing parameter: key='eReturnReceiptEmailSms', value='0', type=string
+Added parameter: id='eReturnReceiptEmailSms', value='0'
+Processing parameter: key='receiptAndRestricted', value='0', type=string
+Added parameter: id='receiptAndRestricted', value='0'
+Processing parameter: key='receiptAnDeliveryToAddr', value='0', type=string
+Added parameter: id='receiptAnDeliveryToAddr', value='0'
+Processing parameter: key='delivery8to2', value='0', type=string
+Added parameter: id='delivery8to2', value='0'
+Processing parameter: key='delivery1to7', value='0', type=string
+Added parameter: id='delivery1to7', value='0'
+Processing parameter: key='guaranteedDeliveryTime', value='0', type=string
+Added parameter: id='guaranteedDeliveryTime', value='0'
+Processing parameter: key='doNotDeposit', value='0', type=string
+Added parameter: id='doNotDeposit', value='0'
+Processing parameter: key='completeDelivery', value='0', type=string
+Added parameter: id='completeDelivery', value='0'
+Processing parameter: key='oldApplianceRemoval', value='0', type=string
+Added parameter: id='oldApplianceRemoval', value='0'
+Processing parameter: key='15discount', value='0', type=string
+Added parameter: id='15discount', value='0'
+Processing parameter: key='over30kg', value='0', type=string
+Added parameter: id='over30kg', value='0'
+Processing parameter: key='posteRestante', value='0', type=string
+Added parameter: id='posteRestante', value='0'
+Processing parameter: key='businessDelivery', value='0', type=string
+Added parameter: id='businessDelivery', value='0'
+Processing parameter: key='doNotTilt', value='0', type=string
+Added parameter: id='doNotTilt', value='0'
+Processing parameter: key='postBox', value='0', type=string
+Added parameter: id='postBox', value='0'
+Final payload to API: {
+    "params": {
+        "eventId": 97555,
+        "eventType": "order",
+        "parcelParameters": [
+            {
+                "id": "restrictedDelivery",
+                "value": "0"
+            },
+            {
+                "id": "returnOfGoods",
+                "value": "0"
+            },
+            {
+                "id": "moneyOrder",
+                "value": "0"
+            },
+            {
+                "id": "returnReceipt",
+                "value": "0"
+            },
+            {
+                "id": "isCodA",
+                "value": "0"
+            },
+            {
+                "id": "isCodC",
+                "value": "0"
+            },
+            {
+                "id": "replyMail",
+                "value": "0"
+            },
+            {
+                "id": "declaredValue",
+                "value": "0"
+            },
+            {
+                "id": "deliveryToAddress",
+                "value": "0"
+            },
+            {
+                "id": "cumbersome",
+                "value": "0"
+            },
+            {
+                "id": "fragile",
+                "value": "0"
+            },
+            {
+                "id": "noLongerCollectionTime",
+                "value": "0"
+            },
+            {
+                "id": "deposit3days",
+                "value": "0"
+            },
+            {
+                "id": "failedDeliveryAttempt",
+                "value": "0"
+            },
+            {
+                "id": "doNotRedirect",
+                "value": "0"
+            },
+            {
+                "id": "longerCollectionTime",
+                "value": "0"
+            },
+            {
+                "id": "smsAlert",
+                "value": "0"
+            },
+            {
+                "id": "confirmationOnDelivery",
+                "value": "0"
+            },
+            {
+                "id": "dataVerification",
+                "value": "0"
+            },
+            {
+                "id": "provisionOfInformation",
+                "value": "0"
+            },
+            {
+                "id": "noCardCash",
+                "value": "0"
+            },
+            {
+                "id": "replyMailEnvelope",
+                "value": "0"
+            },
+            {
+                "id": "smsAndMail",
+                "value": "0"
+            },
+            {
+                "id": "mailAlert",
+                "value": "0"
+            },
+            {
+                "id": "multiPackage",
+                "value": "0"
+            },
+            {
+                "id": "intermediationOfOrder",
+                "value": "0"
+            },
+            {
+                "id": "preProcessed",
+                "value": "0"
+            },
+            {
+                "id": "eReturnReceiptSms",
+                "value": "0"
+            },
+            {
+                "id": "eReturnReceiptEmail",
+                "value": "0"
+            },
+            {
+                "id": "eReturnReceiptEmailSms",
+                "value": "0"
+            },
+            {
+                "id": "receiptAndRestricted",
+                "value": "0"
+            },
+            {
+                "id": "receiptAnDeliveryToAddr",
+                "value": "0"
+            },
+            {
+                "id": "delivery8to2",
+                "value": "0"
+            },
+            {
+                "id": "delivery1to7",
+                "value": "0"
+            },
+            {
+                "id": "guaranteedDeliveryTime",
+                "value": "0"
+            },
+            {
+                "id": "doNotDeposit",
+                "value": "0"
+            },
+            {
+                "id": "completeDelivery",
+                "value": "0"
+            },
+            {
+                "id": "oldApplianceRemoval",
+                "value": "0"
+            },
+            {
+                "id": "15discount",
+                "value": "0"
+            },
+            {
+                "id": "over30kg",
+                "value": "0"
+            },
+            {
+                "id": "posteRestante",
+                "value": "0"
+            },
+            {
+                "id": "businessDelivery",
+                "value": "0"
+            },
+            {
+                "id": "doNotTilt",
+                "value": "0"
+            },
+            {
+                "id": "postBox",
+                "value": "0"
+            }
+        ]
+    }
+}
+
+=== HTTP REQUEST DETAILS ===
+URL: https://dkwadrat.pl/api/admin/v6/packages/labels
+Method: POST
+Headers:
+  X-API-KEY: YXBwbGljYXRpb24xODpzSUdaNFU1ZzFwVnV2K3R4bExZU2lxRnR6dytHa0hiY3dhQ29HZ1BOdFdOSEtlekRYR0F3NkpFZEFCZGk0RWQ0
+  Accept: application/json, application/pdf
+  Content-Type: application/json
+Raw JSON Body:
+{"params":{"eventId":97555,"eventType":"order","parcelParameters":[{"id":"restrictedDelivery","value":"0"},{"id":"returnOfGoods","value":"0"},{"id":"moneyOrder","value":"0"},{"id":"returnReceipt","value":"0"},{"id":"isCodA","value":"0"},{"id":"isCodC","value":"0"},{"id":"replyMail","value":"0"},{"id":"declaredValue","value":"0"},{"id":"deliveryToAddress","value":"0"},{"id":"cumbersome","value":"0"},{"id":"fragile","value":"0"},{"id":"noLongerCollectionTime","value":"0"},{"id":"deposit3days","value":"0"},{"id":"failedDeliveryAttempt","value":"0"},{"id":"doNotRedirect","value":"0"},{"id":"longerCollectionTime","value":"0"},{"id":"smsAlert","value":"0"},{"id":"confirmationOnDelivery","value":"0"},{"id":"dataVerification","value":"0"},{"id":"provisionOfInformation","value":"0"},{"id":"noCardCash","value":"0"},{"id":"replyMailEnvelope","value":"0"},{"id":"smsAndMail","value":"0"},{"id":"mailAlert","value":"0"},{"id":"multiPackage","value":"0"},{"id":"intermediationOfOrder","value":"0"},{"id":"preProcessed","value":"0"},{"id":"eReturnReceiptSms","value":"0"},{"id":"eReturnReceiptEmail","value":"0"},{"id":"eReturnReceiptEmailSms","value":"0"},{"id":"receiptAndRestricted","value":"0"},{"id":"receiptAnDeliveryToAddr","value":"0"},{"id":"delivery8to2","value":"0"},{"id":"delivery1to7","value":"0"},{"id":"guaranteedDeliveryTime","value":"0"},{"id":"doNotDeposit","value":"0"},{"id":"completeDelivery","value":"0"},{"id":"oldApplianceRemoval","value":"0"},{"id":"15discount","value":"0"},{"id":"over30kg","value":"0"},{"id":"posteRestante","value":"0"},{"id":"businessDelivery","value":"0"},{"id":"doNotTilt","value":"0"},{"id":"postBox","value":"0"}]}}
+Body Length: 1663 bytes
+
+=== HTTP RESPONSE DETAILS ===
+HTTP Status Code: 207
+Response Headers:
+  Content-Type: application/json
+  Content-Length: 161
+Total Time: 0.775111 seconds
+API Response: HTTP 207 (Content-Type: application/json)
+Response preview: {"errors":{"faultCode":6,"faultString":"Ten kurier nie obs\u0142uguje API do generowania numer\u00f3w paczek"},"eventId":97555,"eventType":"order","packages":[]}
+Time: 2025-10-01 16:20:11
+
+=== API GENERATE LABELS DEBUG ===
+Order Number: 97555
+Input parameters: Array
+(
+    [service] => 1
+    [labelFormat] => LBL_PRINTER
+    [carryIn] => 0
+    [cud] => 0
+    [duty] => 0
+    [inPers] => 0
+    [rod] => 0
+    [selfCol] => 0
+    [privpers] => 1
+    [tiresService] => 0
+    [dec] => 0
+    [schemaProductDescription] => [iai:order_sn]
+    [schemaNotice] => [iai:delivery_notice]
+    [schemaRef1] => 
+    [schemaRef2] => 
+    [schemaRef3] => 
+)
+
+
+=== PARAMETER TRANSFORMATION DEBUG ===
+Transformed service: '1' (string) -> 1 (int)
+Kept labelFormat: 'LBL_PRINTER' (unchanged)
+Transformed carryIn: '0' (string) -> 0 (int)
+Transformed cud: '0' (string) -> 0 (int)
+Transformed duty: '0' (string) -> 0 (int)
+Transformed inPers: '0' (string) -> 0 (int)
+Transformed rod: '0' (string) -> 0 (int)
+Transformed selfCol: '0' (string) -> 0 (int)
+Transformed privpers: '1' (string) -> 1 (int)
+Transformed tiresService: '0' (string) -> 0 (int)
+Transformed dec: '0' (string) -> 0 (int)
+Kept schemaProductDescription: '[iai:order_sn]' (unchanged)
+Kept schemaNotice: '[iai:delivery_notice]' (unchanged)
+Kept schemaRef1: '' (unchanged)
+Kept schemaRef2: '' (unchanged)
+Kept schemaRef3: '' (unchanged)
+Processing parameter: key='service', value='1', type=string
+Converted service: '1' -> 1
+Added parameter: id='service', value='1'
+Processing parameter: key='labelFormat', value='LBL_PRINTER', type=string
+Added parameter: id='labelFormat', value='LBL_PRINTER'
+Processing parameter: key='carryIn', value='0', type=string
+Converted carryIn: '0' -> 0
+Added parameter: id='carryIn', value='0'
+Processing parameter: key='cud', value='0', type=string
+Converted cud: '0' -> 0
+Added parameter: id='cud', value='0'
+Processing parameter: key='duty', value='0', type=string
+Converted duty: '0' -> 0
+Added parameter: id='duty', value='0'
+Processing parameter: key='inPers', value='0', type=string
+Converted inPers: '0' -> 0
+Added parameter: id='inPers', value='0'
+Processing parameter: key='rod', value='0', type=string
+Converted rod: '0' -> 0
+Added parameter: id='rod', value='0'
+Processing parameter: key='selfCol', value='0', type=string
+Converted selfCol: '0' -> 0
+Added parameter: id='selfCol', value='0'
+Processing parameter: key='privpers', value='1', type=string
+Converted privpers: '1' -> 1
+Added parameter: id='privpers', value='1'
+Processing parameter: key='tiresService', value='0', type=string
+Converted tiresService: '0' -> 0
+Added parameter: id='tiresService', value='0'
+Processing parameter: key='dec', value='0', type=string
+Converted dec: '0' -> 0
+Added parameter: id='dec', value='0'
+Processing parameter: key='schemaProductDescription', value='[iai:order_sn]', type=string
+Added parameter: id='schemaProductDescription', value='[iai:order_sn]'
+Processing parameter: key='schemaNotice', value='[iai:delivery_notice]', type=string
+Added parameter: id='schemaNotice', value='[iai:delivery_notice]'
+Processing parameter: key='schemaRef1', value='', type=string
+Skipping parameter schemaRef1 (empty value: '')
+Processing parameter: key='schemaRef2', value='', type=string
+Skipping parameter schemaRef2 (empty value: '')
+Processing parameter: key='schemaRef3', value='', type=string
+Skipping parameter schemaRef3 (empty value: '')
+Final payload to API: {
+    "params": {
+        "eventId": 97555,
+        "eventType": "order",
+        "parcelParameters": [
+            {
+                "id": "service",
+                "value": 1
+            },
+            {
+                "id": "labelFormat",
+                "value": "LBL_PRINTER"
+            },
+            {
+                "id": "carryIn",
+                "value": 0
+            },
+            {
+                "id": "cud",
+                "value": 0
+            },
+            {
+                "id": "duty",
+                "value": 0
+            },
+            {
+                "id": "inPers",
+                "value": 0
+            },
+            {
+                "id": "rod",
+                "value": 0
+            },
+            {
+                "id": "selfCol",
+                "value": 0
+            },
+            {
+                "id": "privpers",
+                "value": 1
+            },
+            {
+                "id": "tiresService",
+                "value": 0
+            },
+            {
+                "id": "dec",
+                "value": 0
+            },
+            {
+                "id": "schemaProductDescription",
+                "value": "[iai:order_sn]"
+            },
+            {
+                "id": "schemaNotice",
+                "value": "[iai:delivery_notice]"
+            }
+        ]
+    }
+}
+
+=== HTTP REQUEST DETAILS ===
+URL: https://dkwadrat.pl/api/admin/v6/packages/labels
+Method: POST
+Headers:
+  X-API-KEY: YXBwbGljYXRpb24xODpzSUdaNFU1ZzFwVnV2K3R4bExZU2lxRnR6dytHa0hiY3dhQ29HZ1BOdFdOSEtlekRYR0F3NkpFZEFCZGk0RWQ0
+  Accept: application/json, application/pdf
+  Content-Type: application/json
+Raw JSON Body:
+{"params":{"eventId":97555,"eventType":"order","parcelParameters":[{"id":"service","value":1},{"id":"labelFormat","value":"LBL_PRINTER"},{"id":"carryIn","value":0},{"id":"cud","value":0},{"id":"duty","value":0},{"id":"inPers","value":0},{"id":"rod","value":0},{"id":"selfCol","value":0},{"id":"privpers","value":1},{"id":"tiresService","value":0},{"id":"dec","value":0},{"id":"schemaProductDescription","value":"[iai:order_sn]"},{"id":"schemaNotice","value":"[iai:delivery_notice]"}]}}
+Body Length: 485 bytes
+
+=== HTTP RESPONSE DETAILS ===
+HTTP Status Code: 200
+Response Headers:
+  Content-Type: application/json
+  Content-Length: -1
+Total Time: 1.794719 seconds
+API Response (JSON): {"eventId":97555,"eventType":"order","packages":[{"id":"105616","packageNumber":"1026619139507U"}],"labels":{"label":"JVBERi0xLjQKJeLjz9MKMiAwIG9iago8PC9GaWx0ZXIvRmxhdGVEZWNvZGUvTGVuZ3RoIDQ5Pj5zdHJlYW0KeJwr5HIK4TI2UzC2NFMISeFyDeEK5CpUMFQwAEIImZyroB+RZqjgkq8QyAUA6zUJ9gplbmRzdHJlYW0KZW5kb2JqCjQgMCBvYmoKPDwvQ29udGVudHMgMiAwIFIvVHlwZS9QYWdlL1Jlc291cmNlczw8L1Byb2NTZXQgWy9QREYgL1RleHQgL0ltYWdlQiAvSW1hZ2VDIC9JbWFnZUldL1hPYmplY3Q8PC9YZjEgMSAwIFI+Pj4+L1BhcmVudCAzIDAgUi9NZWRpYUJveFswIDAgMjg4IDQzMl0+PgplbmRvYmoKMSAwIG9iago8PC9TdWJ0eXBlL0Zvcm0vRmlsdGVyL0ZsYXRlRGVjb2RlL1R5cGUvWE9iamVjdC9NYXRyaXhbMSAwIDAgMSAwIDBdL0Zvcm1UeXBlIDEvUmVzb3VyY2VzPDwvQ29sb3JTcGFjZTw8L0RlZmF1bHRSR0IgNSAwIFI+Pi9Qcm9jU2V0Wy9QREYvSW1hZ2VCL0ltYWdlQy9UZXh0XS9Gb250PDwvRjIxIDYgMCBSL0YzMSA3IDAgUi9GNDAgOCAwIFIvRjM0IDkgMCBSL0YyNCAxMCAwIFI+Pi9YT2JqZWN0PDwvSW0xIDExIDAgUj4+Pj4vTGVuZ3RoIDQzMzkvQkJveFswIDAgMjg4IDQzMl0+PnN0cmVhbQp4nOVdW48lxQ1+n1\/RLzxuU1dXlYRWmmFmVkHKA2KVPCAekrBAoh0IhIT8\/Nh1v7jPnIVA0jCjs6e72l1ll8tl+2v3zrc3chP4+4K+jFbbX55uvs1tcrN7sAqPsFFsX97cvb55\/1Fh8\/b6i+G+XQUr8Mdvr5+2Tz\/AI\/3ys+31Rz2RFCsVnQJ+HLXiJ+DnNrdp\/Nzl4w\/xc5\/bHjItfT\/m79vuOl6TIh1LPJAKPzpf7\/qv7VP\/8z3xm9pN4jd+68w7ji1tHhM6vn3ux+V7deM9tsXvdYZgmaF6J\/XoM5d3qT2ePzZpo2TUHl5u2m0fNDnj3UXW264noqZzmmeTviXOhWTmQj7ktsckc5GNuo\/95TmM40Gel9ymZKbFa2pdGUqtKyPLokzu1aaRRZFbN4lkkfJ+mqcyJ512eo2TRMpmug9H7dFKiX0+ZNp+xoq0oZO4rKAwrkiSXEHHS\/y83Kwl\/cQ5vEvzHL9dljhzRudRBzbN2cPrzjaVtDsZrEgm++2Nsbu2Jk2rErs0OoRAtokmrOTuJBDl+797ktv9Nzcfx9\/WHarB7CKYvAE4sQuHgupNere7gIdmeyLKdvo2nxo6lXg63VXbv9r+ePM17iCvbj79DO\/5fBM7zYmA7YcbMQ7AD\/x2+2RkdtfbC\/onMhuP6PNEjYAUAyvxFMLunI9U6cw4F4IjTqIc6ZtjFHlMvcYB+n5jX5mxrv+nZfBOJuV3L6DjaGzJXFGjFZYOGW4vTWdlhNhYhhiZLe1PaS4bmThkYGi\/xMfQ4zErE1mc6EZTtVk13FQlnuelsCFWCaflFKnTwm+yeonbEv7YuO7b2dt4Ns6LP1jmlm7xcZljBzru1Hk62ii5eeZKFtOOp6B3Izzdocz23Zs4VPLHZguTP3a71oIGtqynLd6r97jlU\/bHu7yntT2r7EAfR45w1I4l3FoyS\/12QtyXkMFPLAJahEpyZxYVbX7ZsavQPtEN3GZWob+2OlDcwZwkJVXBo8u5y67tNn9oY\/6wuL5OsHH2TY573nHy\/S4tzaA0dfIhO4cSstzl76IAnZ34Q3O50bHLA9ocjkSnCNlN+EFBTQqwT
+Time: 2025-10-01 16:30:13
+

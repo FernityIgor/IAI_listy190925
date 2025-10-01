@@ -223,11 +223,25 @@ class OrderController
                 $courierExists = !empty($courierId);
                 $courierSupportsMultiplePackages = false;
                 
-                // Define couriers that support multiple packages (you can move this to config if needed)
-                $multiplePackageCouriers = [6, 26]; // DPD, K-EX support multiple packages
-                
-                if ($courierExists && in_array($courierId, $multiplePackageCouriers)) {
-                    $courierSupportsMultiplePackages = true;
+                // Get courier profiles from API to check multiple packages support
+                $courierProfiles = $this->apiClient->fetchCourierProfiles();
+                if ($courierProfiles && isset($courierProfiles['couriers'])) {
+                    // Debug log the courier profiles
+                    error_log("Courier profiles from API: " . print_r($courierProfiles, true));
+                    
+                    foreach ($courierProfiles['couriers'] as $courier) {
+                        if (isset($courier['id']) && (int)$courier['id'] === $courierId) {
+                            $courierSupportsMultiplePackages = isset($courier['multiple_packages_support']) && $courier['multiple_packages_support'] === '1';
+                            error_log("Courier ID {$courierId}: multiple_packages_support = " . ($courier['multiple_packages_support'] ?? 'not set'));
+                            break;
+                        }
+                    }
+                } else {
+                    // Fallback to hardcoded list if API fails
+                    $multiplePackageCouriers = [6, 26, 690000]; // DPD, K-EX, Kurier 1 support multiple packages
+                    if ($courierExists && in_array($courierId, $multiplePackageCouriers)) {
+                        $courierSupportsMultiplePackages = true;
+                    }
                 }
             }
         }
@@ -241,6 +255,7 @@ class OrderController
         $pageTitle = 'Order Details';
         $shopNames = $this->config['shops'];
         $changeableCouriers = $this->couriers['changeable_couriers'];
+        $specialCourierGroups = $this->couriers['special_courier_groups'] ?? [];
         
         // Ensure these variables are always defined
         $courierExists = $courierExists ?? false;
