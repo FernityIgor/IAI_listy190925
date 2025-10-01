@@ -1,0 +1,41 @@
+ Step-by-Step Installation Guide
+Step 1: Check Your PHP Version
+Open XAMPP Control Panel
+Click "Admin" next to Apache, or go to http://localhost/phpinfo.php
+Create a file called phpinfo.php in your htdocs folder with this content:
+<?php phpinfo(); ?>
+
+Note down your PHP version (e.g., 8.1, 8.2, 8.3)
+
+Step 2: Download the SQL Server Driver
+Go to: https://docs.microsoft.com/en-us/sql/connect/php/download-drivers-php-sql-server
+Or direct download: https://github.com/Microsoft/msphpsql/releases
+Download the latest version that matches your PHP version
+
+Step 3: Extract and Copy Files
+Extract the downloaded zip file
+Find the files that match your PHP version:
+For PHP 8.1: php_sqlsrv_81_ts.dll and php_pdo_sqlsrv_81_ts.dll
+For PHP 8.2: php_sqlsrv_82_ts.dll and php_pdo_sqlsrv_82_ts.dll
+For PHP 8.3: php_sqlsrv_83_ts.dll and php_pdo_sqlsrv_83_ts.dll
+Copy these 2 files to your XAMPP PHP extensions folder:
+Usually: ext
+
+Step 4: Edit php.ini
+Open php.ini in a text editor
+Find the section with other extension= lines
+
+Add these lines (replace 82 with your PHP version):
+extension=php_sqlsrv_82_ts
+extension=php_pdo_sqlsrv_82_ts
+
+Step 5: Install Visual C++ Redistributable
+The SQL Server driver requires Visual C++ Redistributable:
+
+Download from: https://aka.ms/vs/17/release/vc_redist.x64.exe
+Install it
+Restart your computer if prompted
+Step 6: Restart XAMPP
+Stop Apache in XAMPP Control Panel
+Start Apache again
+Check if it loads without errors

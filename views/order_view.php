@@ -612,7 +612,7 @@ function generujEtykiety() {
     requestData.append('order_id', currentOrderNumber);
     requestData.append('parameters', JSON.stringify(parameters));
     
-    fetch('generate_labels.php', {
+    fetch('../public/generate_labels.php', {
         method: 'POST',
         body: requestData
     })
@@ -715,7 +715,7 @@ function generateLabels() {
     requestData.append('order_id', currentOrderNumber);
     requestData.append('parameters', JSON.stringify(parameters));
 
-    fetch('generate_labels.php', {
+    fetch('../public/generate_labels.php', {
         method: 'POST',
         body: requestData
     })
@@ -764,7 +764,7 @@ function generateLabels() {
 
 // 2. Save without checkbox (to config directory)
 function saveWithoutCheckbox(orderNumber) {
-    return fetch('save_labels.php', {
+    return fetch('../public/save_labels.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -901,7 +901,7 @@ function generateAndSave() {
     requestData.append('order_id', currentOrderNumber);
     requestData.append('parameters', JSON.stringify(parameters));
 
-    fetch('generate_labels.php', {
+    fetch('../public/generate_labels.php', {
         method: 'POST',
         body: requestData
     })
@@ -978,7 +978,7 @@ function generateSaveAndPrint() {
     requestData.append('order_id', currentOrderNumber);
     requestData.append('parameters', JSON.stringify(parameters));
 
-    fetch('generate_labels.php', {
+    fetch('../public/generate_labels.php', {
         method: 'POST',
         body: requestData
     })
@@ -1037,7 +1037,7 @@ function generateSaveAndPrint() {
 
 // 7. Print labels function
 function printLabels(orderNumber, saveResult) {
-    return fetch('print_labels.php', {
+    return fetch('../public/print_labels.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -1099,7 +1099,7 @@ function printCustomFile(file) {
     const formData = new FormData();
     formData.append('pdf_file', file);
     
-    fetch('print_custom_file.php', {
+    fetch('../public/print_custom_file.php', {
         method: 'POST',
         body: formData
     })
@@ -1183,7 +1183,7 @@ function pobierzEtykiety(orderNumber) {
         console.log('Downloading to configured directory...');
         
         // Download to configured directory using save_labels.php
-        fetch('save_labels.php', {
+        fetch('../public/save_labels.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -1287,7 +1287,7 @@ function generujIPobierz() {
     console.log('Step 1: Generating labels...');
     
     // Step 1: Generate labels
-    fetch('generate_labels.php', {
+    fetch('../public/generate_labels.php', {
         method: 'POST',
         body: formData
     })
@@ -1342,7 +1342,7 @@ function generujIPobierz() {
                 console.log('Step 2: Generating and saving to configured directory...');
                 
                 // Default behavior - generate and save to configured directory in one step
-                fetch('generate_and_save.php', {
+                fetch('../public/generate_and_save.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
@@ -1520,7 +1520,7 @@ function searchOrders() {
     searchBtn.disabled = true;
     
     // Make API request
-    fetch('search_orders.php', {
+    fetch('../public/search_orders.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -1529,6 +1529,9 @@ function searchOrders() {
     })
     .then(response => {
         return response.text().then(text => {
+            console.log('Raw server response:', text);
+            console.log('Response status:', response.status);
+            console.log('Response headers:', [...response.headers.entries()]);
             try {
                 return JSON.parse(text);
             } catch (e) {

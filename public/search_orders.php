@@ -6,29 +6,81 @@ error_reporting(E_ALL);
 ini_set('display_errors', 0);
 ini_set('log_errors', 1);
 
+// Start output buffering to catch any unexpected output
+ob_start();
+
+// Clean any previous output
+while (ob_get_level()) {
+    ob_end_clean();
+}
+ob_start();
+
 // Set JSON header early
-header('Content-Type: application/json');
+header('Content-Type: application/json; charset=utf-8');
+
+// Function to send clean JSON response
+function sendJsonResponse($data) {
+    // Clean all output buffers
+    while (ob_get_level()) {
+        ob_end_clean();
+    }
+    // Send JSON response
+    echo json_encode($data);
+    exit;
+}
 
 try {
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['search_term'])) {
         $searchTerm = trim($_POST['search_term']);
         
         if (empty($searchTerm)) {
-            echo json_encode(['success' => false, 'error' => 'Search term cannot be empty']);
-            exit;
+            sendJsonResponse(['success' => false, 'error' => 'Search term cannot be empty']);
         }
         
         // Check if sqlsrv extension is loaded
         if (!extension_loaded('sqlsrv')) {
-            echo json_encode([
+            sendJsonResponse([
                 'success' => false, 
-                'error' => 'SQL Server extension (sqlsrv) is not installed or enabled in PHP. Please install Microsoft SQL Server driver for PHP or enable the extension in php.ini'
+                'error' => 'SQL Server extension (sqlsrv) is not installed or enabled in PHP. Please install Microsoft SQL Server driver for PHP or enable the extension in php.ini',
+                'debug_info' => [
+                    'php_version' => PHP_VERSION,
+                    'loaded_extensions' => array_filter(get_loaded_extensions(), function($ext) {
+                        return stripos($ext, 'sql') !== false || stripos($ext, 'odbc') !== false;
+                    })
+                ]
             ]);
-            exit;
         }
         
-        // Load config
-        $config = require __DIR__ . '/../config/config.php';
+        // Load config - try multiple possible locations
+        $possibleConfigPaths = [
+            __DIR__ . '/../config/config.php',  // Standard location
+            __DIR__ . '/config/config.php',     // Alternative location 1
+            dirname(__DIR__) . '/config.php',   // Alternative location 2
+            __DIR__ . '/../config.php',         // Alternative location 3
+        ];
+        
+        $config = null;
+        $configPath = null;
+        
+        foreach ($possibleConfigPaths as $path) {
+            if (file_exists($path)) {
+                $configPath = $path;
+                $config = require $path;
+                break;
+            }
+        }
+        
+        if (!$config) {
+            sendJsonResponse([
+                'success' => false, 
+                'error' => 'Configuration file not found in any of the expected locations',
+                'debug_info' => [
+                    'searched_paths' => $possibleConfigPaths,
+                    'current_dir' => __DIR__,
+                    'script_location' => __FILE__
+                ]
+            ]);
+        }
         
         // Get MSSQL connection details
         $server = $config['mssql']['server'];
@@ -43,12 +95,11 @@ try {
         
         if (!$conn) {
             $errors = sqlsrv_errors();
-            echo json_encode([
+            sendJsonResponse([
                 'success' => false, 
                 'error' => 'Failed to connect to database', 
                 'details' => $errors
             ]);
-            exit;
         }
         
         // Prepare the SQL query
@@ -81,8 +132,7 @@ try {
         
         if ($stmt === false) {
             $errors = sqlsrv_errors();
-            echo json_encode(['success' => false, 'error' => 'Database query failed', 'details' => $errors]);
-            exit;
+            sendJsonResponse(['success' => false, 'error' => 'Database query failed', 'details' => $errors]);
         }
         
         // Fetch results
@@ -96,25 +146,25 @@ try {
         sqlsrv_close($conn);
         
         // Return results
-        echo json_encode([
+        sendJsonResponse([
             'success' => true,
             'results' => $results,
             'count' => count($results)
         ]);
         
     } else {
-        echo json_encode(['success' => false, 'error' => 'Invalid request']);
+        sendJsonResponse(['success' => false, 'error' => 'Invalid request']);
     }
     
 } catch (Exception $e) {
-    echo json_encode([
+    sendJsonResponse([
         'success' => false, 
         'error' => 'Server error: ' . $e->getMessage(),
         'file' => $e->getFile(),
         'line' => $e->getLine()
     ]);
 } catch (Error $e) {
-    echo json_encode([
+    sendJsonResponse([
         'success' => false, 
         'error' => 'Fatal error: ' . $e->getMessage(),
         'file' => $e->getFile(),
